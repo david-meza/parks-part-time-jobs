@@ -93,8 +93,36 @@
   </ui-gmap-google-map>
 
   <!-- Map Icons Key Button -->
-  <md-button class="md-primary md-raised map-bottom-right md-fab md-mini" ng-click="openKey($event)">
+<!--   <md-button class="md-primary md-raised map-bottom-right md-fab md-mini" ng-click="openKey($event)">
     Key
-  </md-button>
+  </md-button> -->
+
+  <md-fab-speed-dial  ng-hide="speedDial.hidden" 
+                      md-direction="left" 
+                      md-open="speedDial.isOpen"
+                      class="md-scale md-fab-bottom-right"
+                      ng-mouseenter="speedDial.isOpen=true" 
+                      ng-mouseleave="speedDial.isOpen=false">
+    
+    <md-fab-trigger>
+      <md-button aria-label="Map Options" class="md-raised map-bottom-right md-fab">
+        <md-tooltip md-direction="top">Map Options</md-tooltip>
+        <md-icon md-svg-src="img/icons/settings-color.svg" aria-label="options"></md-icon>
+      </md-button>
+    </md-fab-trigger>
+    
+    <md-fab-actions>
+      <div ng-repeat="item in speedDial.items">
+        <md-button aria-label="{{item.name}}" class="md-fab md-raised md-mini"
+                   ng-click="speedDial.openDialog($event, item)">
+          <md-tooltip md-direction="{{item.direction}}" md-visible="tooltipVisible"
+                      md-autohide="false">
+            {{item.name}}
+          </md-tooltip>
+          <md-icon md-svg-src="{{item.icon}}" aria-label="{{item.name}}"></md-icon>
+        </md-button>
+      </div>
+    </md-fab-actions>
+  </md-fab-speed-dial>
     
 </div>

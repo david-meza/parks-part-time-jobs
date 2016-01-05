@@ -24,6 +24,14 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
   // Activity Info window
   $scope.activityWindow = amenitiesService.activityWindow;
 
+  $scope.speedDial = {
+    hidden: false,
+    isOpen: false,
+    items: [
+      { name: "test", direction: "top", icon: "img/icons/search-color.svg"}
+    ]
+  }
+
   // Make a new query when the activities filter changes
   $scope.$watchCollection('selectedActivities.current', function (selected) {
     parkService.updateParkMarkers(selected);

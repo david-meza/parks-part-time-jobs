@@ -530,9 +530,9 @@ ul#park-amenities {
 }
 
 .map-bottom-right {
-  position: absolute;
-  right: 15px;
-  bottom: 15px;
+  // position: absolute;
+  // right: 15px;
+  // bottom: 15px;
   text-transform: capitalize;
 }
 
@@ -541,6 +541,7 @@ ul#park-amenities {
 }
 
 #map-canvas, #mini-map {
+  position: relative;
   -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   -moz-box-shadow:    0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   box-shadow:         0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
