@@ -1,0 +1,100 @@
+<div id="map-canvas" layout = "column" flex>
+
+  <!-- Search Container and Input Field (ui-gmap-search-box) -->
+  <div id="searchbox-container">
+    <md-button class="search-icon-container">
+      <md-icon md-svg-icon="img/icons/search.svg" aria-label = "Position map"></md-icon>
+      <!-- <md-icon md-font-icon = "fa-search" class = "fa search-icon" aria-label = "Position map"></md-icon> -->
+    </md-button>
+  </div>
+
+  <!-- Main Map Directive -->
+  <ui-gmap-google-map center='map.location.coords'
+                      zoom='map.zoom'
+                      options = 'map.options'
+                      dragging='map.dragging'
+                      refresh='map.refresh'
+                      pan='map.pan'
+                      events = 'map.events'
+                      control = 'map.control'
+                      layout = "column" flex>
+
+
+    <!-- Map Positioning Autocomplete Search Box -->
+    <ui-gmap-search-box template="map.searchbox.template"
+                        events="map.searchbox.events"
+                        options = "map.searchbox.options"
+                        parentdiv = "'searchbox-container'">
+    </ui-gmap-search-box>
+
+
+    <!-- User Marker -->
+    <ui-gmap-marker idKey='map.myLocationMarker.id'
+                    coords='map.myLocationMarker.coords'
+                    options = "map.myLocationMarker.options">
+    </ui-gmap-marker>
+
+    
+    <!-- Park Markers -->
+    <ui-gmap-markers  models="parks.content"
+                      coords="'self'"
+                      icon="'icon'"
+                      click="markerClick"
+                      type = "map.markersConfig.type"
+                      typeOptions = "map.markersConfig.typeOptions"
+                      typeEvents = "map.markersConfig.typeEvents"
+                      modelsbyref="parks.shallowWatch"
+                      fit = "parks.fitToMap"
+                      options="'options'"
+                      events="map.parkMarkerEvents"
+                      doRebuildAll = "parks.rebuild"
+                      control = "parks.control">
+    </ui-gmap-markers>
+
+    
+    <!-- Park Info Window -->
+    <ui-gmap-window show="parkWindow.show" 
+                    coords="parkWindow.coords"
+                    control = "parkWindow.control" 
+                    options="parkWindow.options" 
+                    closeclick="parkWindow.closeclick"
+                    templateurl = "parkWindow.templateUrl"
+                    templateparameter = "parkWindow.templateParameter"
+                    ng-cloak>
+    </ui-gmap-window>
+
+
+    <!-- Activities Markers -->
+    <ui-gmap-markers  models="activities.markers"
+                      coords="'self'"
+                      icon="activities.markersConfig.icon"
+                      click="onMarkerClicked()"
+                      type = "activities.markersConfig.type"
+                      typeOptions = "activities.markersConfig.typeOptions"
+                      typeEvents = "activities.markersConfig.typeEvents"
+                      control = "activities.markersConfig.control"
+                      options = "activities.markersConfig.options"
+                      modelsbyref = "true">
+    </ui-gmap-markers>
+
+
+    <!-- Activities Info Window -->
+    <ui-gmap-window show="activityWindow.show" 
+                    coords="activityWindow.coords"
+                    control = "activityWindow.control" 
+                    options="activityWindow.options" 
+                    closeclick="activityWindow.closeclick"
+                    templateurl = "activityWindow.templateUrl"
+                    templateparameter = "activityWindow.templateParameter"
+                    ng-cloak>
+    </ui-gmap-window>
+
+
+  </ui-gmap-google-map>
+
+  <!-- Map Icons Key Button -->
+  <md-button class="md-primary md-raised map-bottom-right md-fab md-mini" ng-click="openKey($event)">
+    Key
+  </md-button>
+    
+</div>
