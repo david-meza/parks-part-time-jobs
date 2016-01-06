@@ -116,7 +116,6 @@ angular.module('parkLocator').factory('mapService', ['uiGmapGoogleMapApi',
   // Optional map themes
   // Light browns and greens (nature)
   map.options.styles = [{'featureType':'poi.park','elementType':'geometry.fill','stylers':[{'color':'#519c2f'},{'gamma':'1.27'}]},{'featureType':'poi.park','elementType':'labels.text.stroke','stylers':[{'visibility':'on'},{'color':'#e4bd2e'},{'weight':'3.14'},{'gamma':'1.58'}]},{'featureType':'poi.school','elementType':'labels','stylers':[{'visibility': 'off'}]},{'featureType':'poi.business','elementType':'labels','stylers':[{'visibility': 'off'}]},{'featureType':'poi.place_of_worship','elementType':'labels','stylers':[{'visibility': 'off'}]},{'featureType':'road.local','elementType':'labels','stylers':[{'visibility': 'off'}]},{'featureType':'landscape','stylers':[{'hue':'#FFBB00'},{'saturation':43.400000000000006},{'lightness':37.599999999999994},{'gamma':1}]},{'featureType':'road.highway','stylers':[{'hue':'#FFC200'},{'saturation':-61.8},{'lightness':45.599999999999994},{'gamma':1}]},{'featureType':'road.arterial','stylers':[{'hue':'#FF0300'},{'saturation':-100},{'lightness':51.19999999999999},{'gamma':1}]},{'featureType':'road.local','stylers':[{'hue':'#FF0300'},{'saturation':-100},{'lightness':52},{'gamma':1}]},{'featureType':'water','stylers':[{'hue':'#0078FF'},{'saturation':-13.200000000000003},{'lightness':2.4000000000000057},{'gamma':1}]}];
-  // Removed: {'featureType':'poi','stylers':[{'hue':'#00FF6A'},{'saturation':-1.0989010989011234},{'lightness':11.200000000000017},{'gamma':1}]}
 
   // Light blues and greys 
   map.options.secondaryStyles = [{'featureType':'water','stylers':[{'visibility':'on'},{'color':'#b5cbe4'}]},{'featureType':'landscape','stylers':[{'color':'#efefef'}]},{'featureType':'road.highway','elementType':'geometry','stylers':[{'color':'#83a5b0'}]},{'featureType':'road.arterial','elementType':'geometry','stylers':[{'color':'#bdcdd3'}]},{'featureType':'road.local','elementType':'geometry','stylers':[{'color':'#ffffff'}]},{'featureType':'poi.park','elementType':'geometry','stylers':[{'color':'#e3eed3'}]},{'featureType':'administrative','stylers':[{'visibility':'on'},{'lightness':33}]},{'featureType':'road'},{'featureType':'poi.park','elementType':'labels','stylers':[{'visibility':'on'},{'lightness':20}]},{},{'featureType':'road','stylers':[{'lightness':20}]}];
@@ -129,6 +128,7 @@ angular.module('parkLocator').factory('mapService', ['uiGmapGoogleMapApi',
       draggable: false,
       clickable: false,
       icon: 'https://s3.amazonaws.com/davidmeza/Park_Locator/user.png',
+      animation: (mapsObj ? mapsObj.Animation.DROP : 2)
     },
   };
 
@@ -160,7 +160,6 @@ angular.module('parkLocator').factory('mapService', ['uiGmapGoogleMapApi',
   };
 
 	var _isInRaleigh = function (lat, lon) {
-    // Test Raleigh address: 35.7776464, -78.63844279999999
     return lat < 36.113561 && lat > 35.437814 && lon < -78.336890 && lon > -78.984583;
   };
 
@@ -173,8 +172,19 @@ angular.module('parkLocator').factory('mapService', ['uiGmapGoogleMapApi',
     map.zoom = 14;
   };
 
+  var geoLocate = function() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition( function (position) {
+        updateUserCoords(position.coords.latitude, position.coords.longitude);
+      });
+    } else {
+      console.log('Geolocation not supported');
+    }
+  };
+
+  geoLocate();
+
   var moveToPos = function (lat, lon) {
-    // if (!_isInRaleigh(lat,lon)) { return updateUserCoords(lat,lon); }
     map.location.coords.latitude = lat;
     map.location.coords.longitude = lon;
     map.zoom = 16;
@@ -183,6 +193,7 @@ angular.module('parkLocator').factory('mapService', ['uiGmapGoogleMapApi',
   return {
     map: map,
     updateUserCoords: updateUserCoords,
+    geoLocate: geoLocate
   };
 
 }]);

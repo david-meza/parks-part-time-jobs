@@ -16,7 +16,7 @@ angular.module('parkLocator').factory('parkService', ['$http', '$state', 'uiGmap
     currentPark: undefined, 
     rebuild: false, 
     shallowWatch: false, 
-    fitToMap: true, 
+    fitToMap: false, 
     control: {} 
   };
 

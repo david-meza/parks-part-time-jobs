@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('parkLocator').controller('navbarCtrl', ['$scope', '$rootScope', 'parkService', 'deviceService',
-	function ($scope, $rootScope, parkService, deviceService) {
+angular.module('parkLocator').controller('navbarCtrl', ['$scope', '$rootScope', 'parkService', 'deviceService', '$mdSidenav',
+	function ($scope, $rootScope, parkService, deviceService, $mdSidenav) {
     
     var markers = parkService.markers;
     
-    $scope.title = "Raleigh Park Locator";
+    $scope.title = "Part Time Park Jobs";
     
     // Start the circular progress icon
     $scope.progress = 'indeterminate';
@@ -13,8 +13,8 @@ angular.module('parkLocator').controller('navbarCtrl', ['$scope', '$rootScope', 
     $scope.activeTab = deviceService.activeTab;
     $scope.isMobile = deviceService.isMobile;
 
-    $scope.selectPark = function () {
-      $scope.activeTab.name = 'park';
+    $scope.toggleSidenav = function () {
+      $mdSidenav('left').toggle();
     };
 
     $rootScope.$on('loading:progress', function(){
@@ -23,7 +23,6 @@ angular.module('parkLocator').controller('navbarCtrl', ['$scope', '$rootScope', 
 
     $rootScope.$on('loading:finish', function(){
     	$scope.progress = undefined;
-      // informUser();
     });
 
 }]);

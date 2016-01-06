@@ -24,6 +24,9 @@ img, h1, h2, h3, h4, h5, h6 {
   -ms-user-select: none;
   user-select: none; }
 
+.svg-fill {
+  fill: rgba(0, 0, 0, 0.7); }
+
 .pac-container .pac-item .pac-matched {
   color: #3F51B5; }
 .pac-container .pac-item .pac-icon-marker {
@@ -329,11 +332,6 @@ ul#park-amenities {
   position: absolute;
   right: 0;
   z-index: 10; }
-
-.progress-spinner {
-  position: absolute;
-  top: 0;
-  right: 0; }
 
 #searchbox-container {
   position: absolute;

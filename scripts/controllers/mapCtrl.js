@@ -24,11 +24,18 @@ angular.module('parkLocator').controller('mapCtrl', ['$scope', 'mapService', 'pa
   // Activity Info window
   $scope.activityWindow = amenitiesService.activityWindow;
 
+  $scope.geoLocate = function (ev) {
+    console.log(ev);
+    mapService.geoLocate();
+  };
+
   $scope.speedDial = {
     hidden: false,
     isOpen: false,
+    openDirection: 'left',
     items: [
-      { name: "test", direction: "top", icon: "img/icons/search-color.svg"}
+      { name: "test", direction: "top", icon: "img/icons/search-color.svg"},
+      { name: "Find Me!", direction: "top", icon: "img/icons/my-location.svg", addIconClass: 'icon-grey', action: $scope.geoLocate }
     ]
   }
 
