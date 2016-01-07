@@ -27,6 +27,12 @@ img, h1, h2, h3, h4, h5, h6 {
 .svg-fill {
   fill: rgba(0, 0, 0, 0.7); }
 
+.odd-card {
+  background-color: rgba(0, 0, 0, 0.01); }
+
+.color-indigo {
+  color: #3f51b5; }
+
 .pac-container .pac-item .pac-matched {
   color: #3F51B5; }
 .pac-container .pac-item .pac-icon-marker {
@@ -50,6 +56,11 @@ img, h1, h2, h3, h4, h5, h6 {
 
 .panel-title a:focus {
   outline: none; }
+
+.job-salary, .job-category, .job-location {
+  display: block;
+  font-size: 12px;
+  line-height: 17px; }
 
 #flash {
   position: absolute;
@@ -478,7 +489,7 @@ ul#park-amenities {
   box-shadow: none; }
 
 .form-control, input {
-  border-width: 2px;
+  box-sizing: border-box;
   -webkit-box-shadow: none;
   box-shadow: none; }
 

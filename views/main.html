@@ -1,11 +1,9 @@
-<ui-view></ui-view>
-
-<md-content>
-  <md-tabs  md-dynamic-height 
-            md-border-bottom 
-            md-stretch-tabs 
-            md-center-tabs
-            md-swipe-content>
+<!-- <md-content layout = "column" flex>
+  <md-tabs  md-border-bottom 
+            md-dynamic-height
+            md-align-tabs = "top"
+            md-stretch-tabs = "always"
+            md-center-tabs>
     
     <md-tab>
       <md-tab-label>
@@ -14,8 +12,6 @@
       </md-tab-label>
 
       <md-tab-body>
-        
-        <h1>Test</h1>
 
       </md-tab-body>
     </md-tab>
@@ -34,35 +30,16 @@
     
   </md-tabs>
 </md-content>
+ -->
+<div layout = "row" flex>
+  <div flex = "60" layout = "column">
+    <main-map></main-map>
+  </div>
 
-<md-content flex = "66" layout = "column">
-          <main-map></main-map>
-        </md-content>
-
-        <div flex = "33" layout = "column">
-          
-          <md-content>
-            
-            <md-subheader class="md-primary" layout = "row">
-              Sorting by distance <span flex></span>
-              <md-icon md-svg-icon = "img/icons/filter.svg"></md-icon>
-            </md-subheader>
-            
-            <md-list layout-padding>
-              <md-list-item class="md-3-line">
-                  <img ng-src="{{message.face}}" class="md-avatar" alt="{{message.who}}">
-                  <div class="md-list-item-text">
-                    <h3>Job Title</h3>
-                    <h4>Company or Park</h4>
-                    <p>
-                      Description
-                    </p>
-                  </div>
-              </md-list-item>
-            </md-list>
-
-          </md-content>
-        </div>
+  <div flex = "40" layout = "column">
+    <jobs-list-sm></jobs-list-sm>
+  </div>
+</div>
 
 
 

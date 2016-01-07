@@ -37,6 +37,14 @@ img, h1, h2, h3, h4, h5, h6 {
   fill: rgba(0,0,0,0.7);
 }
 
+.odd-card {
+  background-color: rgba(0,0,0,0.01);
+}
+
+.color-indigo {
+  color: rgb(63,81,181);
+}
+
 .pac-container {
   // z-index: 1 !important;
   // width: auto !important;
@@ -76,9 +84,11 @@ img, h1, h2, h3, h4, h5, h6 {
   display: none !important;
 }
 
+
 .angular-google-map {
   flex: 1;
   display: flex;
+  // min-height: 600px;
 }
 
 .angular-google-map-container {
@@ -97,6 +107,12 @@ img, h1, h2, h3, h4, h5, h6 {
   &:focus {
     outline: none;
   }
+}
+
+.job-salary, .job-category, .job-location {
+  display: block;
+  font-size: 12px;
+  line-height: 17px;
 }
 
 #flash {
@@ -664,7 +680,7 @@ ul#park-amenities {
 }
 
 .form-control, input {
-  border-width: 2px;
+  box-sizing: border-box;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
