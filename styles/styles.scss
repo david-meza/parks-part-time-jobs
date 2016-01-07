@@ -109,10 +109,22 @@ img, h1, h2, h3, h4, h5, h6 {
   }
 }
 
+.job-title {
+  font-size: 18px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: 300;
+  line-height: 1.4em;
+}
+
 .job-salary, .job-category, .job-location {
   display: block;
-  font-size: 12px;
-  line-height: 17px;
+  padding-top: 0 !important;
+  font-size: 14px;
+  line-height: 18px;
+  color: rgba(0,0,0,0.54);
+  letter-spacing: 0.010em;
 }
 
 #flash {

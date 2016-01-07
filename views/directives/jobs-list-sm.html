@@ -9,18 +9,18 @@
 
     <md-list-item ng-repeat = "job in jobs">
       
-      <md-card ng-class-odd="'odd-card'">
+      <md-card ng-class-odd="'odd-card'" flex>
         
         <md-card-title>
           <md-card-title-text>
-            <span class="md-headline">{{ job.title }}</span>
-            <span class="md-subhead">{{ job.time }} - {{ job.salary }}</span>
-            <span class="md-subhead">Category: {{ job.category }}</span>
-            <span class="md-subhead">{{ job.location }}</span>
+            <span class="md-headline job-title">{{ job.title }}</span>
+            <span class="md-subhead job-salary">{{ job.time }} - {{ job.salary }}</span>
+            <span class="md-subhead job-category">Category: {{ job.category }}</span>
+            <span class="md-subhead job-location">{{ job.location }}</span>
           </md-card-title-text>
-          <md-card-title-media>
+          <!-- <md-card-title-media>
             <div class="md-media-md card-media"></div>
-          </md-card-title-media>
+          </md-card-title-media> -->
         </md-card-title>
         
 
@@ -30,32 +30,18 @@
         
 
         <md-card-actions layout="row" layout-align="end center">
-          <md-button>Apply Now</md-button>
+          <md-button  target = "_blank" 
+                      ng-href="https://www.governmentjobs.com/careers/raleighnc/jobs/1314835/camp-counselor-southeast-raleigh-district-4/apply"
+                      class = "md-accent">
+            <md-icon  aria-label="Apply now" 
+                      md-svg-icon="img/icons/external-link.svg">
+            </md-icon>
+            Apply
+          </md-button>
         </md-card-actions>
       </md-card>
     </md-list-item>
 
-
-    <md-list-item class="md-3-line" ng-repeat = "job in jobs">
-      <div class="md-list-item-text">
-        <h3> {{ job.title }} </h3>
-
-        <p>
-          <span class = "job-salary"> {{ job.time }} - {{ job.salary }} </span>
-          <span class = "job-category"> Category: {{ job.category }} </span> 
-          <span class = "job-location"> {{ job.location }} </span> 
-          {{ job.description }} 
-        </p>
-
-        <md-icon  ng-click="doSecondaryAction($event)" 
-                  class="md-secondary" 
-                  aria-label="Apply now" 
-                  md-svg-icon="img/icons/external-link.svg">
-        </md-icon>
-      
-      </div>
-      <md-divider></md-divider>
-    </md-list-item>
   </md-list>
 
 </md-content>
