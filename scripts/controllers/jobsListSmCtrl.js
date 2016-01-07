@@ -11,4 +11,6 @@ angular.module('parkLocator').controller('jobsListSmCtrl', ['$scope',
 
     ];
 
+    $scope.sortOptions = ['distance', 'salary', 'posting date', 'job title'];
+
 }]);

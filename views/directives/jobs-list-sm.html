@@ -1,8 +1,35 @@
 <md-content layout = "column" flex>
               
   <md-subheader class="md-primary" layout = "row">
-    <md-icon md-svg-icon = "img/icons/filter.svg"></md-icon>
-    Sorting by distance
+    
+    
+    <span flex layout = "row">
+      
+      <div flex = "45" layout = "row">
+        <md-icon md-svg-icon = "img/icons/sort.svg"></md-icon>
+        <span class = "text-before-dropdown">Sort by</span> 
+        <md-select  ng-model = "selectedSort" 
+                    aria-label = "Select Sort" 
+                    class = "inline-dropdown" 
+                    md-container-class = "inline-dropdown" flex>
+          <md-option ng-value="option" ng-repeat="option in sortOptions">{{ option }}</md-option>
+        </md-select>
+      </div>
+      <span flex = "10"></span>
+      <div flex = "45" layout = "row">
+        <md-icon md-svg-icon = "img/icons/filter.svg"></md-icon>
+        <span class = "text-before-dropdown">Filter by</span> 
+        <md-select  ng-model = "selectedSort" 
+                    aria-label = "Select Sort" 
+                    class = "inline-dropdown" 
+                    md-container-class = "inline-dropdown" flex>
+          <md-option ng-value="option" ng-repeat="option in sortOptions">{{ option }}</md-option>
+        </md-select>
+      </div>
+
+ 
+    </span>
+    
   </md-subheader>
   
   <md-list>
