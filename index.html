@@ -35,8 +35,46 @@
     </md-content>
   </md-sidenav>
 
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" 
+              md-component-id="filter"
+              md-is-open="sideNavOpen">
+    
+    <md-toolbar class="md-theme-light">
+      <h1 class="md-toolbar-tools">Filter</h1>
+    </md-toolbar>
+    
+    <md-content layout-padding>
+
+      <md-list>
+
+        <md-list-item>
+          <md-icon md-svg-icon = "img/icons/filter.svg"></md-icon>
+          <p>Salary</p>
+          <md-icon md-svg-icon = "img/icons/filter.svg"></md-icon>
+        </md-list-item>
+
+      </md-list>
+
+      <md-list>
+
+        <md-list-item>
+          <md-icon md-svg-icon = "img/icons/filter.svg"></md-icon>
+          <p>Coming soon...</p>
+          <md-icon md-svg-icon = "img/icons/filter.svg"></md-icon>
+        </md-list-item>
+
+      </md-list>
+
+
+      
+      <md-button ng-click="close()" class="md-primary">
+        Close
+      </md-button>
+    </md-content>
+  </md-sidenav>
 
   <ui-view layout = "row" flex></ui-view>
+
 
 
   <back-to-top>
@@ -114,3 +152,4 @@
 
 </body>
 </html>
+

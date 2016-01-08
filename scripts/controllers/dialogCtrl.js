@@ -2,10 +2,8 @@
 
   'use strict';
 
-  angular.module('appControllers').controller('DialogCtrl', ['$scope', '$mdDialog', 'amenitiesService',
-    function DialogCtrl($scope, $mdDialog, amenitiesService) {
-      $scope.activities = amenitiesService.list.uniques.concat(amenitiesService.selectedActivities.current);
-      $scope.amenitiesService = amenitiesService.list;
+  angular.module('appControllers').controller('DialogCtrl', ['$scope', '$mdDialog',
+    function DialogCtrl($scope, $mdDialog) {
 
       $scope.hide = function() {
         $mdDialog.hide();

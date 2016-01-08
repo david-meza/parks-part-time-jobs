@@ -2,8 +2,8 @@
 
   'use strict';
 
-  angular.module('appControllers').controller('jobsListSmCtrl', ['$scope',
-    function ($scope) {
+  angular.module('appControllers').controller('jobsListSmCtrl', ['$scope', '$mdDialog',
+    function ($scope, $mdDialog) {
           
       $scope.jobs = [
         { title: 'Afterschool Specialist - Teens', salary: '$10.00 hourly', description: 'The Teen Afterschool Specialist is responsible for managing the logistics and operations of several different after school programs for middle and high school aged participants throughout the City of Raleigh. The Teen Afterschool Specialist will also work closely with participants to facilitate skill building and enrichment activities.', time: 'Part Time', category: 'Parks and Recreation', location: 'Raleigh, NC', url: 'https://www.governmentjobs.com/careers/raleighnc/jobs/1314835/camp-counselor-southeast-raleigh-district-4/apply' },
@@ -14,6 +14,23 @@
       ];
 
       $scope.sortOptions = ['distance', 'salary', 'posting date', 'job title'];
+      $scope.selectedSort = 'distance';
+
+      // Opens the dialog showing address edit input field
+      $scope.editLocation = function (ev) {
+        $mdDialog.show({
+          templateUrl: 'views/partials/filter-dialog.html',
+          targetEvent: ev,
+          fullscreen: true,
+          clickOutsideToClose:true,
+          controller: 'DialogCtrl',
+          bindToController: true
+        });
+      };
+
+      $scope.openFilterSelection = function (ev) {
+        console.log(ev);
+      };
 
   }]);
 

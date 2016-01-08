@@ -11,6 +11,7 @@
     gMapsApi.then( function (maps) {
       mapsObj = maps;
       map.searchbox.options.bounds = new mapsObj.LatLngBounds(new mapsObj.LatLng(35.437814,-78.984583), new mapsObj.LatLng(36.113561,-78.336890));
+      console.log(mapsObj.ControlPosition.LEFT_BOTTOM);
     });
 
     // Temporary coordinates while Geoloc gets us the user's coords
@@ -42,17 +43,21 @@
         }
       },
       options: {
-        // backgroundColor: '#2c3e50',
-        draggable: true, //$window.innerWidth >= 992,
+        disableDefaultUI: true,
+        draggable: true,
         scrollwheel: false,
-        // mapTypeControl: true,
-        // mapTypeId: 'HYBRID',
-        // mapTypeControlOptions: {
-          // mapTypeIds: ['park_theme', 'ROADMAP'],
-        // },
-        minZoom: 8,
+        minZoom: 10,
         tilt: 45,
-        panControl: false //$window.innerWidth < 992
+        zoomControl: true,
+        zoomControlOptions: {
+          position: mapsObj ? mapsObj.ControlPosition.LEFT_BOTTOM : 6,
+          style: mapsObj ? mapsObj.ZoomControlStyle.SMALL : 1,
+        },
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false,
+        rotateControl: false,
+        panControl: false
       },
     };
 
