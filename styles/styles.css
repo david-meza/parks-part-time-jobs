@@ -79,6 +79,15 @@ img, h1, h2, h3, h4, h5, h6 {
 .inline-dropdown {
   margin: 0 0 2px 2px; }
 
+.icon-marker-off {
+  fill: #71b045; }
+
+.icon-my-location {
+  fill: rgba(103, 58, 183, 0.9); }
+
+.icon-person-pin {
+  fill: rgba(0, 0, 0, 0.74); }
+
 #flash {
   position: absolute;
   z-index: 101;

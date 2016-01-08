@@ -1,11 +1,15 @@
-'use strict';
+(function(angular) {
 
-angular.module('parkLocator').directive('ngFooter', function(){
-  
-  return { 
-    restrict: 'E',
-    replace: true,
-    templateUrl: 'views/directives/footer.html',
-  };
+  'use strict';
 
-});
+  angular.module('appDirectives').directive('ngFooter', function(){
+    
+    return { 
+      restrict: 'E',
+      replace: true,
+      templateUrl: 'views/directives/footer.html',
+    };
+
+  });
+
+})(window.angular);

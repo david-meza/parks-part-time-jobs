@@ -1,14 +1,18 @@
-'use strict';
+(function(angular) {
 
-angular.module('parkLocator').controller('devicesCtrl', ['$scope', 'deviceService',
-	function($scope, deviceService){
+  'use strict';
 
-    $scope.isMobile = deviceService.isMobile;
+  angular.module('appControllers').controller('devicesCtrl', ['$scope', 'deviceService',
+  	function($scope, deviceService){
 
-    $scope.activeTab = deviceService.activeTab;
+      $scope.isMobile = deviceService.isMobile;
 
-    $scope.showTab = function (tab) {
-      return $scope.isMobile() && $scope.activeTab.name !== tab;
-    };
+      $scope.activeTab = deviceService.activeTab;
 
-}]);
+      $scope.showTab = function (tab) {
+        return $scope.isMobile() && $scope.activeTab.name !== tab;
+      };
+
+  }]);
+
+})(window.angular);

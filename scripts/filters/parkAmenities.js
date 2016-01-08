@@ -1,20 +1,24 @@
-'use strict';
+(function(angular) {
 
-angular.module('parkLocator').filter('parkAmenities', function() {
-  
-  return function(amenities, park) {
+  'use strict';
 
-  	if (!park) {return amenities;}
+  angular.module('appFilters').filter('parkAmenities', function() {
+    
+    return function(amenities, park) {
 
-  	var filtered = [];
+    	if (!park) {return amenities;}
 
-  	for (var i = 0; i < amenities.length; i++) {
-  		var parkAttribute = amenities[i].parkAttr.toLowerCase();
-  		if (park[parkAttribute]) {
-  			filtered.push(amenities[i]);
-  		}
-  	}
+    	var filtered = [];
 
-    return filtered;
-  };
-});
+    	for (var i = 0; i < amenities.length; i++) {
+    		var parkAttribute = amenities[i].parkAttr.toLowerCase();
+    		if (park[parkAttribute]) {
+    			filtered.push(amenities[i]);
+    		}
+    	}
+
+      return filtered;
+    };
+  });
+
+})(window.angular);

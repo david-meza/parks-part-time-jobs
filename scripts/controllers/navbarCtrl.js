@@ -1,28 +1,32 @@
-'use strict';
+(function(angular) {
 
-angular.module('parkLocator').controller('navbarCtrl', ['$scope', '$rootScope', 'parkService', 'deviceService', '$mdSidenav',
-	function ($scope, $rootScope, parkService, deviceService, $mdSidenav) {
-    
-    var markers = parkService.markers;
-    
-    $scope.title = "Part Time Park Jobs";
-    
-    // Start the circular progress icon
-    $scope.progress = 'indeterminate';
+  'use strict';
 
-    $scope.activeTab = deviceService.activeTab;
-    $scope.isMobile = deviceService.isMobile;
-
-    $scope.toggleSidenav = function () {
-      $mdSidenav('left').toggle();
-    };
-
-    $rootScope.$on('loading:progress', function(){
+  angular.module('appControllers').controller('navbarCtrl', ['$scope', '$rootScope', 'parkService', 'deviceService', '$mdSidenav',
+  	function ($scope, $rootScope, parkService, deviceService, $mdSidenav) {
+      
+      var markers = parkService.markers;
+      
+      $scope.title = "Part Time Park Jobs";
+      
+      // Start the circular progress icon
       $scope.progress = 'indeterminate';
-    });
 
-    $rootScope.$on('loading:finish', function(){
-    	$scope.progress = undefined;
-    });
+      $scope.activeTab = deviceService.activeTab;
+      $scope.isMobile = deviceService.isMobile;
 
-}]);
+      $scope.toggleSidenav = function () {
+        $mdSidenav('left').toggle();
+      };
+
+      $rootScope.$on('loading:progress', function(){
+        $scope.progress = 'indeterminate';
+      });
+
+      $rootScope.$on('loading:finish', function(){
+      	$scope.progress = undefined;
+      });
+
+  }]);
+
+})(window.angular);

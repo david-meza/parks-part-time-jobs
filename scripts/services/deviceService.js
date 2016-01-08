@@ -1,19 +1,23 @@
-'use strict';
+(function(angular) {
+ 
+  'use strict';
 
-angular.module('parkLocator').factory('deviceService', ['$window', 
-  function($window){
+  angular.module('appServices').factory('deviceService', ['$window', 
+    function($window){
 
-    var _width = $window.innerWidth;
-    var activeTab = { name: 'search' };
+      var _width = $window.innerWidth;
+      var activeTab = { name: 'search' };
 
-    var isMobile = function () {
-      return _width < 768;
-    };
-  
+      var isMobile = function () {
+        return _width < 768;
+      };
+    
 
-	return {
-    isMobile: isMobile,
-    activeTab: activeTab
-	};
+  	return {
+      isMobile: isMobile,
+      activeTab: activeTab
+  	};
 
-}]);
+  }]);
+
+})(window.angular);

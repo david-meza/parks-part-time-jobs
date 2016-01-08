@@ -1,19 +1,23 @@
-'use strict';
+(function(angular) {
 
-angular.module('parkLocator').controller('DialogCtrl', ['$scope', '$mdDialog', 'amenitiesService',
-  function DialogCtrl($scope, $mdDialog, amenitiesService) {
-    $scope.activities = amenitiesService.list.uniques.concat(amenitiesService.selectedActivities.current);
-    $scope.amenitiesService = amenitiesService.list;
+  'use strict';
 
-    $scope.hide = function() {
-      $mdDialog.hide();
-    };
+  angular.module('appControllers').controller('DialogCtrl', ['$scope', '$mdDialog', 'amenitiesService',
+    function DialogCtrl($scope, $mdDialog, amenitiesService) {
+      $scope.activities = amenitiesService.list.uniques.concat(amenitiesService.selectedActivities.current);
+      $scope.amenitiesService = amenitiesService.list;
 
-    $scope.cancel = function() {
-      $mdDialog.cancel();
-    };
+      $scope.hide = function() {
+        $mdDialog.hide();
+      };
 
-    $scope.answer = function(answer) {
-      $mdDialog.hide(answer);
-    };
-  }]);
+      $scope.cancel = function() {
+        $mdDialog.cancel();
+      };
+
+      $scope.answer = function(answer) {
+        $mdDialog.hide(answer);
+      };
+    }]);
+
+})(window.angular);

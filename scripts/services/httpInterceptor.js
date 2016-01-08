@@ -1,25 +1,29 @@
-'use strict';
+(function(angular) {
 
-angular.module('parkLocator').factory('httpInterceptor', ['$q', '$rootScope', 
-  function ($q, $rootScope) {
+  'use strict';
 
-  var loadingCount = 0;
+  angular.module('appServices').factory('httpInterceptor', ['$q', '$rootScope', 
+    function ($q, $rootScope) {
 
-  return {
-    'request': function (config) {
-      if(++loadingCount === 1) { $rootScope.$broadcast('loading:progress'); }
-      return config || $q.when(config);
-    },
+    var loadingCount = 0;
 
-    'response': function (response) {
-      if(--loadingCount <= 0) { $rootScope.$broadcast('loading:finish'); }
-      return response || $q.when(response);
-    },
+    return {
+      'request': function (config) {
+        if(++loadingCount === 1) { $rootScope.$broadcast('loading:progress'); }
+        return config || $q.when(config);
+      },
 
-    'responseError': function (response) {
-      if(--loadingCount <= 0) { $rootScope.$broadcast('loading:finish'); }
-      return $q.reject(response);
-    }
-  };
+      'response': function (response) {
+        if(--loadingCount <= 0) { $rootScope.$broadcast('loading:finish'); }
+        return response || $q.when(response);
+      },
 
-}]);
+      'responseError': function (response) {
+        if(--loadingCount <= 0) { $rootScope.$broadcast('loading:finish'); }
+        return $q.reject(response);
+      }
+    };
+
+  }]);
+
+})(window.angular);

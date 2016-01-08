@@ -1,28 +1,32 @@
-'use strict';
+(function(angular) {
 
-angular.module('parkLocator').filter('selectedActivities', function() {
-  
-  var filtered = [];
-  
-  return function(parkMarkers, activities) {
-    console.log(parkMarkers);
-    console.log(activities);
+  'use strict';
 
-    if (activities.length <= 0) {return parkMarkers;}
+  angular.module('appFilters').filter('selectedActivities', function() {
+    
+    var filtered = [];
+    
+    return function(parkMarkers, activities) {
+      console.log(parkMarkers);
+      console.log(activities);
 
-    filtered.splice(0, filtered.length);
+      if (activities.length <= 0) {return parkMarkers;}
 
-  	parkMarkers.forEach( function (marker) {
+      filtered.splice(0, filtered.length);
 
-      for (var i = 0; i < activities.length; i++) {
-        // If the attribute exists, display the park in the map (e.g. marker['gym'])
-        if ( marker[ activities[i].name.replace(/\s+/g, '').toLowerCase() ] ) {
-          filtered.push(marker);
+    	parkMarkers.forEach( function (marker) {
+
+        for (var i = 0; i < activities.length; i++) {
+          // If the attribute exists, display the park in the map (e.g. marker['gym'])
+          if ( marker[ activities[i].name.replace(/\s+/g, '').toLowerCase() ] ) {
+            filtered.push(marker);
+          }
         }
-      }
 
-    });
+      });
 
-    return filtered;
-  };
-});
+      return filtered;
+    };
+  });
+
+})(window.angular);

@@ -13,7 +13,7 @@
 </head>
 
 
-<body ng-app="parkLocator" ng-cloak layout = "column">
+<body ng-app="parkJobs" ng-cloak layout = "column">
   
   <ng-navbar></ng-navbar>
 
@@ -26,12 +26,11 @@
     </md-toolbar>
     
     <md-content layout-padding>
-      <md-button ng-click="close()" class="md-primary" hide-gt-md>
+      <md-button ng-click="close()" class="md-primary">
         Close Sidenav Left
       </md-button>
       <p hide-md show-gt-md>
-        This sidenav is locked open on your device. To go back to the default behavior,
-        narrow your display.
+        Coming soon...
       </p>
     </md-content>
   </md-sidenav>
@@ -56,7 +55,7 @@
      r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
      }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-     ga('create', 'UA-71382325-1');
+     ga('create', 'UA-xxxxxxxx-x');
      ga('send', 'pageview');
   </script>
 
@@ -74,17 +73,16 @@
   <script src='bower_components/ngSmoothScroll/lib/angular-smooth-scroll.js'></script>
   <script src='bower_components/angular-img-fallback/angular.dcb-img-fallback.min.js'></script>
 
-  <!-- Main -->
-  <script src="scripts/app.js"></script>
+  <!-- Angular App Modules -->
+  <script src="scripts/modules/services.js"></script>
+  <script src="scripts/modules/controllers.js"></script>
+  <script src="scripts/modules/filters.js"></script>
+  <script src="scripts/modules/directives.js"></script>
 
   <!-- Services -->
   <script src="scripts/services/deviceService.js"></script>
-  <script src="scripts/services/accordionConfig.js"></script>
   <script src="scripts/services/mapService.js"></script>
-  <script src="scripts/services/parkService.js"></script>
-  <script src="scripts/services/amenitiesService.js"></script>
-  <script src="scripts/services/classesService.js"></script>
-  
+  <script src="scripts/services/parkService.js"></script>  
   <script src="scripts/services/httpInterceptor.js"></script>
   
   <!-- Filters -->
@@ -96,23 +94,23 @@
   <script src="scripts/controllers/navbarCtrl.js"></script>
   <script src="scripts/controllers/devicesCtrl.js"></script>
   <script src="scripts/controllers/jobsListSmCtrl.js"></script>
-  <script src="scripts/controllers/accordionCtrl.js"></script>
+  <script src="scripts/controllers/mapActionsCtrl.js"></script>
   <script src="scripts/controllers/mapCtrl.js"></script>
   <script src="scripts/controllers/dialogCtrl.js"></script>
   <script src="scripts/controllers/parkCtrl.js"></script>
-  <script src="scripts/controllers/classesCtrl.js"></script>
-  <script src="scripts/controllers/sectionCtrl.js"></script>
 
   <!-- Directives -->
   <script src="scripts/directives/navbar.js"></script>
   <script src="scripts/directives/footer.js"></script>
   <script src="scripts/directives/jobsListSm.js"></script>
+  <script src="scripts/directives/mapActions.js"></script>
   <script src="scripts/directives/backToTop.js"></script>
   <script src="scripts/directives/navbarFixed.js"></script>
   <script src="scripts/directives/mainMap.js"></script>
-  <script src="scripts/directives/accordionMenu.js"></script>
   <script src="scripts/directives/scrollingButtons.js"></script>
-  <script src="scripts/directives/classesInfo.js"></script>
+
+  <!-- Main -->
+  <script src="scripts/app.js"></script>
 
 </body>
 </html>

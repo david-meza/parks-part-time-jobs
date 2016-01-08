@@ -1,11 +1,11 @@
 <div id="map-canvas" layout = "column" flex>
 
   <!-- Search Container and Input Field (ui-gmap-search-box) -->
-  <div id="searchbox-container">
+  <!-- <div id="searchbox-container">
     <md-button class="search-icon-container">
       <md-icon md-svg-icon="img/icons/search.svg" aria-label = "Position map"></md-icon>
     </md-button>
-  </div>
+  </div> -->
 
   <!-- Main Map Directive -->
   <ui-gmap-google-map center='map.location.coords'
@@ -64,7 +64,7 @@
 
 
     <!-- Activities Markers -->
-    <ui-gmap-markers  models="activities.markers"
+    <!-- <ui-gmap-markers  models="activities.markers"
                       coords="'self'"
                       icon="activities.markersConfig.icon"
                       click="onMarkerClicked()"
@@ -74,11 +74,11 @@
                       control = "activities.markersConfig.control"
                       options = "activities.markersConfig.options"
                       modelsbyref = "true">
-    </ui-gmap-markers>
+    </ui-gmap-markers> -->
 
 
     <!-- Activities Info Window -->
-    <ui-gmap-window show="activityWindow.show" 
+    <!-- <ui-gmap-window show="activityWindow.show" 
                     coords="activityWindow.coords"
                     control = "activityWindow.control" 
                     options="activityWindow.options" 
@@ -86,40 +86,12 @@
                     templateurl = "activityWindow.templateUrl"
                     templateparameter = "activityWindow.templateParameter"
                     ng-cloak>
-    </ui-gmap-window>
+    </ui-gmap-window> -->
 
 
   </ui-gmap-google-map>
 
 
-  <md-fab-speed-dial  ng-hide="speedDial.hidden" 
-                      md-direction="{{ speedDial.openDirection }}" 
-                      md-open="speedDial.isOpen"
-                      class="md-scale md-fab-bottom-right">
-    
-    <md-fab-trigger>
-      <md-button aria-label="Map Options" class="md-raised map-bottom-right md-fab">
-        <md-tooltip md-direction="top">Map Options</md-tooltip>
-        <md-icon md-svg-src="img/icons/settings-color.svg" aria-label="options"></md-icon>
-      </md-button>
-    </md-fab-trigger>
-    
-    <md-fab-actions>
-      <div ng-repeat="item in speedDial.items">
-        <md-button  aria-label="{{item.name}}" 
-                    class="md-fab md-raised md-mini"
-                    ng-click="item.action($event)">
-          
-          <md-tooltip md-direction="{{item.direction}}" 
-                      md-visible="tooltipVisible"
-                      md-autohide="false">
-            {{item.name}}
-          </md-tooltip>
-          
-          <md-icon md-svg-src="{{item.icon}}" ng-class = "{{ item.addIconClass }}" aria-label="{{item.name}}"></md-icon>
-        </md-button>
-      </div>
-    </md-fab-actions>
-  </md-fab-speed-dial>
+  <map-actions></map-actions>
     
 </div>
