@@ -14,14 +14,11 @@
       // Opens the dialog showing address edit input field
       $scope.editLocation = function (ev) {
         $mdDialog.show({
-          templateUrl: 'views/partials/key-dialog.html',
+          templateUrl: 'views/partials/edit-location-dialog.html',
           targetEvent: ev,
           fullscreen: true,
           clickOutsideToClose:true,
           controller: 'DialogCtrl',
-          locals: {
-            activities: $scope.uniqueActivs
-          },
           bindToController: true
         });
       };

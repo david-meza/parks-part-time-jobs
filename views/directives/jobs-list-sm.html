@@ -40,7 +40,7 @@
         <md-card-title>
           <md-card-title-text>
             <span class="md-headline job-title">{{ job.title }}</span>
-            <span class="md-subhead job-salary">{{ job.time }} - {{ job.salary }}</span>
+            <span class="md-subhead job-salary">{{ job.time }} - {{ job.salary | currency }} hourly</span>
             <span class="md-subhead job-category">Category: {{ job.category }}</span>
             <span class="md-subhead job-location">{{ job.location }}</span>
           </md-card-title-text>
