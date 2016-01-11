@@ -16,9 +16,12 @@
       controller: 'autocompleteCtrl',
       
       link: function(scope, element, attrs) {
-        
-        var dropdown = document.getElementsByClassName('pac-container')[0];
-        element.append(dropdown);
+
+        $timeout(function(){
+          var dropdown = document.getElementsByClassName('pac-container');
+          element.append(dropdown);
+        }, 0);
+
 
       }
     };

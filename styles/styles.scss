@@ -55,11 +55,16 @@ img, h1, h2, h3, h4, h5, h6 {
   border-top: none !important;
 
   .pac-item {
+    padding: 5px;
+    font-size: 14px !important;
 
-    .pac-matched {
-      // color: #FF565D; // Red
-      color: #3F51B5 // Indigo Blue
-      // color: #B3A1E9; // Light Purple
+    .pac-item-query {
+      font-size: 15px;
+      .pac-matched {
+        // color: #FF565D; // Red
+        color: #3F51B5 // Indigo Blue
+        // color: #B3A1E9; // Light Purple
+      } 
     }
 
     .pac-icon {

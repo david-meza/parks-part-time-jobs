@@ -41,10 +41,15 @@ img, h1, h2, h3, h4, h5, h6 {
   display: block !important;
   box-shadow: none !important;
   border-top: none !important; }
-  .pac-container .pac-item .pac-matched {
-    color: #3F51B5; }
-  .pac-container .pac-item .pac-icon-marker {
-    background-position: 16px -1px; }
+  .pac-container .pac-item {
+    padding: 5px;
+    font-size: 14px !important; }
+    .pac-container .pac-item .pac-item-query {
+      font-size: 15px; }
+      .pac-container .pac-item .pac-item-query .pac-matched {
+        color: #3F51B5; }
+    .pac-container .pac-item .pac-icon-marker {
+      background-position: 16px -1px; }
 
 .pac-container:empty {
   display: none !important; }

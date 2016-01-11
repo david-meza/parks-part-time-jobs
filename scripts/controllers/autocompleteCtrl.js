@@ -2,8 +2,8 @@
 
   'use strict';
 
-  angular.module('appControllers').controller('autocompleteCtrl', ['$scope', 'uiGmapGoogleMapApi', 'mapService',
-    function($scope, gMapsApi, mapService){
+  angular.module('appControllers').controller('autocompleteCtrl', ['$scope', 'uiGmapGoogleMapApi', 'mapService', '$mdDialog',
+    function($scope, gMapsApi, mapService, $mdDialog){
 
       // Search box inside set my location dialog
       var myLocation;
@@ -28,9 +28,10 @@
 
       // Function used by address typeahead on a place selected
       var updateUserMarker = function() {
-        var loc = myLocation.getPlace().geometry.location;
-        mapService.updateUserCoords( loc.lat(), loc.lng() );
-        $scope.$apply();
+        $mdDialog.hide().then(function () {
+          var loc = myLocation.getPlace().geometry.location;
+          mapService.updateUserCoords( loc.lat(), loc.lng() );
+        });
       };
 
   }]);
