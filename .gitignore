@@ -1,7 +1,7 @@
 .tmp
 .sass-cache
 
-/bower_components
+# /bower_components
 
 
 styles/styles.css.map
