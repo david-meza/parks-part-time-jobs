@@ -11,7 +11,7 @@
       mapsApi = maps;
     });
 
-    var currentMarker = { obj: {} };
+    var currentPlace = { name: 'Raleigh, NC' };
   	
     var markers = { 
       content: [], 
@@ -29,7 +29,7 @@
       options: {
         pixelOffset: { width: 0, height: -48 }
       },
-      closeclick: function (windowScope) { console.log(windowScope);windowScope.show = false; },
+      closeclick: function (windowScope) { console.log(windowScope);windowScope.show = false;currentPlace.name = 'Raleigh, NC' },
       templateUrl: 'views/partials/park-window.html',
       templateParameter: {},
     };
@@ -41,17 +41,19 @@
       parkWindow.templateParameter.name = parkModel.name;
       parkWindow.templateParameter.address = parkModel.address;
       parkWindow.templateParameter.phone = parkModel.phone;
+      parkWindow.templateParameter.jobs = parkModel.jobs.length;
       parkWindow.show = true;
     };
   	
     var _markerClick = function (gInstance, evnt, model) {
-      currentMarker.obj = markers.currentPark = model;
+      markers.currentPark = model;
+      currentPlace.name = model.name;
       
       // Place the info window above park marker and pass in the park info
       _positionParkWindow(model);
       
       // Trigger a state change and show the park details
-      $state.go('home.park', { 'name': markers.currentPark.name.replace(/\W+/g, '').toLowerCase() });
+      // $state.go('home.park', { 'name': markers.currentPark.name.replace(/\W+/g, '').toLowerCase() });
     };
 
 
@@ -79,6 +81,10 @@
             icon: 'https://s3.amazonaws.com/davidmeza/Park_Locator/tree-small.png',
             latitude: park.geometry.y,
             longitude: park.geometry.x,
+
+            jobs: [
+              { title: 'Camp Counselor- North/Northwest Raleigh (District 1)', salary: 8.25, description: 'Responsible for the direct supervision of campers, programming age appropriate activities and working with other staff to address the daily needs of a group of children during the summer season.', time: 'Part Time', category: 'Parks and Recreation', location: p.NAME, url: 'https://www.governmentjobs.com/careers/raleighnc/jobs/1314835/camp-counselor-southeast-raleigh-district-4/apply', date: new Date(), distance: Math.random() * 30 }
+            ],
 
             markerClick: _markerClick,
             options: {
@@ -133,7 +139,8 @@
   	return {
   		markers: markers,
       updateParkMarkers: updateParkMarkers,
-      parkWindow: parkWindow
+      parkWindow: parkWindow,
+      currentPlace: currentPlace
   	};
 
   }]);

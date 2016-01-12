@@ -8,7 +8,22 @@
       restrict: 'E',
       replace: true,
       templateUrl: 'views/directives/sidenavs.html',
-      controller: ['$scope', '$mdSidenav', 'jobsFilterService', function ($scope, $mdSidenav, jobsFilterService) {
+      controller: ['$scope', '$mdSidenav', 'jobsFilterService', 'deviceService', 
+        function ($scope, $mdSidenav, jobsFilterService, deviceService) {
+
+        $scope.showList = function () {
+          deviceService.activeTab.list = true;
+          deviceService.activeTab.map = false;
+          deviceService.activeTab.name = 'list';
+          $scope.leftClose();
+        };
+
+        $scope.hideList = function () {
+          deviceService.activeTab.list = false;
+          deviceService.activeTab.map = true;
+          deviceService.activeTab.name = 'map';
+          $scope.leftClose();
+        };
 
         $scope.filterClose = function () {
           $mdSidenav('filter').close();
@@ -38,7 +53,7 @@
 
         var idxLookup = {
           distance: 0,
-          category: 1,
+          categories: 1,
           salary: 2,
         };
 
@@ -50,6 +65,7 @@
             $scope.applyFilter('salary', 0);
             $scope.applyFilter('distance', 9999);
             $scope.applyFilter('categories', []);
+            uncheckCategories();
           } else {
             $scope.applyFilter(filterName, val);
           }
@@ -74,6 +90,12 @@
           { name: 'Engineering', jobs: 1, checked: false},
           { name: 'Etc', jobs: 0, checked: false},
         ];
+
+        var uncheckCategories = function () {
+          angular.forEach($scope.categories, function(cat) {
+            cat.checked = false;
+          });
+        };
 
         $scope.salaryOptions = [10, 15, 20, 25, 30];
 

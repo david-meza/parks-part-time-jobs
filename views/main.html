@@ -32,13 +32,18 @@
 </md-content>
  -->
 <div layout = "row" flex>
-  <div flex = "100" flex-gt-sm = "60" layout = "column">
+  <div flex = "100" flex-gt-sm = "60" layout = "column" ng-hide="activeTab.list">
     <main-map></main-map>
   </div>
 
-  <div flex-gt-sm = "40" hide-xs hide-sm layout = "column">
+  <div flex = "100" flex-gt-sm = "40" hide-xs hide-sm layout = "column" ui-view = "job-details" ng-hide="activeTab.list">
+    <!-- <jobs-list-sm></jobs-list-sm> -->
+  </div>
+
+  <div flex = "100" layout = "column" ng-show="activeTab.list">
     <jobs-list-sm></jobs-list-sm>
   </div>
+
 </div>
 
 

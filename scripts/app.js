@@ -53,14 +53,26 @@
         $stateProvider
           .state('home', {
             url: '/',
-            templateUrl: 'views/main.html',
-            controller: 'devicesCtrl'
+            views: {
+              '': {
+                templateUrl: 'views/main.html',
+                controller: 'devicesCtrl'
+              },
+              'job-details@home': {
+                templateUrl: 'views/directives/jobs-list-sm.html',
+                controller: 'jobsListSmCtrl'
+              }
+            }
           })
 
           .state('home.park', {
             url: ':name',
-            templateUrl: 'views/park-information.html',
-            controller: 'parkCtrl'
+            views: {
+              'job-details': {
+                templateUrl: 'views/directives/jobs-list-sm.html',
+                controller: 'parkCtrl'
+              }
+            }
           });
 
     }]);

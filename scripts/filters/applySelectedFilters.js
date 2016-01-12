@@ -7,8 +7,6 @@
     var filtered = [];
     
     return function(jobs, selectedFilters) {
-      console.log(jobs);
-      console.log(selectedFilters);
 
       if (selectedFilters.categories.length <= 0 && selectedFilters.salary === 0 && selectedFilters.distance === 9999) { return jobs; }
 

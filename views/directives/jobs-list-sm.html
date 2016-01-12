@@ -36,10 +36,10 @@
   <md-list>
 
     <md-list-item>
-      <p>Showing <b>{{ filteredJobs.length }}</b> jobs in <b>{{ currentPlace }}</b></p>
+      <p>Showing <b>{{ filteredJobs.length }}</b> jobs in <b>{{ currentPlace.name }}</b></p>
     </md-list-item>
 
-    <md-list-item ng-repeat = "job in jobs | applySelectedFilters: selectedFilters | orderBy: selectedSort as filteredJobs">
+    <md-list-item ng-repeat = "job in jobs | filterByPark | applySelectedFilters: selectedFilters | orderBy: selectedSort as filteredJobs">
       
       <md-card ng-class-odd="'odd-card'" flex>
         
@@ -55,7 +55,7 @@
             <span class="md-headline job-title">{{ job.title }}</span>
             <span class="md-subhead job-salary">{{ job.time }} - {{ job.salary | currency }} hourly</span>
             <span class="md-subhead job-category">Category: {{ job.category }}</span>
-            <span class="md-subhead job-location">{{ job.distance }} miles away</span>
+            <span class="md-subhead job-location">{{ job.distance | number: 2 }} miles away</span>
           </md-card-title-text>
           <!-- <md-card-title-media>
             <div class="md-media-md card-media"></div>
