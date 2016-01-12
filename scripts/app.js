@@ -24,7 +24,24 @@
 
     .config([ '$mdThemingProvider', function ($mdThemingProvider) {
       $mdThemingProvider.theme('altTheme')
-        .primaryPalette('purple');
+        .primaryPalette('purple')
+        .accentPalette('red')
+        .warnPalette('yellow');
+    }])
+
+    .config([ '$mdIconProvider', function ($mdIconProvider) {
+      $mdIconProvider
+        .icon('$default:0', 'img/icons/filter-none.svg')
+        .icon('$default:1', 'img/icons/filter-1.svg')
+        .icon('$default:2', 'img/icons/filter-2.svg')
+        .icon('$default:3', 'img/icons/filter-3.svg')
+        .icon('$default:4', 'img/icons/filter-4.svg')
+        .icon('$default:5', 'img/icons/filter-5.svg')
+        .icon('$default:6', 'img/icons/filter-6.svg')
+        .icon('$default:7', 'img/icons/filter-7.svg')
+        .icon('$default:8', 'img/icons/filter-8.svg')
+        .icon('$default:9', 'img/icons/filter-9.svg')
+        .icon('$default:10', 'img/icons/filter-9-plus.svg');
     }])
 
     .config(['$stateProvider', '$urlRouterProvider', 
@@ -44,13 +61,6 @@
             url: ':name',
             templateUrl: 'views/park-information.html',
             controller: 'parkCtrl'
-
-          })
-
-          .state('home.park.section', {
-            url: '/:sectionName',
-            templateUrl: 'views/course-section.html',
-            controller: 'sectionCtrl'
           });
 
     }]);

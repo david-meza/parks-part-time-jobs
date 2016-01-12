@@ -1,8 +1,27 @@
-<div class = "ng-cloak" id = "park-window">
-  <h5 ng-bind="parameter.name"></h5>
-  <p ng-bind="parameter.address"></p>
-  <p ng-bind="parameter.phone"></p>
-  <a  scroll-to="panels-section"
-      duration = "500"
-      offset = "10">More Info</a>
+<div class = "ng-cloak" id = "park-window" layout = "column">
+  
+  <div class = "title" layout = "row" layout-align = "space-between center">
+    
+    <div class = "title-text" flex = "60" layout = "column" layout-wrap layout-align = "start stretch">
+      <span flex = "100" class="md-headline">{{ parameter.name }}</span>
+      <span flex = "100" class="md-subhead">{{ parameter.address }}</span>
+      <span flex = "100" class="md-subhead">{{ parameter.phone }}</span>
+    </div>
+    
+    <div class = "title-media" flex = "40" layout = "column">
+      <div class="md-media-md card-media" flex-shrink>
+        <img  class = "img-vertical-center park-image" 
+              fallback-src = "https://s3.amazonaws.com/davidmeza/Park_Locator/nophoto.png"
+              ng-src="https://maps.raleighnc.gov/parklocator/images/photos/{{ parameter.name }}.jpg">
+      </div>
+    </div>
+  
+  </div>
+
+  <div class = "card-actions" layout="row" layout-align="center center" md-theme = "altTheme">
+    <md-button class = "md-primary capitalize" ng-click = "focusJobs()">
+      See all {{ parameter.jobs || '4' }} jobs in this location
+    </md-button>
+  </div>
+
 </div>

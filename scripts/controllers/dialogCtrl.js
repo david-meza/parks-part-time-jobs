@@ -18,13 +18,6 @@
       };
 
 
-      $scope.settings = [
-        { name: 'Wi-Fi', extraScreen: 'Wi-fi menu', icon: 'device:network-wifi', enabled: true },
-        { name: 'Bluetooth', extraScreen: 'Bluetooth menu', icon: 'device:bluetooth', enabled: false },
-      ];
-
-
-
     }]);
 
 })(window.angular);
