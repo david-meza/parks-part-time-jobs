@@ -1,0 +1,167 @@
+<div id="sidenavs">
+  
+  <!-- Menu button -> Left Sidenav -> Opened from navbarCtrl -->
+  <md-sidenav class="md-sidenav-left md-whiteframe-z2" 
+              md-component-id="left" 
+              md-is-open="leftSidenavOpen">
+    
+    <md-toolbar>
+      <h1 class="md-toolbar-tools">Sidenav Left</h1>
+    </md-toolbar>
+    
+    <md-content layout-padding>
+
+      <md-list>
+        <md-list-item ng-click = "hideList()">
+          <md-icon md-svg-icon="img/icons/map.svg"></md-icon>
+          <p> Map View </p>
+        </md-list-item>
+
+        <md-list-item ng-click = "showList()">
+          <md-icon md-svg-icon="img/icons/list-view.svg"></md-icon>
+          <p> List View </p>
+        </md-list-item>
+
+      </md-list>
+
+      <md-button ng-click="leftClose()" class="md-primary">
+        Close
+      </md-button>
+    </md-content>
+  </md-sidenav>
+
+
+  <!-- Filter button -> Right Sidenav -> Opened from JobListSmCtrl -->
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" 
+              md-component-id="filter"
+              md-is-open="filterSidenavOpen">
+    
+    <md-toolbar class="md-theme-light">
+      <h1 class="md-toolbar-tools">Filter</h1>
+    </md-toolbar>
+    
+    <md-content layout-padding>
+
+      <md-list>
+      
+        <md-list-item ng-click="navigateTo(setting.extraScreen, $event)" ng-repeat="setting in settings">
+          <md-icon md-svg-icon="{{setting.icon}}"></md-icon>
+          <p> {{ setting.name }} </p>
+          <md-icon md-svg-icon="{{setting.filtersOn}}"></md-icon>
+        </md-list-item>
+
+      </md-list>
+
+      <div layout = "row" layout-align = "end stretch">
+        <md-button ng-click="clearFilter('all')" class="md-primary capitalize">
+          Clear all filters
+        </md-button>
+        
+        <md-button ng-click="filterClose()" class="md-primary capitalize">
+          Close
+        </md-button> 
+      </div>
+
+    </md-content>
+  </md-sidenav>
+
+
+  <!-- Salary list item -> Right Sidenav -> Opened from sidenavs controller -->
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" 
+              md-component-id="salary"
+              md-is-open="salarySidenavOpen">
+    
+    <md-toolbar class="md-theme-light">
+      <h1 class="md-toolbar-tools">Salary</h1>
+    </md-toolbar>
+    
+    <md-content layout-padding>
+
+      <md-list>
+      
+        <md-radio-group ng-model = "filters.salary" layout = "column">
+        
+          <md-list-item ng-click="applyFilter('salary', filters.salary)" 
+                        class = "list-item-with-radio" 
+                        md-ink-ripple = "#FF0000"
+                        ng-repeat="salary in salaryOptions">
+              <md-radio-button flex value = "{{salary}}"> {{ salary | currency }}+ hourly </md-radio-button>
+          </md-list-item>
+
+        </md-radio-group>
+
+      </md-list>
+
+
+      <md-button ng-click="salaryClose()" class="md-primary">
+        &lt;&lt; Back
+      </md-button>
+
+    </md-content>
+  </md-sidenav>
+
+  <!-- Distance list item -> Right Sidenav -> Opened from sidenavs controller -->
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" 
+              md-component-id="distance"
+              md-is-open="distanceSidenavOpen">
+    
+    <md-toolbar class="md-theme-light">
+      <h1 class="md-toolbar-tools">Distance</h1>
+    </md-toolbar>
+    
+    <md-content layout-padding>
+
+      <md-list>
+      
+        <md-radio-group ng-model = "filters.distance" layout = "column">
+        
+          <md-list-item ng-repeat = "distance in distanceOptions" 
+                        ng-click="applyFilter('distance', filters.distance)" 
+                        class = "list-item-with-radio" 
+                        md-ink-ripple = "#FF0000">
+              <md-radio-button flex value = "{{ distance }}"> Within {{ distance }} miles </md-radio-button>
+          </md-list-item>
+
+        </md-radio-group>
+
+      </md-list>
+
+
+      <md-button ng-click="distanceClose()" class="md-primary">
+        &lt;&lt; Back
+      </md-button>
+
+    </md-content>
+  </md-sidenav>
+
+  <!-- Category list item -> Right Sidenav -> Opened from sidenavs controller -->
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" 
+              md-component-id="category"
+              md-is-open="categorySidenavOpen">
+    
+    <md-toolbar class="md-theme-light">
+      <h1 class="md-toolbar-tools">Category</h1>
+    </md-toolbar>
+    
+    <md-content layout-padding>
+      
+      <div ng-repeat="category in categories">
+        <md-checkbox  ng-checked="catExists(category.name, filters.categories)" 
+                      ng-click="catToggle(category.name, filters.categories)" 
+                      aria-label = "{{category.name}}"
+                      ng-model = "category.checked"
+                      ng-change="applyFilter('categories', filters.categories)">
+          {{ category.name }} ({{ category.jobs }})
+        </md-checkbox>
+      </div>
+
+
+      <md-button ng-click="categoryClose()" class="md-primary">
+        &lt;&lt; Back
+      </md-button>
+
+    </md-content>
+  </md-sidenav>
+
+
+</div>

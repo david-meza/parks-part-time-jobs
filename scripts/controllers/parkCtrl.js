@@ -2,11 +2,10 @@
 
 	'use strict';
 
-	angular.module('appControllers').controller('parkCtrl', [ '$scope', '$state', '$stateParams', 'mapService', 'parkService', 'uiGmapGoogleMapApi', 'amenitiesService', 'accordionService', '$timeout',
-		function ($scope, $state, $stateParams, mapService, parkService, gMapsAPI, amenitiesService, accordionService, $timeout) {
+	angular.module('appControllers').controller('parkCtrl', [ '$scope', '$state', '$stateParams', 'mapService', 'parkService', 'uiGmapGoogleMapApi',
+		function ($scope, $state, $stateParams, mapService, parkService, gMapsAPI) {
 
 			var parkName = $stateParams.name,
-					accordionSettings = accordionService.settings,
 					directionsService,
 		  		directionsDisplay,
 		  		icons,
@@ -14,12 +13,8 @@
 
 		  // Define some async objects from our services
 	    $scope.parks = parkService.markers;
-	    $scope.amenities = amenitiesService.list;
-	    $scope.selectedActivities = amenitiesService.selectedActivities;
 	    $scope.myLoc = mapService.map.myLocationMarker.coords;
 	    $scope.map = mapService.map;
-
-	    $scope.mergedActivities = $scope.amenities.uniques.concat($scope.selectedActivities.current);
 
 		  gMapsAPI.then( function (maps) {
 		  	$scope.mapsApi = maps;
@@ -27,21 +22,6 @@
 	      initializeDirectionsMap();
 
 		  });
-
-		  $scope.openLocationPanel = function () {
-	      accordionSettings.second.status.open = false;
-	      accordionSettings.third.status.open = false;
-	      accordionSettings.first.status.open = true;
-	      $timeout(function(){
-	      	document.getElementById("autocomplete").focus();
-	      }, 501);
-		  };
-
-		  $scope.showAmenityInMap = function () {
-	    	$scope.map.location.coords.latitude = $scope.parks.currentPark.latitude;
-	    	$scope.map.location.coords.longitude = $scope.parks.currentPark.longitude;
-	    	$scope.map.zoom = 18;
-		  };
 
 		  var initializeDirectionsMap = function () {
 		  	if ( !document.getElementById('mini-map') ) { return; }

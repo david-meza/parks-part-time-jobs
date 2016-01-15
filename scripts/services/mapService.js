@@ -11,7 +11,6 @@
     gMapsApi.then( function (maps) {
       mapsObj = maps;
       map.searchbox.options.bounds = new mapsObj.LatLngBounds(new mapsObj.LatLng(35.437814,-78.984583), new mapsObj.LatLng(36.113561,-78.336890));
-      console.log(mapsObj.ControlPosition.LEFT_BOTTOM);
     });
 
     // Temporary coordinates while Geoloc gets us the user's coords

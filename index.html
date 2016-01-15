@@ -17,64 +17,11 @@
   
   <ng-navbar></ng-navbar>
 
-  <md-sidenav class="md-sidenav-left md-whiteframe-z2" 
-              md-component-id="left" 
-              md-is-open="sideNavOpen">
-    
-    <md-toolbar>
-      <h1 class="md-toolbar-tools">Sidenav Left</h1>
-    </md-toolbar>
-    
-    <md-content layout-padding>
-      <md-button ng-click="close()" class="md-primary">
-        Close Sidenav Left
-      </md-button>
-      <p hide-md show-gt-md>
-        Coming soon...
-      </p>
-    </md-content>
-  </md-sidenav>
-
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2" 
-              md-component-id="filter"
-              md-is-open="sideNavOpen">
-    
-    <md-toolbar class="md-theme-light">
-      <h1 class="md-toolbar-tools">Filter</h1>
-    </md-toolbar>
-    
-    <md-content layout-padding>
-
-      <md-list>
-
-        <md-list-item>
-          <md-icon md-svg-icon = "img/icons/filter.svg"></md-icon>
-          <p>Salary</p>
-          <md-icon md-svg-icon = "img/icons/filter.svg"></md-icon>
-        </md-list-item>
-
-      </md-list>
-
-      <md-list>
-
-        <md-list-item>
-          <md-icon md-svg-icon = "img/icons/filter.svg"></md-icon>
-          <p>Coming soon...</p>
-          <md-icon md-svg-icon = "img/icons/filter.svg"></md-icon>
-        </md-list-item>
-
-      </md-list>
-
-
-      
-      <md-button ng-click="close()" class="md-primary">
-        Close
-      </md-button>
-    </md-content>
-  </md-sidenav>
-
+  
+  <ng-sidenavs></ng-sidenavs>
+  
+  
   <ui-view layout = "row" flex></ui-view>
-
 
 
   <back-to-top>
@@ -87,6 +34,7 @@
   </md-button>
   </back-to-top>
 
+  
   <script>
      !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
      (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
@@ -97,6 +45,7 @@
      ga('send', 'pageview');
   </script>
 
+  
   <!-- Angular -->
   <script src="bower_components/angular/angular.js"></script>
 
@@ -121,16 +70,18 @@
   <script src="scripts/services/deviceService.js"></script>
   <script src="scripts/services/mapService.js"></script>
   <script src="scripts/services/parkService.js"></script>  
+  <script src="scripts/services/jobsFilterService.js"></script>  
   <script src="scripts/services/httpInterceptor.js"></script>
   
   <!-- Filters -->
-  <script src="scripts/filters/parkAmenities.js"></script>
-  <script src="scripts/filters/selectedActivities.js"></script>
+  <script src="scripts/filters/filterByPark.js"></script>
+  <script src="scripts/filters/applySelectedFilters.js"></script>
   
 
   <!-- Controllers -->
   <script src="scripts/controllers/navbarCtrl.js"></script>
   <script src="scripts/controllers/devicesCtrl.js"></script>
+  <script src="scripts/controllers/autocompleteCtrl.js"></script>
   <script src="scripts/controllers/jobsListSmCtrl.js"></script>
   <script src="scripts/controllers/mapActionsCtrl.js"></script>
   <script src="scripts/controllers/mapCtrl.js"></script>
@@ -139,9 +90,11 @@
 
   <!-- Directives -->
   <script src="scripts/directives/navbar.js"></script>
+  <script src="scripts/directives/sidenavs.js"></script>
   <script src="scripts/directives/footer.js"></script>
   <script src="scripts/directives/jobsListSm.js"></script>
   <script src="scripts/directives/mapActions.js"></script>
+  <script src="scripts/directives/gmapsAddress.js"></script>
   <script src="scripts/directives/backToTop.js"></script>
   <script src="scripts/directives/navbarFixed.js"></script>
   <script src="scripts/directives/mainMap.js"></script>

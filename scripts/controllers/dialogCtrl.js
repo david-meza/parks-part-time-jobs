@@ -16,6 +16,8 @@
       $scope.answer = function(answer) {
         $mdDialog.hide(answer);
       };
+
+
     }]);
 
 })(window.angular);

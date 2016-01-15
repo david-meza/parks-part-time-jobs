@@ -15,6 +15,7 @@
       $scope.activeTab = deviceService.activeTab;
       $scope.isMobile = deviceService.isMobile;
 
+
       $scope.toggleSidenav = function () {
         $mdSidenav('left').toggle();
       };
