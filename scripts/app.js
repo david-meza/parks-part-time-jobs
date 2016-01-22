@@ -24,9 +24,12 @@
 
     .config([ '$mdThemingProvider', function ($mdThemingProvider) {
       $mdThemingProvider.theme('altTheme')
-        .primaryPalette('purple')
+        .primaryPalette('deep-purple')
         .accentPalette('red')
         .warnPalette('yellow');
+
+      // $mdThemingProvider.theme('default')
+      //   .primaryPalette('deep-purple');
     }])
 
     .config([ '$mdIconProvider', function ($mdIconProvider) {

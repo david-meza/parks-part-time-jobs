@@ -56,6 +56,40 @@
       // $state.go('home.park', { 'name': markers.currentPark.name.replace(/\W+/g, '').toLowerCase() });
     };
 
+    var generateOtherLocations = function () {
+      angular.forEach(markers.content, function (park, idx) {
+
+        angular.forEach(park.jobs, function (job) {
+
+          var numOfParksToAdd = Math.floor(Math.random() * 5) + 1;
+          var iterable = [];
+
+          for (var i = 0; i < numOfParksToAdd; i++) {
+            iterable.push( Math.floor(Math.random() * markers.content.length) );  
+          };
+          
+          angular.forEach(iterable, function (randIndex) {
+            if (randIndex === idx) return;
+            var relatedPark = markers.content[randIndex];
+            // Only get the properties that we need to avoid infinite recursion from park jobs linking to other parks
+            job.otherLocations.push({ 
+              name: relatedPark.name, 
+              markerClick: function () { 
+                relatedPark.markerClick.call(relatedPark, null, 'click', relatedPark);
+              },
+              latitude: relatedPark.latitude,
+              longitude: relatedPark.longitude
+            });
+          });
+          
+        });
+        
+        
+      });
+
+      console.log(markers.content);
+    };
+
 
     var _generateMarkers = function (response) {
 
@@ -83,7 +117,8 @@
             longitude: park.geometry.x,
 
             jobs: [
-              { title: 'Camp Counselor- North/Northwest Raleigh (District 1)', salary: 8.25, description: 'Responsible for the direct supervision of campers, programming age appropriate activities and working with other staff to address the daily needs of a group of children during the summer season.', time: 'Part Time', category: 'Parks and Recreation', location: p.NAME, url: 'https://www.governmentjobs.com/careers/raleighnc/jobs/1314835/camp-counselor-southeast-raleigh-district-4/apply', date: new Date(), distance: Math.random() * 30 }
+              { title: 'Camp Counselor- North/Northwest Raleigh (District 1)', salary: (8 + Math.random() * 12), description: 'Responsible for the direct supervision of campers, programming age appropriate activities and working with other staff to address the daily needs of a group of children during the summer season.', time: 'Part Time', category: 'Parks and Recreation', location: p.NAME, url: 'https://www.governmentjobs.com/careers/raleighnc/jobs/1314835/camp-counselor-southeast-raleigh-district-4', date: new Date(), distance: (Math.random() * 30), otherLocations: [] },
+              { title: 'Cashier', salary: (8 + Math.random() * 12), description: 'Responsible for assisting full-time facility management and recreation leaders as a cashier at a waterfront facility and park.', time: 'Part Time', category: 'PRCR Resources', location: p.NAME, url: 'https://www.governmentjobs.com/careers/raleighnc/jobs/1119867/cashier-lake-johnson-park-and-lake-wheeler-park', date: new Date(), distance: (Math.random() * 30), otherLocations: [] }
             ],
 
             markerClick: _markerClick,
@@ -100,9 +135,9 @@
 
           markers.content.push(marker);
         });
-        
-        // if (markers.content.length > 0) { $state.go('home.park', { 'name': markers.content[0].name.replace(/\W+/g, '').toLowerCase() }); }
 
+        generateOtherLocations();
+        
       } else {
         console.log('error', response);
       }
