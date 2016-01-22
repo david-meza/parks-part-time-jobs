@@ -1,6 +1,6 @@
-<md-content layout = "column" flex>
+<md-content id = "jobs-list" layout = "column" flex>
               
-  <md-subheader class="md-primary" layout = "row">
+  <md-subheader class="md-primary jobs-subheader md-no-sticky" layout = "row">
     
     
     <span flex layout = "row">
@@ -20,7 +20,7 @@
       <span flex = "10"></span>
       <div flex = "45" layout = "row">
         <span flex></span>
-        <md-button  class = "capitalize md-primary md-raised"
+        <md-button  class = "capitalize md-primary md-raised filter-button"
                     ng-click="openFilterSelection($event)">
           <md-icon md-svg-icon = "img/icons/filter.svg"></md-icon>
           Filter
@@ -68,7 +68,7 @@
         </md-card-content>
         
 
-        <md-card-actions layout="row" layout-align="end center">
+        <md-card-actions layout="row" layout-align="end center" class = "card-actions">
           <md-button  target = "_blank" 
                       ng-href="{{ job.url }}"
                       class = "md-accent">
@@ -79,7 +79,7 @@
           </md-button>
           <md-button  target = "_blank" 
                       ng-href="{{ job.url }}/apply"
-                      class = "md-accent">
+                      class = "md-accent apply-button">
             <md-icon  aria-label="Apply now" 
                       md-svg-icon="img/icons/briefcase.svg">
             </md-icon>
