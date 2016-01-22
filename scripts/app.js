@@ -2,7 +2,7 @@
 
   'use strict';
 
-  angular.module('parkJobs', ['appServices', 'appFilters', 'appControllers', 'appDirectives', 'ui.router', 'ngMaterial', 'uiGmapgoogle-maps', 'smoothScroll', 'dcbImgFallback', 'ngAnimate'])
+  angular.module('parkJobs', ['appServices', 'appFilters', 'appControllers', 'appDirectives', 'ui.router', 'ngMaterial', 'uiGmapgoogle-maps', 'angular-tour', 'dcbImgFallback', 'ngAnimate', 'ipCookie'])
 
     .config(['uiGmapGoogleMapApiProvider', 
       function(uiGmapGoogleMapApiProvider) {
