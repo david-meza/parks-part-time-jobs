@@ -2,8 +2,8 @@
 
   'use strict';
 
-  angular.module('appServices').factory('mapService', ['uiGmapGoogleMapApi',
-    function (gMapsApi) {
+  angular.module('appServices').factory('mapService', ['uiGmapGoogleMapApi', '$mdToast',
+    function (gMapsApi, $mdToast) {
 
 
     var mapsObj;
@@ -102,14 +102,7 @@
     map.searchbox = {
       template: 'views/partials/search-box.html',
       position: 'TOP_RIGHT',
-      options: {
-        // bounds: {
-        //   east: -78.336890,
-        //   north: 36.113561,
-        //   south: 35.437814,
-        //   west: -78.984583
-        // }
-      },
+      options: {},
       events: {
         places_changed: function (searchBox) {
           var loc = searchBox.getPlaces()[0].geometry.location;
@@ -131,13 +124,32 @@
       map.zoom = 14;
     };
 
+    var informUser = function (message) {
+      var toast = $mdToast.simple()
+        .textContent(message)
+        .action('ok')
+        .highlightAction(false)
+        // .capsule(true)
+        .position('top right');
+      $mdToast.show(toast);
+    }
+
     var geoLocate = function() {
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition( function (position) {
-          updateUserCoords(position.coords.latitude, position.coords.longitude);
-        });
+        navigator.geolocation.getCurrentPosition( 
+          function (position) {
+            updateUserCoords(position.coords.latitude, position.coords.longitude);
+          },
+          function (error) {
+            informUser(error.message);
+          }, {
+            enableHighAccuracy: false,
+            timeout: 10000,
+            maximumAge: 60000
+          }
+        );
       } else {
-        console.log('Geolocation not supported');
+        console.log('Geolocation not supported. Defaulting to backup location.');
       }
     };
 

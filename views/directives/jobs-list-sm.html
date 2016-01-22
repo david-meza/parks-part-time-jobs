@@ -72,8 +72,16 @@
           <md-button  target = "_blank" 
                       ng-href="{{ job.url }}"
                       class = "md-accent">
+            <md-icon  aria-label="See Job Details" 
+                      md-svg-icon="img/icons/document.svg">
+            </md-icon>
+            Job Details
+          </md-button>
+          <md-button  target = "_blank" 
+                      ng-href="{{ job.url }}/apply"
+                      class = "md-accent">
             <md-icon  aria-label="Apply now" 
-                      md-svg-icon="img/icons/external-link.svg">
+                      md-svg-icon="img/icons/briefcase.svg">
             </md-icon>
             Apply
           </md-button>
