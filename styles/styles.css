@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:100,400,500,700,400italic");
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900");
 @import url(../bower_components/angular-material/angular-material.css);
 @import url(./font-awesome.css);
 html {
@@ -86,6 +86,24 @@ img, h1, h2, h3, h4, h5, h6 {
   color: rgba(0, 0, 0, 0.54);
   letter-spacing: 0.010em; }
 
+.footer-title {
+  display: block;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4em; }
+
+.footer-item {
+  display: block;
+  font-size: 12px;
+  line-height: 1.2em; }
+
+.chips-wrapper.md-chips {
+  box-shadow: 0 1px #e0e0e0; }
+
+.background-default {
+  background-color: rgba(0, 0, 0, 0.14);
+  color: rgba(0, 0, 0, 0.7); }
+
 .text-before-dropdown {
   margin: auto;
   padding-top: 3px; }
@@ -136,10 +154,10 @@ img, h1, h2, h3, h4, h5, h6 {
   -ms-transform: translateY(100px);
   transform: translateY(100px);
   opacity: 0;
-  -webkit-transform: all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  -moz-transform: all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  -o-transform: all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  -ms-transform: all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+  -webkit-transition: all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+  -moz-transition: all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+  -o-transition: all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+  -ms-transition: all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
   transition: all 0.4s cubic-bezier(0.345, 0, 0.25, 1); }
 
 .bring-to-screen #back-to-top {
@@ -159,10 +177,10 @@ md-icon {
   position: absolute;
   height: 25px;
   width: 100%;
-  -webkit-transform: visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  -moz-transform: visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  -o-transform: visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
-  -ms-transform: visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+  -webkit-transition: visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+  -moz-transition: visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+  -o-transition: visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+  -ms-transition: visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1);
   transition: visibility 0.4s, opacity 0.4s cubic-bezier(0.345, 0, 0.25, 1); }
   .scroll-button-top.show-button, .scroll-button-bottom.show-button {
     opacity: 1;
@@ -428,10 +446,10 @@ ul#park-amenities {
     z-index: 13;
     border: 0;
     cursor: pointer;
-    -webkit-transform: all 0.25s cubic-bezier(0.345, 0, 0.25, 1);
-    -moz-transform: all 0.25s cubic-bezier(0.345, 0, 0.25, 1);
-    -o-transform: all 0.25s cubic-bezier(0.345, 0, 0.25, 1);
-    -ms-transform: all 0.25s cubic-bezier(0.345, 0, 0.25, 1);
+    -webkit-transition: all 0.25s cubic-bezier(0.345, 0, 0.25, 1);
+    -moz-transition: all 0.25s cubic-bezier(0.345, 0, 0.25, 1);
+    -o-transition: all 0.25s cubic-bezier(0.345, 0, 0.25, 1);
+    -ms-transition: all 0.25s cubic-bezier(0.345, 0, 0.25, 1);
     transition: all 0.25s cubic-bezier(0.345, 0, 0.25, 1); }
     #searchbox-container input#search-box:focus {
       cursor: text;
@@ -504,10 +522,10 @@ ul#park-amenities {
 
 #activity-window, #park-window {
   opacity: 0;
-  -moz-animation: show-me 0.3s ease-in 0s 1 normal;
-  -webkit-animation: show-me 0.3s ease-in 0s 1 normal;
-  -o-animation: show-me 0.3s ease-in 0s 1 normal;
-  animation: show-me 0.3s ease-in 0s 1 normal;
+  -moz-animation: show-me 900ms cubic-bezier(0.65, 0.05, 0.36, 1) 0s 1 normal;
+  -webkit-animation: show-me 900ms cubic-bezier(0.65, 0.05, 0.36, 1) 0s 1 normal;
+  -o-animation: show-me 900ms cubic-bezier(0.65, 0.05, 0.36, 1) 0s 1 normal;
+  animation: show-me 900ms cubic-bezier(0.65, 0.05, 0.36, 1) 0s 1 normal;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards; }
 
