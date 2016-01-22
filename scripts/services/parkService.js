@@ -29,7 +29,7 @@
       options: {
         pixelOffset: { width: 0, height: -48 }
       },
-      closeclick: function (windowScope) { console.log(windowScope);windowScope.show = false;currentPlace.name = 'Raleigh, NC' },
+      closeclick: function (windowScope) { windowScope.show = false; currentPlace.name = 'Raleigh, NC' },
       templateUrl: 'views/partials/park-window.html',
       templateParameter: {},
     };

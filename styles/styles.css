@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900");
 @import url(../bower_components/angular-material/angular-material.css);
+@import url(../bower_components/angular-tour/dist/angular-tour.css);
 @import url(./font-awesome.css);
 html {
   font-family: Roboto, Helvetica, Verdana, sans-serif; }
@@ -53,6 +54,9 @@ img, h1, h2, h3, h4, h5, h6 {
 
 .pac-container:empty {
   display: none !important; }
+
+.tour-tip p {
+  margin: 1em auto; }
 
 .angular-google-map {
   flex: 1;
