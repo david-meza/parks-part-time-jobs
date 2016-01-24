@@ -24,57 +24,7 @@
   <ui-view layout = "row" flex></ui-view>
 
 
-  <back-to-top>
-    <md-button  class="md-accent md-raised md-fab md-mini" 
-                aria-label="Back to Top"
-                scroll-to = "navbar" 
-                duration = "400" 
-                offset = "0">
-    <md-icon md-font-icon="fa-angle-double-up" class = "fa fa-lg"></md-icon>
-  </md-button>
-  </back-to-top>
-
-  <guided-tour ng-controller="tourCtrl">
-    <tour step="currentStep" post-step="stepComplete()">
-      <virtual-step tourtip="Jobs can be sorted by distance, salary, post date and title"
-                    tourtip-next-label="Next"
-                    tourtip-placement="bottom"
-                    tourtip-element=".inline-dropdown"
-                    use-source-scope = "true"
-                    tourtip-step="0">
-      </virtual-step>  
-      <virtual-step tourtip="They can also be filtered for more relevant results"
-                    tourtip-next-label="Next"
-                    tourtip-placement="left"
-                    tourtip-element=".filter-button"
-                    use-source-scope = "true"
-                    tourtip-step="1">
-      </virtual-step>
-      <virtual-step tourtip="Click on a park marker to see jobs only at that location"
-                    tourtip-next-label="Next"
-                    tourtip-placement="right"
-                    tourtip-element=".angular-google-map-container"
-                    tourtip-container-element="#map-canvas"
-                    use-source-scope = "true"
-                    tourtip-step="2">
-      </virtual-step>    
-      <virtual-step tourtip="You can manually modify your location to find jobs near you"
-                    tourtip-next-label="Next"
-                    tourtip-placement="top"
-                    tourtip-element="#map-actions"
-                    tourtip-container-element="#map-canvas"
-                    use-source-scope = "true"
-                    tourtip-step="3">
-      </virtual-step>
-      <virtual-step tourtip="Start applying for jobs!"
-                    tourtip-next-label="Thanks for the tips"
-                    tourtip-placement="left"
-                    tourtip-element=".apply-button"
-                    use-source-scope = "true"
-                    tourtip-step="4">
-      </virtual-step>
-    </tour>
-  </guided-tour>
+  <guided-tour></guided-tour>
 
   
   <script>
@@ -138,6 +88,7 @@
   <script src="scripts/directives/navbar.js"></script>
   <script src="scripts/directives/sidenavs.js"></script>
   <script src="scripts/directives/footer.js"></script>
+  <script src="scripts/directives/guidedTour.js"></script>
   <script src="scripts/directives/jobsListSm.js"></script>
   <script src="scripts/directives/mapActions.js"></script>
   <script src="scripts/directives/gmapsAddress.js"></script>

@@ -2,25 +2,30 @@
 
   'use strict';
 
-  angular.module('appDirectives').directive('backToTop', ['$window', function ($window) {
+  angular.module('appDirectives').directive('backToTop', function () {
     
     return { 
       restrict: 'E',
       transclude: true,
+      replace: true,
       template: '<div id = "back-to-top" ng-transclude></div>',
       link: function(scope, element) {
 
-        angular.element($window).bind('scroll', function() {
-          if (this.pageYOffset >= 100) {
-            element.addClass('bring-to-screen');
-          } else {
-            element.removeClass('bring-to-screen');
-          }
+        var container = element.parent();
+        
+        container.on('scroll', function() {
+          console.log(this, this.scrollTop);
+          (this.scrollTop >= 50) ? element.addClass('bring-to-screen') : element.removeClass('bring-to-screen');
         });
+
+
+        scope.scrollToTop = function () {
+          container.scrollTopAnimated(0, 800);
+        };
 
       }
     };
 
-  }]);
+  });
 
 })(window.angular);
