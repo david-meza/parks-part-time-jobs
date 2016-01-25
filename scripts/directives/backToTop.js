@@ -14,7 +14,6 @@
         var container = element.parent();
         
         container.on('scroll', function() {
-          console.log(this, this.scrollTop);
           (this.scrollTop >= 50) ? element.addClass('bring-to-screen') : element.removeClass('bring-to-screen');
         });
 

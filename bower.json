@@ -9,6 +9,7 @@
     "angular-animate": "^1.4.8",
     "angular-material": "^1.0.1",
     "angular-cookie": "^4.0.10",
-    "angular-tour": "^0.2.5"
+    "angular-tour": "^0.2.5",
+    "angular-scroll": "~1.0.0"
   }
 }

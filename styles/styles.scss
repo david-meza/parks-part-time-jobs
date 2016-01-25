@@ -238,16 +238,17 @@ img, h1, h2, h3, h4, h5, h6 {
   -o-transition:      all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
   -ms-transition:     all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
   transition:         all 0.4s cubic-bezier(0.345, 0, 0.25, 1);
+  
+  &.bring-to-screen{
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+       -moz-transform: translateY(0px);
+         -o-transform: translateY(0px);
+        -ms-transform: translateY(0px);
+            transform: translateY(0px);
+  }
 }
 
-.bring-to-screen #back-to-top {
-  opacity: 1;
-  -webkit-transform: translateY(0px);
-     -moz-transform: translateY(0px);
-       -o-transform: translateY(0px);
-      -ms-transform: translateY(0px);
-          transform: translateY(0px);
-}
 
 md-icon {
   outline: none;

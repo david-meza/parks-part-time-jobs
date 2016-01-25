@@ -7,7 +7,7 @@
       
       $timeout(function(){
         $scope.currentStep = ipCookie('guided-tour') || 0;
-      }, 1000);
+      }, 5000);
 
       $scope.stepComplete = function() {
         ipCookie('guided-tour', $scope.currentStep, { expires: 30 });
