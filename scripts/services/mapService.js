@@ -141,7 +141,7 @@
             updateUserCoords(position.coords.latitude, position.coords.longitude);
           },
           function (error) {
-            informUser(error.message);
+            informUser('Could not locate you due to: ' + error.message);
           }, {
             enableHighAccuracy: true,
             timeout: 10000,

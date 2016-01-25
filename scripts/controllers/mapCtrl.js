@@ -24,16 +24,7 @@
     // });
 
     $scope.map.events.zoom_changed = function (map) {
-      var z = map.getZoom();
-      if (true) { return console.log(z); }
-      
-      // Get all the activities markers, then only show them if we are zoomed in >= 16
-      // var activsMarkers = $scope.activities.markersConfig.control.getPlurals();
-      // activsMarkers.allVals.forEach( function (marker) {
-      //   marker.gObject.setVisible(z >= 16);
-      // });
-
-      // Close info windows
+      // Close info window
       $scope.parkWindow.show = false;
     };
 
