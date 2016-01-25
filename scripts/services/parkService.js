@@ -86,8 +86,6 @@
         
         
       });
-
-      console.log(markers.content);
     };
 
 

@@ -8,9 +8,9 @@
   	// Map settings
     $scope.map = mapService.map;
 
-    $scope.$watch('map.location.coords', function(newValue) {
-      console.log(newValue);
-    }, true);
+    // $scope.$watch('map.location.coords', function(newValue) {
+    //   console.log(newValue);
+    // }, true);
     
     // Park Markers
     $scope.parks = parkService.markers;
