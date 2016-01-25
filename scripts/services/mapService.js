@@ -143,9 +143,9 @@
           function (error) {
             informUser(error.message);
           }, {
-            enableHighAccuracy: false,
+            enableHighAccuracy: true,
             timeout: 10000,
-            maximumAge: 60000
+            maximumAge: 30000
           }
         );
       } else {
