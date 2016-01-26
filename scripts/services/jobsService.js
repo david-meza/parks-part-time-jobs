@@ -2,10 +2,8 @@
 
   'use strict';
 
-  angular.module('appServices').factory('jobsService', ['$http', '$q',
-    function ($http, $q) {
-
-    console.log('job service');
+  angular.module('appServices').factory('jobsService', ['$http', '$q', 'uiGmapGoogleMapApi',
+    function ($http, $q, mapsApi) {
 
     var parser = new X2JS(),
         jobs = { list: [] };
@@ -19,7 +17,7 @@
     };
 
     var parseDescription = function (desc) {
-      if (!desc) return 'No description preview available';
+      if (!desc || desc === '<br />') return 'No description preview available';
 
       var htmlParser = new DOMParser();
       var nodes = htmlParser.parseFromString(desc, 'text/html');
@@ -57,13 +55,21 @@
         jobType: job.jobType.__text,
         location: job.location.__text,
         state: job.state.__text,
-        minSalary: job.minimumSalary.__text,
-        maxSalary: job.maximumSalary.__text,
+        minSalary: Number(job.minimumSalary.__text) || 7.25,
+        maxSalary: Number(job.maximumSalary.__text),
         interval: job.salaryInterval.__text,
         createdDate: new Date(Date.parse(job.advertiseFromDate.__text)),
-        endDate: new Date(Date.parse(job.advertiseToDateTime.__text)),
+        endDate: job.advertiseToDateTime.__text,
         link: job.link
       };
+    };
+
+    var isPRCRjob = function (job) {
+      var matcher = new RegExp(/prc|parks|recreation|rcc|temporary/i);
+      angular.forEach(job.categories, function (cat) {
+        if (matcher.test(cat)) return true;
+      });
+      return matcher.test(job.department);
     };
 
     var extractJobData = function (jsonjobs) {
@@ -71,11 +77,12 @@
 
         var processedJob = constructJob(job);
 
+        if (processedJob.jobType === 'Full-Time' || !isPRCRjob(processedJob) ) return;
+        console.log(processedJob.location, processedJob.state);
         jobs[processedJob.id] = processedJob;
         this.push(processedJob);
 
       }, jobs.list);
-      console.log(jobs.list);
     };
 
     var readResponse = function(response) {
@@ -89,12 +96,18 @@
     };
 
     var logError = function (response) {
-      return $q.reject(response).then( function () {
+      return $q.reject(response).then(null, function () {
         console.log('Failed to get data from jobs server', response);
       });
     };
+
+    var geocodeMappableJobs = function () {
+      mapsApi.then( function (maps) {
+        console.log(maps.Geocoder);
+      });
+    };
     
-    getJobsFeed().then(readResponse, logError);
+    getJobsFeed().then(readResponse, logError).then(geocodeMappableJobs);
 
 
     return {
