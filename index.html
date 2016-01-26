@@ -40,15 +40,18 @@
   <!-- Jquery because angular tour depends on it (TODO: fork repo and re-write without Jquery) -->
   <script src="bower_components/jquery/jquery.min.js"></script>
   
+  <!-- XML to JS script -->
+  <script src="bower_components/abdmob/x2js/xml2json.min.js"></script>
+  
   <!-- Angular -->
   <script src="bower_components/angular/angular.js"></script>
 
   <!-- Angular Dependencies -->
   <script src="bower_components/angular-cookie/angular-cookie.min.js"></script>
-  <script src="bower_components/angular-tour/dist/angular-tour-tpls.js"></script>
+  <script src="bower_components/angular-tour/dist/angular-tour-tpls.min.js"></script>
   <script src="bower_components/angular-animate/angular-animate.min.js"></script>
   <script src="bower_components/angular-aria/angular-aria.min.js"></script>
-  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script src="bower_components/angular-material/angular-material.min.js"></script>
   <script src='bower_components/lodash/lodash.min.js'></script>
   <script src='bower_components/angular-simple-logger/dist/angular-simple-logger.min.js'></script>
@@ -66,6 +69,7 @@
   <script src="scripts/services/deviceService.js"></script>
   <script src="scripts/services/mapService.js"></script>
   <script src="scripts/services/parkService.js"></script>  
+  <script src="scripts/services/jobsService.js"></script>  
   <script src="scripts/services/jobsFilterService.js"></script>  
   <script src="scripts/services/httpInterceptor.js"></script>
   
@@ -94,7 +98,6 @@
   <script src="scripts/directives/mapActions.js"></script>
   <script src="scripts/directives/gmapsAddress.js"></script>
   <script src="scripts/directives/backToTop.js"></script>
-  <script src="scripts/directives/navbarFixed.js"></script>
   <script src="scripts/directives/mainMap.js"></script>
   <script src="scripts/directives/scrollingButtons.js"></script>
 

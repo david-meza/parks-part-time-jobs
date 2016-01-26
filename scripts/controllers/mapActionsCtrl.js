@@ -7,7 +7,6 @@
           
       // Reference to service geo-location
       $scope.geoLocate = function (ev) {
-        console.log(ev);
         mapService.geoLocate();
       };
 
