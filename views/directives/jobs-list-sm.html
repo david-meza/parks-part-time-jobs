@@ -60,13 +60,27 @@
 
         <md-card-title class = "job-card-title">
           <md-card-title-text>
+            
             <span class="md-headline job-title">{{ job.title }}</span>
-            <span class="md-subhead job-salary">{{ job.jobType }}: {{ job.minSalary | number:2 | currency }}-{{ job.maxSalary | number:2 | currency }} {{ job.interval }}</span>
-            <span class="md-subhead job-category">Category: {{ job.category }}</span>
+            
+            <span class="md-subhead job-salary">
+              <md-icon  aria-label="salary icon" 
+                        md-svg-icon="img/icons/salary.svg">
+              </md-icon>
+              {{ job.jobType }}: {{ job.minSalary | currency }}-{{ job.maxSalary | currency }} {{ job.interval }}
+            </span>
+            
+            <span class="md-subhead job-category">
+              <md-icon  aria-label="salary icon" 
+                        md-svg-icon="img/icons/work.svg">
+              </md-icon>
+              Category: {{ job.department }}
+            </span>
+            
             <span class="md-subhead job-location">
-            <md-icon  aria-label="distance icon" 
-                      md-svg-icon="img/icons/location.svg">
-            </md-icon>
+              <md-icon  aria-label="distance icon" 
+                        md-svg-icon="img/icons/location.svg">
+              </md-icon>
               {{ job.distance | number: 2 }} miles away
             </span>
           </md-card-title-text>

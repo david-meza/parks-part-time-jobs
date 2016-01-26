@@ -136,6 +136,29 @@ img, h1, h2, h3, h4, h5, h6 {
   line-height: 18px;
   color: rgba(0,0,0,0.54);
   letter-spacing: 0.010em;
+
+  md-icon {
+    height: 18px;
+    width: 18px;
+  }
+}
+
+.job-salary {
+  md-icon {
+    color: rgba(23, 145, 10, 0.7);
+  }
+}
+
+.job-category {
+  md-icon {
+    color: rgba(182, 79, 15, 0.89);
+  }
+}
+
+.job-location {
+  md-icon {
+    color: rgba(103, 58, 183, 0.87);
+  }
 }
 
 .footer-title {

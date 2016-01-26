@@ -19,38 +19,61 @@
     };
 
     var parseDescription = function (desc) {
-      if (!desc) return '';
+      if (!desc) return 'No description preview available';
 
       var htmlParser = new DOMParser();
       var nodes = htmlParser.parseFromString(desc, 'text/html');
 
       return nodes.getElementsByTagName('body')[0].innerText;
+    };
 
+    var parseCategories = function (categories) {
+      var arr = [];
+      if (categories.constructor === Object) {
+        arr.push(categories.Category);
+      } else if (categories.constructor === Array) {
+        angular.forEach(categories, function (cat) {
+          this.push(cat.Category);
+        }, arr);
+      } else {
+        console.log(categories);
+        arr.push(categories);
+      }
+      return arr;
+    };
+
+    var constructJob = function (job) {
+      var description = parseDescription(job.description);
+      var categories = parseCategories(job.categories.category);
+      var titleUrl = job.title.replace(/\W+/ig, '-').toLowerCase();
+
+      return {
+        id: job.jobId.__text,
+        title: job.title,
+        titleUrl: titleUrl[titleUrl.length - 1] === '-' ? titleUrl.substring(0, titleUrl.length - 1) : titleUrl,
+        department: job.department.__text,
+        categories: categories,
+        description: description,
+        jobType: job.jobType.__text,
+        location: job.location.__text,
+        state: job.state.__text,
+        minSalary: job.minimumSalary.__text,
+        maxSalary: job.maximumSalary.__text,
+        interval: job.salaryInterval.__text,
+        createdDate: new Date(Date.parse(job.advertiseFromDate.__text)),
+        endDate: new Date(Date.parse(job.advertiseToDateTime.__text)),
+        link: job.link
+      };
     };
 
     var extractJobData = function (jsonjobs) {
       angular.forEach( jsonjobs, function (job) {
 
-        var description = parseDescription(job.description);
-        var titleUrl = job.title.replace(/\W+/ig, '-').toLowerCase();
-        var processedJob = {
-          id: job.jobId.__text,
-          title: job.title,
-          titleUrl: titleUrl[titleUrl.length - 1] === '-' ? titleUrl.substring(0, titleUrl.length - 1) : titleUrl,
-          category: job.department.__text,
-          description: description,
-          jobType: job.jobType.__text,
-          location: job.location.__text,
-          minSalary: job.minimumSalary.__text,
-          maxSalary: job.maximumSalary.__text,
-          interval: job.salaryInterval.__text,
-          createdDate: new Date(Date.parse(job.advertiseFromDate.__text)),
-          endDate: new Date(Date.parse(job.advertiseToDateTime.__text)),
-          link: job.link
-        };
+        var processedJob = constructJob(job);
 
         jobs[processedJob.id] = processedJob;
         this.push(processedJob);
+
       }, jobs.list);
       console.log(jobs.list);
     };
