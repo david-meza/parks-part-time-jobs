@@ -2,11 +2,12 @@
 
   'use strict';
 
-  angular.module('appServices').factory('geocoderService', ['$q', '$timeout', 'uiGmapGoogleMapApi',
-    function ($q, $timeout, mapsApi) {
+  angular.module('appServices').factory('geocoderService', ['$q', '$timeout', 'uiGmapGoogleMapApi', '$localStorage',
+    function ($q, $timeout, mapsApi, $localStorage) {
     
 
-    var locations = {};
+    var locations = $localStorage.locations ? JSON.parse($localStorage.locations) : {};
+    console.log(locations);
     var queue = [];
     var geocoder;
     
@@ -20,7 +21,7 @@
 
     // Amount of time (in milliseconds) to pause between each trip to the
     // Geocoding API, which places limits on frequency.
-    var QUERYPAUSE = 250;
+    var QUERY_PAUSE = 250;
 
     /**
      * geocodeNextAddress() - execute the next function in the queue.
@@ -29,6 +30,7 @@
      *                  If we receive OVER_QUERY_LIMIT, increase interval and try again.
      */
     var geocodeNextAddress = function () {
+      if (!geocoder) { $timeout(geocodeNextAddress, QUERY_PAUSE); }
       // Don't do anything if there aren't any tasks left
       if (!queue.length) { return; }
 
@@ -55,12 +57,13 @@
             };
             
             locations[task.address] = parsedResult;
+            $localStorage.locations = JSON.stringify(locations);
             task.d.resolve(parsedResult);
-            QUERYPAUSE = 250;
+            QUERY_PAUSE = 250;
 
           // Increase the pause up to 1s intervals and keep trying...
           } else if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
-            QUERYPAUSE < 1000 ? QUERYPAUSE += 250 : QUERYPAUSE = 1000;
+            QUERY_PAUSE < 1000 ? QUERY_PAUSE += 250 : QUERY_PAUSE = 1000;
 
           // Reject any other result
           } else if (status === google.maps.GeocoderStatus.ZERO_RESULTS) {
@@ -84,7 +87,7 @@
           if (status !== google.maps.GeocoderStatus.OVER_QUERY_LIMIT) { queue.shift(); }
 
           // Go on to the next item in the queue
-          if (queue.length) { $timeout(geocodeNextAddress, QUERYPAUSE); }    
+          if (queue.length) { $timeout(geocodeNextAddress, QUERY_PAUSE); }    
         });
       }
 
