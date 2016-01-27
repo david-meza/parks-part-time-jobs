@@ -108,14 +108,15 @@
 
         geocoderService.getLatLng(job.location + ', ' + job.state).then(function(results) {
           
-          job.coords = { latitude: results.lat, longitude: results.lng };
+          job.latitude = results.lat;
+          job.longitude = results.lng;
           job.formattedAddress = results.formattedAddress;
           jobs.mappable.push(job);
 
         }, logError);
 
       });
-        
+
     };
     
     getJobsFeed().then(readResponse, logError).then(geocodeMappableJobs);

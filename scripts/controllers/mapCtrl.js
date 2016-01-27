@@ -2,8 +2,8 @@
 
   'use strict';
 
-  angular.module('appControllers').controller('mapCtrl', ['$scope', 'mapService', 'parkService', 'uiGmapGoogleMapApi', 'uiGmapIsReady', '$q', '$mdDialog',
-  	function($scope, mapService, parkService, gMapsAPI, uiGmapIsReady, $q, $mdDialog){
+  angular.module('appControllers').controller('mapCtrl', ['$scope', 'mapService', 'parkService', 'uiGmapGoogleMapApi', 'uiGmapIsReady', '$q', '$mdDialog', 'jobsService',
+  	function($scope, mapService, parkService, gMapsAPI, uiGmapIsReady, $q, $mdDialog, jobsService){
 
   	// Map settings
     $scope.map = mapService.map;
@@ -14,6 +14,7 @@
     
     // Park Markers
     $scope.parks = parkService.markers;
+    $scope.jobs = jobsService.jobs;
             
     // Park Info Window
     $scope.parkWindow = parkService.parkWindow;

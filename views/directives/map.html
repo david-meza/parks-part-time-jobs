@@ -50,6 +50,21 @@
                       control = "parks.control">
     </ui-gmap-markers>
 
+    <ui-gmap-markers  models="jobs.mappable"
+                      coords="'self'"
+                      icon="'icon'"
+                      click="markerClick"
+                      type = "jobs.markersConfig.type"
+                      typeOptions = "jobs.markersConfig.typeOptions"
+                      typeEvents = "jobs.markersConfig.typeEvents"
+                      modelsbyref="false"
+                      fit = "false"
+                      options="'options'"
+                      events="jobs.markerEvents"
+                      doRebuildAll = "false"
+                      control = "jobs.control">
+    </ui-gmap-markers>
+
     
     <!-- Park Info Window -->
     <ui-gmap-window show="parkWindow.show" 
