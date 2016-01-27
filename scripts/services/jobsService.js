@@ -2,8 +2,8 @@
 
   'use strict';
 
-  angular.module('appServices').factory('jobsService', ['$http', '$q', 'uiGmapGoogleMapApi',
-    function ($http, $q, mapsApi) {
+  angular.module('appServices').factory('jobsService', ['$http', '$q', 'uiGmapGoogleMapApi', '$timeout',
+    function ($http, $q, mapsApi, $timeout) {
 
     var parser = new X2JS(),
         jobs = { list: [] };
@@ -103,7 +103,31 @@
 
     var geocodeMappableJobs = function () {
       mapsApi.then( function (maps) {
-        console.log(maps.Geocoder);
+        var geocoder = new maps.Geocoder();
+        var matcher = new RegExp(/varies|multiple/i);
+        
+        angular.forEach(jobs.list, function (job, idx) {
+          if (matcher.test(job.location)) return;
+
+          $timeout( function () {
+            
+            geocoder.geocode( { 'address': job.location }, function (results, status) {
+              console.log(status, maps.GeocoderStatus.OK);
+              if (status === maps.GeocoderStatus.OK) {
+                job.coords = {
+                  latitude: results[0].geometry.location.lat(),
+                  longitude: results[0].geometry.location.lng()
+                };
+                console.log(results);
+              } else {
+                console.log("Geocode was not successful for the following reason: " + status);
+              }
+            });
+            
+          }, 250 * idx);
+
+        });
+        
       });
     };
     
