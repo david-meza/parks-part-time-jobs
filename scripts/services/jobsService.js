@@ -2,11 +2,11 @@
 
   'use strict';
 
-  angular.module('appServices').factory('jobsService', ['$http', '$q', 'uiGmapGoogleMapApi', '$timeout',
-    function ($http, $q, mapsApi, $timeout) {
+  angular.module('appServices').factory('jobsService', ['$http', '$q', 'geocoderService', '$timeout',
+    function ($http, $q, geocoderService, $timeout) {
 
     var parser = new X2JS(),
-        jobs = { list: [] };
+        jobs = { list: [], mappable: [] };
 
     
     var getJobsFeed = function () {
@@ -78,7 +78,6 @@
         var processedJob = constructJob(job);
 
         if (processedJob.jobType === 'Full-Time' || !isPRCRjob(processedJob) ) return;
-        console.log(processedJob.location, processedJob.state);
         jobs[processedJob.id] = processedJob;
         this.push(processedJob);
 
@@ -102,33 +101,21 @@
     };
 
     var geocodeMappableJobs = function () {
-      mapsApi.then( function (maps) {
-        var geocoder = new maps.Geocoder();
-        var matcher = new RegExp(/varies|multiple/i);
+      var matcher = new RegExp(/varies|multiple/i);
         
-        angular.forEach(jobs.list, function (job, idx) {
-          if (matcher.test(job.location)) return;
+      angular.forEach(jobs.list, function (job) {
+        if (matcher.test(job.location)) { return; }
 
-          $timeout( function () {
-            
-            geocoder.geocode( { 'address': job.location }, function (results, status) {
-              console.log(status, maps.GeocoderStatus.OK);
-              if (status === maps.GeocoderStatus.OK) {
-                job.coords = {
-                  latitude: results[0].geometry.location.lat(),
-                  longitude: results[0].geometry.location.lng()
-                };
-                console.log(results);
-              } else {
-                console.log("Geocode was not successful for the following reason: " + status);
-              }
-            });
-            
-          }, 250 * idx);
+        geocoderService.getLatLng(job.location + ', ' + job.state).then(function(results) {
+          
+          job.coords = { latitude: results.lat, longitude: results.lng };
+          job.formattedAddress = results.formattedAddress;
+          jobs.mappable.push(job);
 
-        });
-        
+        }, logError);
+
       });
+        
     };
     
     getJobsFeed().then(readResponse, logError).then(geocodeMappableJobs);

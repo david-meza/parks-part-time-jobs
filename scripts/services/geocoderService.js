@@ -2,17 +2,20 @@
 
   'use strict';
 
-  angular.module('appServices').factory('geocoderService', ['$q', '$timeout', '$rootScope', 'uiGmapGoogleMapApi',
-    function ($q, $timeout, $rootScope, mapsApi) {
+  angular.module('appServices').factory('geocoderService', ['$q', '$timeout', 'uiGmapGoogleMapApi',
+    function ($q, $timeout, mapsApi) {
     
 
     var locations = {};
     var queue = [];
+    var geocoder;
     
-    // Assign the maps object when the api is ready
+    // Assign the google.maps object when the API is ready
     var google = {};
     mapsApi.then( function (maps) {
       google.maps = maps;
+      geocoder = new google.maps.Geocoder();
+      geocodeNextAddress();
     });
 
     // Amount of time (in milliseconds) to pause between each trip to the
@@ -20,80 +23,91 @@
     var QUERYPAUSE = 250;
 
     /**
-     * executeNext() - execute the next function in the queue.
+     * geocodeNextAddress() - execute the next function in the queue.
      *                  If a result is returned, fulfill the promise.
      *                  If we get an error, reject the promise (with message).
      *                  If we receive OVER_QUERY_LIMIT, increase interval and try again.
      */
-    var executeNext = function () {
-      var task = queue.shift(),
-          geocoder = new google.maps.Geocoder();
+    var geocodeNextAddress = function () {
+      // Don't do anything if there aren't any tasks left
+      if (!queue.length) { return; }
 
-      geocoder.geocode({ address : task.address }, function (result, status) {
+      // Get the next task (though not shift from queue yet, until it is finally resolved)
+      var task = queue[0];
 
-        if (status === google.maps.GeocoderStatus.OK) {
+      // If we already processed this address return the stored results and go on to the next item in the queue
+      if (locations.hasOwnProperty(task.address)) {
+        queue.shift();
+        task.d.resolve(locations[task.address]);
+        if (queue.length) { return geocodeNextAddress(); }
 
-          var parsedResult = {
-            lat: result[0].geometry.location.lat(),
-            lng: result[0].geometry.location.lng(),
-            formattedAddress: result[0].formatted_address
-          };
-          
-          locations[task.address] = parsedResult;
-          task.d.resolve(parsedResult);
-          QUERYPAUSE = 250;
+      // Otherwise get the results from the geocoder service
+      } else {
+        geocoder.geocode({ address : task.address }, function (result, status) {
 
-        } else if (status === google.maps.GeocoderStatus.ZERO_RESULTS) {
-          task.d.reject({
-            type: 'zero',
-            message: 'Zero results for geocoding address ' + task.address
-          });
-        } else if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
-          queue.unshift(task);
-          QUERYPAUSE < 1000 ? QUERYPAUSE += 250 : QUERYPAUSE = 1000;
-        } else if (status === google.maps.GeocoderStatus.REQUEST_DENIED) {
-          task.d.reject({
-            type: 'denied',
-            message: 'Request denied for geocoding address ' + task.address
-          });
-        } else {
-          task.d.reject({
-            type: 'invalid',
-            message: 'Invalid request for geocoding: status=' + status + ', address=' + task.address
-          });
-        }
+          // Resolve the promise with the results and reset the pause to the default
+          if (status === google.maps.GeocoderStatus.OK) {
 
-        // if (!$rootScope.$$phase) { $rootScope.$apply(); }
-      });
+            var parsedResult = {
+              lat: result[0].geometry.location.lat(),
+              lng: result[0].geometry.location.lng(),
+              formattedAddress: result[0].formatted_address
+            };
+            
+            locations[task.address] = parsedResult;
+            task.d.resolve(parsedResult);
+            QUERYPAUSE = 250;
 
-      if (queue.length) {
-        $timeout(executeNext, QUERYPAUSE);
-      }    
+          // Increase the pause up to 1s intervals and keep trying...
+          } else if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
+            QUERYPAUSE < 1000 ? QUERYPAUSE += 250 : QUERYPAUSE = 1000;
+
+          // Reject any other result
+          } else if (status === google.maps.GeocoderStatus.ZERO_RESULTS) {
+            task.d.reject({
+              type: 'zero',
+              message: 'Zero results for geocoding address ' + task.address
+            });
+          } else if (status === google.maps.GeocoderStatus.REQUEST_DENIED) {
+            task.d.reject({
+              type: 'denied',
+              message: 'Request denied for geocoding address ' + task.address
+            });
+          } else {
+            task.d.reject({
+              type: 'invalid',
+              message: 'Invalid request for geocoding: status=' + status + ', address=' + task.address
+            });
+          }
+
+          // Remove from queue if the promise has been resolved or rejected
+          if (status !== google.maps.GeocoderStatus.OVER_QUERY_LIMIT) { queue.shift(); }
+
+          // Go on to the next item in the queue
+          if (queue.length) { $timeout(geocodeNextAddress, QUERYPAUSE); }    
+        });
+      }
+
 
     };
 
-    var geocodeAddress = function (address) {
+    // Publically available function to push addresses to the queue. Returns the promise so it can be chained with .then
+    var getLatLng = function (address) {
       var d = $q.defer();
 
-      if (locations.hasOwnProperty(address)) {
-        d.resolve(locations[address]);
-      } else {
-        queue.push({
-          address: address,
-          d: d
-        });
+      queue.push({
+        address: address,
+        d: d
+      });
 
-        if (queue.length === 1) {
-          executeNext();
-        }
-      }
+      if (queue.length === 1) { geocodeNextAddress(); }
 
       return d.promise;
     };
 
     
     return {
-      geocodeAddress : geocodeAddress
+      getLatLng : getLatLng
     };
 
 
