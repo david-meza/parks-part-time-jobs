@@ -114,10 +114,7 @@
             latitude: park.geometry.y,
             longitude: park.geometry.x,
 
-            jobs: [
-              { title: 'Camp Counselor- North/Northwest Raleigh (District 1)', salary: (8 + Math.random() * 12), description: 'Responsible for the direct supervision of campers, programming age appropriate activities and working with other staff to address the daily needs of a group of children during the summer season.', time: 'Part Time', category: 'Parks and Recreation', location: p.NAME, url: 'https://www.governmentjobs.com/careers/raleighnc/jobs/1314835/camp-counselor-southeast-raleigh-district-4', date: new Date(), distance: (Math.random() * 30), otherLocations: [] },
-              { title: 'Cashier', salary: (8 + Math.random() * 12), description: 'Responsible for assisting full-time facility management and recreation leaders as a cashier at a waterfront facility and park.', time: 'Part Time', category: 'PRCR Resources', location: p.NAME, url: 'https://www.governmentjobs.com/careers/raleighnc/jobs/1119867/cashier-lake-johnson-park-and-lake-wheeler-park', date: new Date(), distance: (Math.random() * 30), otherLocations: [] }
-            ],
+            jobs: [],
 
             markerClick: _markerClick,
             options: {
