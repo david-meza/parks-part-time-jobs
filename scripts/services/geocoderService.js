@@ -7,7 +7,6 @@
     
 
     var locations = $localStorage.locations ? JSON.parse($localStorage.locations) : {};
-    console.log(locations);
     var queue = [];
     var geocoder;
     
