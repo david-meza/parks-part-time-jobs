@@ -32,8 +32,8 @@
     // });
 
     $scope.map.events.zoom_changed = function (map) {
-      // Close info windows
       $scope.parkWindow.show = false;
+      $scope.jobWindow.show = false;      
     };
 
     var mapInstance,
