@@ -6,7 +6,7 @@
     function ($http, $q, geocoderService, $timeout, jobsMapConfig) {
 
     var parser = new X2JS(),
-        jobs = { list: [], mappable: [] };
+        jobs = { list: [], mappable: [], categories: {} };
 
     
     var getJobsFeed = function () {
@@ -75,6 +75,18 @@
       return matcher.test(job.department);
     };
 
+    var storeCategory = function (job) {
+      if (jobs.categories[job.department]) {
+        jobs.categories[job.department].jobCount += 1; 
+      } else {
+        jobs.categories[job.department] = {
+          name: job.department,
+          jobCount: 1,
+          checked: false
+        };
+      }
+    };
+
     var extractJobData = function (jsonjobs) {
       angular.forEach( jsonjobs, function (job) {
 
@@ -82,6 +94,7 @@
 
         if (processedJob.jobType === 'Full-Time' || !isPRCRjob(processedJob) ) return;
         jobs[processedJob.id] = processedJob;
+        storeCategory(processedJob);
         this.push(processedJob);
 
       }, jobs.list);
@@ -116,6 +129,12 @@
           job.formattedAddress = results.formattedAddress;
           job.icon = 'img/icons/job-marker.svg';
           job.markerClick = jobsMapConfig.markerClick;
+          job.options = {
+            title: job.title,
+            labelAnchor: '0 0',
+            animation: 2
+          };
+          
           jobs.mappable.push(job);
 
         }, logError);

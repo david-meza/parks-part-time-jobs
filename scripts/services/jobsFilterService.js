@@ -8,7 +8,8 @@
     var filters = {
       salary: 0, // $0 or more
       distance: 9999, // 9999 miles
-      categories: []
+      categories: [],
+      totalJobs: undefined
     };
 
     return {

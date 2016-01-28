@@ -43,6 +43,10 @@
     <md-content layout-padding>
 
       <md-list>
+
+        <md-list-item ng-show="filters.totalJobs">
+          <p class="text-info">Total Results: <b>{{ filters.totalJobs }}</b> jobs</p>
+        </md-list-item>
       
         <md-list-item ng-click="navigateTo(setting.extraScreen, $event)" ng-repeat="setting in settings">
           <md-icon md-svg-icon="{{setting.icon}}"></md-icon>
@@ -145,13 +149,13 @@
     
     <md-content layout-padding>
       
-      <div ng-repeat="category in categories">
-        <md-checkbox  ng-checked="catExists(category.name, filters.categories)" 
-                      ng-click="catToggle(category.name, filters.categories)" 
-                      aria-label = "{{category.name}}"
+      <div ng-repeat="(catName, category) in categories">
+        <md-checkbox  ng-checked="catExists(catName, filters.categories)" 
+                      ng-click="catToggle(catName, filters.categories)" 
+                      aria-label = "{{ catName }}"
                       ng-model = "category.checked"
                       ng-change="applyFilter('categories', filters.categories)">
-          {{ category.name }} ({{ category.jobs }})
+          {{ catName }} ({{ category.jobCount }})
         </md-checkbox>
       </div>
 

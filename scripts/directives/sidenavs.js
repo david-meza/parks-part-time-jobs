@@ -8,8 +8,9 @@
       restrict: 'E',
       replace: true,
       templateUrl: 'views/directives/sidenavs.html',
-      controller: ['$scope', '$mdSidenav', 'jobsFilterService', 'deviceService', 
-        function ($scope, $mdSidenav, jobsFilterService, deviceService) {
+      controller: ['$scope', '$mdSidenav', 'jobsFilterService', 'deviceService', 'jobsService',
+        function ($scope, $mdSidenav, jobsFilterService, deviceService, jobsService) {
+
 
         $scope.showList = function () {
           deviceService.activeTab.list = true;
@@ -83,13 +84,7 @@
           $scope.settings[idxLookup[knd]].filtersOn = (typeof newVal === 'object' ? (newVal.length > 10 ? 10 : newVal.length) : (newVal === 0 || newVal === 9999 ? 0 : 1) );
         };
 
-        $scope.categories = [
-          { name: 'Parks and Recreation', jobs: 4, checked: false},
-          { name: 'Camping', jobs: 6, checked: false},
-          { name: 'Swimming', jobs: 2, checked: false},
-          { name: 'Engineering', jobs: 1, checked: false},
-          { name: 'Etc', jobs: 0, checked: false},
-        ];
+        $scope.categories = jobsService.jobs.categories;
 
         var uncheckCategories = function () {
           angular.forEach($scope.categories, function(cat) {
@@ -97,9 +92,9 @@
           });
         };
 
-        $scope.salaryOptions = [10, 15, 20, 25, 30];
+        $scope.salaryOptions = [8, 10, 12, 15, 20];
 
-        $scope.distanceOptions = [5, 10, 15, 20, 25, 30];
+        $scope.distanceOptions = [5, 10, 15, 20, 25];
 
         $scope.catExists = function (name, list) {
           return list.indexOf(name) > -1;
