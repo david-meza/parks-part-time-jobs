@@ -6,10 +6,8 @@
   <circle cx="250" cy="250" r="225" fill="#9B481A" fill-opacity='0.3' />
   <circle cx="250" cy="250" r="240" fill="#9B481A" fill-opacity='0.2' />
   <circle cx="250" cy="250" r="200" fill="#9B481A" />
-  <!-- <circle cx="250" cy="250" r="250" fill="rgba(255,110,64,1)" /> -->
 
   <circle cx="375" cy="120" r="125" fill="rgba(255, 243, 224, 1)" />
-
   <g id="briefcase" enable-background="new 0 0 48 48" transform="scale(4.5,4.5) translate(59, 0)">
     <path fill="#424242" d="M27,7h-6c-1.7,0-3,1.3-3,3v3h2v-3c0-0.6,0.4-1,1-1h6c0.6,0,1,0.4,1,1v3h2v-3C30,8.3,28.7,7,27,7z"/>
     <path fill="#E65100" d="M40,43H8c-2.2,0-4-1.8-4-4V15c0-2.2,1.8-4,4-4h32c2.2,0,4,1.8,4,4v24C44,41.2,42.2,43,40,43z"/>
