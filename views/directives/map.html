@@ -39,13 +39,13 @@
                       coords="'self'"
                       icon="'icon'"
                       click="markerClick"
-                      type = "map.markersConfig.type"
-                      typeOptions = "map.markersConfig.typeOptions"
-                      typeEvents = "map.markersConfig.typeEvents"
+                      type = "parkMarkersConfig.type"
+                      typeOptions = "parkMarkersConfig.typeOptions"
+                      typeEvents = "parkMarkersConfig.typeEvents"
                       modelsbyref="parks.shallowWatch"
                       fit = "parks.fitToMap"
                       options="'options'"
-                      events="map.parkMarkerEvents"
+                      events="parks.markerEvents"
                       doRebuildAll = "parks.rebuild"
                       control = "parks.control">
     </ui-gmap-markers>
@@ -56,15 +56,15 @@
                       coords="'self'"
                       icon="'icon'"
                       click="markerClick"
-                      type = "jobs.markersConfig.type"
-                      typeOptions = "jobs.markersConfig.typeOptions"
-                      typeEvents = "jobs.markersConfig.typeEvents"
-                      modelsbyref="false"
-                      fit = "false"
+                      type = "jobMarkersConfig.type"
+                      typeOptions = "jobMarkersConfig.typeOptions"
+                      typeEvents = "jobMarkersConfig.typeEvents"
+                      modelsbyref="jobMarkersConfig.shallowWatch"
+                      fit = "jobMarkersConfig.fitToMap"
                       options="'options'"
-                      events="jobs.markerEvents"
-                      doRebuildAll = "false"
-                      control = "jobs.control">
+                      events="jobMarkersConfig.markerEvents"
+                      doRebuildAll = "jobMarkersConfig.rebuild"
+                      control = "jobMarkersConfig.control">
     </ui-gmap-markers>
 
     

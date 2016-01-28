@@ -2,8 +2,8 @@
 
   'use strict';
 
-  angular.module('appServices').factory('jobsService', ['$http', '$q', 'geocoderService', '$timeout',
-    function ($http, $q, geocoderService, $timeout) {
+  angular.module('appServices').factory('jobsService', ['$http', '$q', 'geocoderService', '$timeout', 'jobsMapConfig',
+    function ($http, $q, geocoderService, $timeout, jobsMapConfig) {
 
     var parser = new X2JS(),
         jobs = { list: [], mappable: [] };
@@ -41,14 +41,16 @@
     };
 
     var constructJob = function (job) {
+      var id = job.jobId.__text
       var description = parseDescription(job.description);
       var categories = parseCategories(job.categories.category);
       var titleUrl = job.title.replace(/\W+/ig, '-').toLowerCase();
+      titleUrl = titleUrl[titleUrl.length - 1] === '-' ? titleUrl.substring(0, titleUrl.length - 1) : titleUrl;
 
       return {
-        id: job.jobId.__text,
+        id: id,
         title: job.title,
-        titleUrl: titleUrl[titleUrl.length - 1] === '-' ? titleUrl.substring(0, titleUrl.length - 1) : titleUrl,
+        titleUrl: titleUrl,
         department: job.department.__text,
         categories: categories,
         description: description,
@@ -60,7 +62,8 @@
         interval: job.salaryInterval.__text,
         createdDate: new Date(Date.parse(job.advertiseFromDate.__text)),
         endDate: job.advertiseToDateTime.__text,
-        link: job.link
+        link: job.link,
+        detailsUrl: ('https://www.governmentjobs.com/careers/raleighnc/jobs/' + id + '/' + titleUrl)
       };
     };
 
@@ -111,6 +114,8 @@
           job.latitude = results.lat;
           job.longitude = results.lng;
           job.formattedAddress = results.formattedAddress;
+          job.icon = 'img/icons/job-marker.svg';
+          job.markerClick = jobsMapConfig.markerClick;
           jobs.mappable.push(job);
 
         }, logError);

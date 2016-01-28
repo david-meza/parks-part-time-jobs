@@ -18,9 +18,22 @@
       currentPark: undefined, 
       rebuild: false, 
       shallowWatch: false, 
-      fitToMap: false, 
+      fitToMap: false,
+      markerEvents: {},
       control: {} 
     };
+
+    var parkMarkersConfig = {
+      type: 'cluster',
+      typeOptions: {
+        title: 'Zoom in to find more parks!',
+        gridSize: 60,
+        minimumClusterSize: 3
+      },
+      typeEvents: {}
+    };
+
+    parkMarkersConfig.typeOptions.styles = [{textColor: '#FFF',textSize: 16,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [-15, 12],url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/marker-cluster.svg',height: 60,width: 60},{textColor: '#FFF',textSize: 15,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [-15, 12],url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/marker-cluster.svg',height: 60,width: 60},{textColor: '#FFF',textSize: 14,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [-15, 12],url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/marker-cluster.svg',height: 60,width: 60},{textColor: '#FFF',textSize: 13,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [-15, 12],url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/marker-cluster.svg',height: 60,width: 60},{textColor: '#FFF',textSize: 12,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [-15, 12],url: 'https://s3.amazonaws.com/davidmeza/Park_Locator/marker-cluster.svg',height: 60,width: 60}];
 
     var parkWindow = {
       show: false,
@@ -110,7 +123,7 @@
             alias2: p.ALIAS2,
             scale: p.SCALE,
             
-            icon: 'https://s3.amazonaws.com/davidmeza/Park_Locator/tree-small.png',
+            icon: 'img/icons/park-marker.svg',
             latitude: park.geometry.y,
             longitude: park.geometry.x,
 
@@ -168,6 +181,7 @@
 
   	return {
   		markers: markers,
+      parkMarkersConfig: parkMarkersConfig,
       updateParkMarkers: updateParkMarkers,
       parkWindow: parkWindow,
       currentPlace: currentPlace

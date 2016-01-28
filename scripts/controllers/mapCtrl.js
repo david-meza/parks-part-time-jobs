@@ -2,8 +2,8 @@
 
   'use strict';
 
-  angular.module('appControllers').controller('mapCtrl', ['$scope', 'mapService', 'parkService', 'uiGmapGoogleMapApi', 'uiGmapIsReady', '$q', '$mdDialog', 'jobsService',
-  	function($scope, mapService, parkService, gMapsAPI, uiGmapIsReady, $q, $mdDialog, jobsService){
+  angular.module('appControllers').controller('mapCtrl', ['$scope', 'mapService', 'parkService', 'uiGmapGoogleMapApi', 'uiGmapIsReady', '$q', '$mdDialog', 'jobsService', 'jobsMapConfig',
+  	function ($scope, mapService, parkService, gMapsAPI, uiGmapIsReady, $q, $mdDialog, jobsService, jobsMapConfig){
 
   	// Map settings
     $scope.map = mapService.map;
@@ -14,10 +14,17 @@
     
     // Park Markers
     $scope.parks = parkService.markers;
+    $scope.parkMarkersConfig = parkService.parkMarkersConfig;
+
+    // Job Markers
     $scope.jobs = jobsService.jobs;
+    $scope.jobMarkersConfig = jobsMapConfig.jobMarkersConfig;
             
     // Park Info Window
     $scope.parkWindow = parkService.parkWindow;
+
+    // Job Info Window
+    $scope.jobWindow = jobsMapConfig.jobWindow;
 
     // Make a new query when the activities filter changes
     // $scope.$watchCollection('selectedActivities.current', function (selected) {
