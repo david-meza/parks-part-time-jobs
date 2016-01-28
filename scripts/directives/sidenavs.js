@@ -62,14 +62,14 @@
         $scope.filters = jobsFilterService.filters;
 
         $scope.clearFilter = function(filterName, val) {
-          if (filterName === 'all') {
-            $scope.applyFilter('salary', 0);
-            $scope.applyFilter('distance', 9999);
-            $scope.applyFilter('categories', []);
-            uncheckCategories();
-          } else {
-            $scope.applyFilter(filterName, val);
+          if (!filterName) {
+            $scope.clearFilter('salary', 0);
+            $scope.clearFilter('distance', 9999);
+            $scope.clearFilter('categories', []);
           }
+          
+          $scope.applyFilter(filterName, val);
+          if (filterName === 'categories') { uncheckCategories(); }
         };
 
         $scope.navigateTo = function(to, event) {
