@@ -5,6 +5,8 @@
 	angular.module('appControllers').controller('parkCtrl', [ '$scope', '$state', '$stateParams', 'mapService', 'parkService', 'uiGmapGoogleMapApi',
 		function ($scope, $state, $stateParams, mapService, parkService, gMapsAPI) {
 
+			console.log('park ctrl');
+
 			var parkName = $stateParams.name,
 					directionsService,
 		  		directionsDisplay,
@@ -101,7 +103,7 @@
 		      placeCustomMarkers(response);
 		      extractDirectionsInfo(response);
 		    } else {
-		    	console.log('Error happened... Maybe over query limit?');
+		    	console.log('Error happened displaying directions:', status);
 		    }
 		  };
 

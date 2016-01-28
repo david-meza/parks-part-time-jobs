@@ -7,7 +7,7 @@
       
       var markers = parkService.markers;
       
-      $scope.title = "Part Time Park Jobs";
+      $scope.title = "Map My Park Job";
       
       // Start the circular progress icon
       $scope.progress = 'indeterminate';

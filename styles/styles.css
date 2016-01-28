@@ -25,6 +25,14 @@ img, h1, h2, h3, h4, h5, h6 {
   -ms-user-select: none;
   user-select: none; }
 
+img.logo {
+  height: 85px;
+  -webkit-transform: translateY(17px);
+  -moz-transform: translateY(17px);
+  -ms-transform: translateY(17px);
+  -o-transform: translateY(17px);
+  transform: translateY(17px); }
+
 .svg-fill {
   fill: rgba(0, 0, 0, 0.7); }
 
@@ -74,6 +82,9 @@ img, h1, h2, h3, h4, h5, h6 {
 .panel-title a:focus {
   outline: none; }
 
+.text-info {
+  color: rgba(23, 116, 139, 0.9); }
+
 .job-title {
   font-size: 18px;
   overflow: hidden;
@@ -89,6 +100,18 @@ img, h1, h2, h3, h4, h5, h6 {
   line-height: 18px;
   color: rgba(0, 0, 0, 0.54);
   letter-spacing: 0.010em; }
+  .job-salary md-icon, .job-category md-icon, .job-location md-icon {
+    height: 18px;
+    width: 18px; }
+
+.job-salary md-icon {
+  color: rgba(23, 145, 10, 0.7); }
+
+.job-category md-icon {
+  color: rgba(182, 79, 15, 0.89); }
+
+.job-location md-icon {
+  color: rgba(103, 58, 183, 0.87); }
 
 .footer-title {
   display: block;
@@ -590,12 +613,11 @@ ul#park-amenities {
   margin: 0;
   padding: 0; }
 
-@media screen and (max-width: 991px) {
-  h1 .navbar-brand {
-    font-size: 0.55em; }
-
-  .course-details {
-    max-height: 30em; } }
+@media screen and (max-width: 599px) {
+  md-toolbar.md-medium-tall {
+    height: auto;
+    max-height: auto;
+    min-height: auto; } }
 @media screen and (max-width: 767px) {
   #flash span {
     font-size: 0.9em; }

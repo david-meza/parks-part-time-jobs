@@ -1,10 +1,11 @@
-<md-toolbar layout = "row" id = "navbar">
-  <div class="md-toolbar-tools">
+<md-toolbar layout = "row" id = "navbar" md-scroll-shrink class = "md-medium-tall">
+  <div class="md-toolbar-tools" layout = "row">
     
     <md-button class="md-icon-button" aria-label="Settings" hide-gt-sm ng-click="toggleSidenav()">
       <md-icon md-svg-icon="img/icons/menu2.svg" ng-cloak></md-icon>
     </md-button>
     
+    <img flex="noshrink" src = "img/logos/PRCRD.svg" hide-xs alt = "Parks and Recreation Logo" class = "logo" />
     <h1>{{ title }}</h1>
 
     <span flex></span>    

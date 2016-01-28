@@ -39,15 +39,32 @@
                       coords="'self'"
                       icon="'icon'"
                       click="markerClick"
-                      type = "map.markersConfig.type"
-                      typeOptions = "map.markersConfig.typeOptions"
-                      typeEvents = "map.markersConfig.typeEvents"
+                      type = "parkMarkersConfig.type"
+                      typeOptions = "parkMarkersConfig.typeOptions"
+                      typeEvents = "parkMarkersConfig.typeEvents"
                       modelsbyref="parks.shallowWatch"
                       fit = "parks.fitToMap"
                       options="'options'"
-                      events="map.parkMarkerEvents"
+                      events="parks.markerEvents"
                       doRebuildAll = "parks.rebuild"
                       control = "parks.control">
+    </ui-gmap-markers>
+
+    
+    <!-- Job Markers -->
+    <ui-gmap-markers  models="jobs.mappable"
+                      coords="'self'"
+                      icon="'icon'"
+                      click="markerClick"
+                      type = "jobMarkersConfig.type"
+                      typeOptions = "jobMarkersConfig.typeOptions"
+                      typeEvents = "jobMarkersConfig.typeEvents"
+                      modelsbyref="jobMarkersConfig.shallowWatch"
+                      fit = "jobMarkersConfig.fitToMap"
+                      options="'options'"
+                      events="jobMarkersConfig.markerEvents"
+                      doRebuildAll = "jobMarkersConfig.rebuild"
+                      control = "jobMarkersConfig.control">
     </ui-gmap-markers>
 
     
@@ -62,31 +79,17 @@
                     ng-cloak>
     </ui-gmap-window>
 
-
-    <!-- Activities Markers -->
-    <!-- <ui-gmap-markers  models="activities.markers"
-                      coords="'self'"
-                      icon="activities.markersConfig.icon"
-                      click="onMarkerClicked()"
-                      type = "activities.markersConfig.type"
-                      typeOptions = "activities.markersConfig.typeOptions"
-                      typeEvents = "activities.markersConfig.typeEvents"
-                      control = "activities.markersConfig.control"
-                      options = "activities.markersConfig.options"
-                      modelsbyref = "true">
-    </ui-gmap-markers> -->
-
-
-    <!-- Activities Info Window -->
-    <!-- <ui-gmap-window show="activityWindow.show" 
-                    coords="activityWindow.coords"
-                    control = "activityWindow.control" 
-                    options="activityWindow.options" 
-                    closeclick="activityWindow.closeclick"
-                    templateurl = "activityWindow.templateUrl"
-                    templateparameter = "activityWindow.templateParameter"
+    
+    <!-- Job Info Window -->
+    <ui-gmap-window show="jobWindow.show" 
+                    coords="jobWindow.coords"
+                    control = "jobWindow.control" 
+                    options="jobWindow.options" 
+                    closeclick="jobWindow.closeclick"
+                    templateurl = "jobWindow.templateUrl"
+                    templateparameter = "jobWindow.templateParameter"
                     ng-cloak>
-    </ui-gmap-window> -->
+    </ui-gmap-window>
 
 
   </ui-gmap-google-map>

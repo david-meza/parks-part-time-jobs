@@ -6,7 +6,7 @@
     return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1 
   }
 
-  angular.module('parkJobs', ['appServices', 'appFilters', 'appControllers', 'appDirectives', 'ui.router', 'ngMaterial', 'uiGmapgoogle-maps', 'angular-tour', 'dcbImgFallback', 'ngAnimate', 'ipCookie', 'duScroll'])
+  angular.module('parkJobs', ['appServices', 'appFilters', 'appControllers', 'appDirectives', 'ui.router', 'ngMaterial', 'uiGmapgoogle-maps', 'angular-tour', 'dcbImgFallback', 'ngAnimate', 'ipCookie', 'duScroll', 'ngStorage'])
 
     .value('duScrollDuration', 600)
     .value('duScrollOffset', 0)

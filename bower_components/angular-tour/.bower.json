@@ -49,7 +49,6 @@
     "commit": "d3abec81647e42114b5a69dcbd800e4571e335a1"
   },
   "_source": "git://github.com/DaftMonk/angular-tour.git",
-  "_target": "~0.2.5",
-  "_originalSource": "angular-tour",
-  "_direct": true
+  "_target": "^0.2.5",
+  "_originalSource": "angular-tour"
 }

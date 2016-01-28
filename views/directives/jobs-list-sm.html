@@ -47,27 +47,43 @@
       <p>Showing <b>{{ filteredJobs.length }}</b> jobs in <b>{{ currentPlace.name }}</b></p>
     </md-list-item>
 
-    <md-list-item ng-repeat = "job in jobs | filterByPark | applySelectedFilters: selectedFilters | orderBy: selectedSort as filteredJobs">
+    <md-list-item ng-repeat = "job in jobs | filterByPark | applySelectedFilters | orderBy: selectedSort as filteredJobs">
       
-      <md-card ng-class-odd="'odd-card'" flex>
+      <md-card data-job-id = "{{ job.id }}" ng-class-odd="'odd-card'" flex>
         
         <md-card-header class = "job-card-header">
           <md-card-header-text layout = "row">
             <span flex></span>
-            <span class="md-subhead">Posted {{ job.date | date: 'short' || 'EEEE, MMM d, y - h:mm a' }}</span>
+            <span class="md-subhead">Posted {{ job.createdDate | date: 'short' || 'EEEE, MMM d, y - h:mm a' }}</span>
           </md-card-header-text>
         </md-card-header>
 
         <md-card-title class = "job-card-title">
           <md-card-title-text>
+            
             <span class="md-headline job-title">{{ job.title }}</span>
-            <span class="md-subhead job-salary">{{ job.time }} - {{ job.salary | number:2 | currency }} hourly</span>
-            <span class="md-subhead job-category">Category: {{ job.category }}</span>
-            <span class="md-subhead job-location">{{ job.distance | number: 2 }} miles away</span>
+            
+            <span class="md-subhead job-salary">
+              <md-icon  aria-label="salary icon" 
+                        md-svg-icon="img/icons/salary.svg">
+              </md-icon>
+              {{ job.jobType }}: {{ job.minSalary | currency }}-{{ job.maxSalary | currency }} {{ job.interval }}
+            </span>
+            
+            <span class="md-subhead job-category">
+              <md-icon  aria-label="salary icon" 
+                        md-svg-icon="img/icons/work.svg">
+              </md-icon>
+              Category: {{ job.department }}
+            </span>
+            
+            <span class="md-subhead job-location">
+              <md-icon  aria-label="distance icon" 
+                        md-svg-icon="img/icons/location.svg">
+              </md-icon>
+              {{ job.distance | number: 2 }} miles away
+            </span>
           </md-card-title-text>
-          <!-- <md-card-title-media>
-            <div class="md-media-md card-media"></div>
-          </md-card-title-media> -->
         </md-card-title>
         
 
@@ -78,7 +94,7 @@
 
         <md-card-actions layout="row" layout-align="end center" class = "card-actions">
           <md-button  target = "_blank" 
-                      ng-href="{{ job.url }}"
+                      ng-href="https://www.governmentjobs.com/careers/raleighnc/jobs/{{ job.id }}/{{ job.titleUrl }}"
                       class = "md-accent">
             <md-icon  aria-label="See Job Details" 
                       md-svg-icon="img/icons/document.svg">
@@ -86,7 +102,7 @@
             Job Details
           </md-button>
           <md-button  target = "_blank" 
-                      ng-href="{{ job.url }}/apply"
+                      ng-href="https://www.governmentjobs.com/careers/raleighnc/jobs/{{ job.id }}/{{ job.titleUrl }}/apply"
                       class = "md-accent apply-button">
             <md-icon  aria-label="Apply now" 
                       md-svg-icon="img/icons/briefcase.svg">

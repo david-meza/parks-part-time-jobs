@@ -43,6 +43,10 @@
     <md-content layout-padding>
 
       <md-list>
+
+        <md-list-item ng-hide="filters.totalJobs === undefined">
+          <p class="text-info">Total Results: <b>{{ filters.totalJobs }}</b> jobs</p>
+        </md-list-item>
       
         <md-list-item ng-click="navigateTo(setting.extraScreen, $event)" ng-repeat="setting in settings">
           <md-icon md-svg-icon="{{setting.icon}}"></md-icon>
@@ -53,7 +57,7 @@
       </md-list>
 
       <div layout = "row" layout-align = "end stretch">
-        <md-button ng-click="clearFilter('all')" class="md-primary capitalize">
+        <md-button ng-click="clearFilter()" class="md-primary capitalize">
           Clear all filters
         </md-button>
         
@@ -78,6 +82,10 @@
     <md-content layout-padding>
 
       <md-list>
+
+        <md-list-item ng-hide="filters.totalJobs === undefined">
+          <p class="text-info">Total Results: <b>{{ filters.totalJobs }}</b> jobs</p>
+        </md-list-item>
       
         <md-radio-group ng-model = "filters.salary" layout = "column">
         
@@ -93,9 +101,15 @@
       </md-list>
 
 
-      <md-button ng-click="salaryClose()" class="md-primary">
-        &lt;&lt; Back
-      </md-button>
+      <div layout = "row" layout-align = "end stretch">
+        <md-button ng-click="clearFilter('salary', 0)" class="md-primary capitalize">
+          Clear Salary Filter
+        </md-button>
+        
+        <md-button ng-click="salaryClose()" class="md-primary capitalize">
+          &lt;&lt; Back
+        </md-button>
+      </div>
 
     </md-content>
   </md-sidenav>
@@ -112,6 +126,10 @@
     <md-content layout-padding>
 
       <md-list>
+
+        <md-list-item ng-hide="filters.totalJobs === undefined">
+          <p class="text-info">Total Results: <b>{{ filters.totalJobs }}</b> jobs</p>
+        </md-list-item>
       
         <md-radio-group ng-model = "filters.distance" layout = "column">
         
@@ -126,10 +144,16 @@
 
       </md-list>
 
+      <div layout = "row" layout-align = "end stretch">
+        <md-button ng-click="clearFilter('distance', 9999)" class="md-primary capitalize">
+          Clear Distance Filter
+        </md-button>
+        
+        <md-button ng-click="distanceClose()" class="md-primary capitalize">
+          &lt;&lt; Back
+        </md-button>
+      </div>
 
-      <md-button ng-click="distanceClose()" class="md-primary">
-        &lt;&lt; Back
-      </md-button>
 
     </md-content>
   </md-sidenav>
@@ -144,21 +168,31 @@
     </md-toolbar>
     
     <md-content layout-padding>
+
+      <md-list-item ng-hide="filters.totalJobs === undefined">
+        <p class="text-info">Total Results: <b>{{ filters.totalJobs }}</b> jobs</p>
+      </md-list-item>
       
-      <div ng-repeat="category in categories">
-        <md-checkbox  ng-checked="catExists(category.name, filters.categories)" 
-                      ng-click="catToggle(category.name, filters.categories)" 
-                      aria-label = "{{category.name}}"
+      <div ng-repeat="(catName, category) in categories">
+        <md-checkbox  ng-checked="catExists(catName, filters.categories)" 
+                      ng-click="catToggle(catName, filters.categories)" 
+                      aria-label = "{{ catName }}"
                       ng-model = "category.checked"
                       ng-change="applyFilter('categories', filters.categories)">
-          {{ category.name }} ({{ category.jobs }})
+          {{ catName }} ({{ category.jobCount }})
         </md-checkbox>
       </div>
 
-
-      <md-button ng-click="categoryClose()" class="md-primary">
-        &lt;&lt; Back
-      </md-button>
+      <div layout = "row" layout-align = "end stretch">
+        <md-button ng-click="clearFilter('categories', [])" class="md-primary capitalize">
+          Clear Categories Filter
+        </md-button>
+        
+        <md-button ng-click="categoryClose()" class="md-primary capitalize">
+          &lt;&lt; Back
+        </md-button>
+      </div>
+      
 
     </md-content>
   </md-sidenav>

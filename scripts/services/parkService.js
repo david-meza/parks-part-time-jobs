@@ -18,9 +18,22 @@
       currentPark: undefined, 
       rebuild: false, 
       shallowWatch: false, 
-      fitToMap: false, 
+      fitToMap: false,
+      markerEvents: {},
       control: {} 
     };
+
+    var parkMarkersConfig = {
+      type: 'cluster',
+      typeOptions: {
+        title: 'Zoom in to find more parks!',
+        gridSize: 60,
+        minimumClusterSize: 3
+      },
+      typeEvents: {}
+    };
+
+    parkMarkersConfig.typeOptions.styles = [{textColor: '#FFF',textSize: 18,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [5, -5],url: 'img/icons/park-marker-cluster.svg',height: 40,width: 40},{textColor: '#FFF',textSize: 18,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [5, -5],url: 'img/icons/park-marker-cluster.svg',height: 44,width: 44},{textColor: '#FFF',textSize: 18,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [5, -5],url: 'img/icons/park-marker-cluster.svg',height: 48,width: 48},{textColor: '#FFF',textSize: 18,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [5, -5],url: 'img/icons/park-marker-cluster.svg',height: 52,width: 52},{textColor: '#FFF',textSize: 18,fontFamily: 'Roboto, Helvetica, Verdana, sans-serif',anchorText: [5, -5],url: 'img/icons/park-marker-cluster.svg',height: 56,width: 56}];
 
     var parkWindow = {
       show: false,
@@ -110,14 +123,11 @@
             alias2: p.ALIAS2,
             scale: p.SCALE,
             
-            icon: 'https://s3.amazonaws.com/davidmeza/Park_Locator/tree-small.png',
+            icon: 'img/icons/park-marker.svg',
             latitude: park.geometry.y,
             longitude: park.geometry.x,
 
-            jobs: [
-              { title: 'Camp Counselor- North/Northwest Raleigh (District 1)', salary: (8 + Math.random() * 12), description: 'Responsible for the direct supervision of campers, programming age appropriate activities and working with other staff to address the daily needs of a group of children during the summer season.', time: 'Part Time', category: 'Parks and Recreation', location: p.NAME, url: 'https://www.governmentjobs.com/careers/raleighnc/jobs/1314835/camp-counselor-southeast-raleigh-district-4', date: new Date(), distance: (Math.random() * 30), otherLocations: [] },
-              { title: 'Cashier', salary: (8 + Math.random() * 12), description: 'Responsible for assisting full-time facility management and recreation leaders as a cashier at a waterfront facility and park.', time: 'Part Time', category: 'PRCR Resources', location: p.NAME, url: 'https://www.governmentjobs.com/careers/raleighnc/jobs/1119867/cashier-lake-johnson-park-and-lake-wheeler-park', date: new Date(), distance: (Math.random() * 30), otherLocations: [] }
-            ],
+            jobs: [],
 
             markerClick: _markerClick,
             options: {
@@ -171,6 +181,7 @@
 
   	return {
   		markers: markers,
+      parkMarkersConfig: parkMarkersConfig,
       updateParkMarkers: updateParkMarkers,
       parkWindow: parkWindow,
       currentPlace: currentPlace
