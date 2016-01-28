@@ -29,7 +29,7 @@
      *                  If we receive OVER_QUERY_LIMIT, increase interval and try again.
      */
     var geocodeNextAddress = function () {
-      if (!geocoder) { $timeout(geocodeNextAddress, QUERY_PAUSE); }
+      if (!geocoder) { return $timeout(geocodeNextAddress, QUERY_PAUSE); }
       // Don't do anything if there aren't any tasks left
       if (!queue.length) { return; }
 

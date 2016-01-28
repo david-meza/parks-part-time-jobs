@@ -14,6 +14,7 @@
     
     // Park Markers
     $scope.parks = parkService.markers;
+    $scope.currentPlace = parkService.currentPlace;
     $scope.parkMarkersConfig = parkService.parkMarkersConfig;
 
     // Job Markers
@@ -33,6 +34,7 @@
 
     $scope.map.events.zoom_changed = function (map) {
       $scope.parkWindow.show = false;
+      $scope.currentPlace.name = 'Raleigh, NC';
       $scope.jobWindow.show = false;      
     };
 
