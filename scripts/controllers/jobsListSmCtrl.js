@@ -6,6 +6,7 @@
     function ($scope, $mdDialog, $mdSidenav, parkService, mapService, jobsService) {
 
       $scope.map = mapService.map;
+
       $scope.currentPlace = parkService.currentPlace;
           
       $scope.jobs = jobsService.jobs.list;

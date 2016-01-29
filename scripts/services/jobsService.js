@@ -12,7 +12,11 @@
     var getJobsFeed = function () {
       return $http({
         method: 'GET',
-        url : 'https://agency.governmentjobs.com/jobfeed.cfm?agency=raleighnc'
+        url : 'https://agency.governmentjobs.com/jobfeed.cfm?agency=raleighnc',
+        headers: {
+          'Content-Type': 'xml',
+          // 'Access-Control-Allow-Origin': 'http://127.0.0.1:54593'
+        }
       });
     };
 
@@ -76,15 +80,17 @@
     };
 
     var storeCategory = function (job) {
-      if (jobs.categories[job.department]) {
-        jobs.categories[job.department].jobCount += 1; 
-      } else {
-        jobs.categories[job.department] = {
-          name: job.department,
-          jobCount: 1,
-          checked: false
-        };
-      }
+      angular.forEach(job.categories, function (cat) {
+        if (jobs.categories[cat]) {
+          jobs.categories[cat].jobCount += 1; 
+        } else {
+          jobs.categories[cat] = {
+            name: cat,
+            jobCount: 1,
+            checked: false
+          };
+        }
+      });
     };
 
     var extractJobData = function (jsonjobs) {
@@ -111,7 +117,7 @@
     };
 
     var logError = function (response) {
-      return $q.reject(response).then(null, function () {
+      return $q.reject(response).then(null, function (response) {
         console.log('Failed to get data from jobs server', response);
       });
     };
