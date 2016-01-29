@@ -209,10 +209,11 @@ img.logo {
 }
 
 .inline-dropdown {
-  margin: 0 0 2px 2px;
+  margin: 0 0 3px 2px;
 
   .md-select-value {
     border-bottom: transparent;
+    align-self: flex-end;
   }
 }
 

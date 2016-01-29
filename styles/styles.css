@@ -132,9 +132,10 @@ img.logo {
   padding-top: 3px; }
 
 .inline-dropdown {
-  margin: 0 0 2px 2px; }
+  margin: 0 0 3px 2px; }
   .inline-dropdown .md-select-value {
-    border-bottom: transparent; }
+    border-bottom: transparent;
+    align-self: flex-end; }
 
 .job-card-header {
   padding: 0 4px; }
