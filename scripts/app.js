@@ -15,8 +15,9 @@
     .config(['uiGmapGoogleMapApiProvider', 
       function(uiGmapGoogleMapApiProvider) {
         uiGmapGoogleMapApiProvider.configure({
-            v: '3.20',
-            libraries: 'places, geometry'
+            signed_in: true,
+            // v: '3.21',
+            libraries: 'places'
         });
     }])
 
