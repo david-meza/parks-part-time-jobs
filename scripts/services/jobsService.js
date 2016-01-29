@@ -12,7 +12,7 @@
     var getJobsFeed = function () {
       return $http({
         method: 'GET',
-        url : 'http://agency.governmentjobs.com/jobfeed.cfm?agency=raleighnc&joblisting:department=PCR%20Recreation'
+        url : 'https://agency.governmentjobs.com/jobfeed.cfm?agency=raleighnc'
       });
     };
 
