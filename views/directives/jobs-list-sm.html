@@ -47,7 +47,7 @@
       <p>Showing <b>{{ filteredJobs.length }}</b> jobs in <b>{{ currentPlace.name }}</b></p>
     </md-list-item>
 
-    <md-list-item ng-repeat = "job in jobs | filterByPark | applySelectedFilters | orderBy: selectedSort as filteredJobs">
+    <md-list-item ng-repeat = "job in jobs | calculateDistanceToUser | filterByPark | applySelectedFilters | orderBy: selectedSort as filteredJobs">
       
       <md-card data-job-id = "{{ job.id }}" ng-class-odd="'odd-card'" flex>
         
@@ -70,19 +70,27 @@
               {{ job.jobType }}: {{ job.minSalary | currency }}-{{ job.maxSalary | currency }} {{ job.interval }}
             </span>
             
-            <span class="md-subhead job-category">
-              <md-icon  aria-label="salary icon" 
-                        md-svg-icon="img/icons/work.svg">
-              </md-icon>
-              Category: {{ job.department }}
-            </span>
-            
-            <span class="md-subhead job-location">
+            <span class="md-subhead job-location" ng-show="job.distance">
               <md-icon  aria-label="distance icon" 
                         md-svg-icon="img/icons/location.svg">
               </md-icon>
-              {{ job.distance | number: 2 }} miles away
+              {{ job.distance | number: 2 }} Miles away
             </span>
+
+            <span class="md-subhead job-category">
+              <md-icon  aria-label="department icon" 
+                        md-svg-icon="img/icons/work.svg">
+              </md-icon>
+              Department: {{ job.department }}
+            </span>
+
+            <span class="md-subhead job-category">
+              <md-icon  aria-label="categories icon" 
+                        md-svg-icon="img/icons/categories.svg">
+              </md-icon>
+              Categories: {{ job.categories.join(', ') }}
+            </span>
+
           </md-card-title-text>
         </md-card-title>
         

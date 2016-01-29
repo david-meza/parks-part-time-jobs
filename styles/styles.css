@@ -25,9 +25,11 @@ img, h1, h2, h3, h4, h5, h6 {
   -ms-user-select: none;
   user-select: none; }
 
-img.logo {
+.logo {
   height: 85px;
-  align-self: baseline; }
+  align-self: baseline;
+  background: url("/img/logos/PRCRD.svg") no-repeat left center;
+  background-size: contain; }
 
 .svg-fill {
   fill: rgba(0, 0, 0, 0.7); }
