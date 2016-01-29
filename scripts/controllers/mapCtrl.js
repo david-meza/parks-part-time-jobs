@@ -35,7 +35,8 @@
     $scope.map.events.zoom_changed = function (map) {
       $scope.parkWindow.show = false;
       $scope.currentPlace.name = 'Raleigh, NC';
-      $scope.jobWindow.show = false;      
+      $scope.jobWindow.show = false;
+      $scope.jobMarkersConfig.type = (map.getZoom() >= 14) ?  'spider' : 'cluster'; 
     };
 
     var mapInstance,

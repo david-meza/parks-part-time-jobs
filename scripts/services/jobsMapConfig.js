@@ -31,8 +31,8 @@
       type: 'cluster',
       typeOptions: {
         title: 'Zoom in to find more jobs!',
-        gridSize: 60,
-        minimumClusterSize: 10
+        gridSize: 100,
+        minimumClusterSize: 5
       },
       typeEvents: {}
     };

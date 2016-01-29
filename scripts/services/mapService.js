@@ -120,7 +120,7 @@
         // .capsule(true)
         .position('top right');
       $mdToast.show(toast);
-    }
+    };
 
     var geoLocate = function() {
       if (navigator.geolocation) {
