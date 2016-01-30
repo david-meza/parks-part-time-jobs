@@ -1,19 +1,25 @@
 {
   "name": "parkJobs",
-  "version": "0.0.1",
-  "main": "index.js",
-  "author": "David Meza",
+  "version": "0.3.1",
+  "main": "server.js",
+  "author": "david-meza",
+  "engines": {
+    "node": "5.1.0",
+    "npm": "3.4.1"
+  },
   "scripts": {
     "build-js": "browserify scripts/app.js -o scripts/bundle.js",
-    "start": "npm run build-js && opener index.html"
+    "start": "npm run build-js && opener index.html",
+    "postinstall": "bower install"
   },
   "license": "MIT",
   "dependencies": {
-    "angular": "~1.4.8",
-    "angular-material": "~1.0.1"
+    "bower": "1.7.1",
+    "express": "4.13.3"
   },
   "devDependencies": {
     "browserify": "^9.0.3",
     "opener": "^1.4.0"
-  }
+  },
+  "cacheDirectories": ["node_modules"]
 }
