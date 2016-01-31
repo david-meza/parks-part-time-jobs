@@ -9,10 +9,9 @@ var port = process.env.PORT || 8080;
 app.use(express.static(__dirname));
 
 // set the home page route
-app.get('/', function(req, res) {
-
-  res.render('index');
-
+app.get('/*', function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:' + port);    
+  next();
 });
 
 app.listen(port, function() {
