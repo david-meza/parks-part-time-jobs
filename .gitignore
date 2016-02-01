@@ -2,6 +2,6 @@
 .sass-cache
 
 /bower_components
-
+/node_modules
 
 styles/styles.css.map
