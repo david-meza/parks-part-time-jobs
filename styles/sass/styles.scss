@@ -115,46 +115,50 @@ img, h1, h2, h3, h4, h5, h6 {
   color: rgba(23, 116, 139, 0.9);
 }
 
-.job-title {
-  font-size: 18px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  font-weight: 300;
-  line-height: 1.4em;
-}
+.job-card-title {
+  
+  .job-title {
+    font-size: 18px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: 300;
+    line-height: 1.4em;
+  }
 
-.job-salary, .job-category, .job-location {
-  display: block;
-  padding-top: 0 !important;
-  font-size: 14px;
-  line-height: 18px;
-  color: rgba(0,0,0,0.54);
-  letter-spacing: 0.010em;
+  .job-salary, .job-category, .job-location {
+    display: block;
+    padding-top: 0 !important;
+    font-size: 14px;
+    line-height: 18px;
+    color: rgba(0,0,0,0.54);
+    letter-spacing: 0.010em;
 
-  md-icon {
-    height: 18px;
-    width: 18px;
+    md-icon {
+      height: 18px;
+      width: 18px;
+    }
+  }
+
+  .job-salary {
+    md-icon {
+      color: rgba(23, 145, 10, 0.7);
+    }
+  }
+
+  .job-category {
+    md-icon {
+      color: rgba(182, 79, 15, 0.89);
+    }
+  }
+
+  .job-location {
+    md-icon {
+      color: rgba(103, 58, 183, 0.87);
+    }
   }
 }
 
-.job-salary {
-  md-icon {
-    color: rgba(23, 145, 10, 0.7);
-  }
-}
-
-.job-category {
-  md-icon {
-    color: rgba(182, 79, 15, 0.89);
-  }
-}
-
-.job-location {
-  md-icon {
-    color: rgba(103, 58, 183, 0.87);
-  }
-}
 
 .footer-title {
   display: block;

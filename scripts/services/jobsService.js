@@ -20,6 +20,13 @@
       });
     };
 
+    var getLocationsMultiple = function () {
+      return $http({
+        method: 'GET',
+        url: '/scripts/joblocations.json'
+      });
+    };
+
     var parseDescription = function (desc) {
       if (!desc || desc === '<br />') return 'No description preview available';
 
@@ -97,7 +104,6 @@
       angular.forEach( jsonjobs, function (job) {
 
         var processedJob = constructJob(job);
-
         if (processedJob.jobType === 'Full-Time' || !isPRCRjob(processedJob) ) return;
         jobs[processedJob.id] = processedJob;
         storeCategory(processedJob);
@@ -107,19 +113,19 @@
     };
 
     var readResponse = function(response) {
-      if (response.status >= 200 && response.status < 300) {
+      if (response.status === 200) {
         var jsonResponse = parser.xml_str2json(response.data);
         var rawJobs = jsonResponse.rss.channel.item;
         extractJobData(rawJobs);
-      } else {
-        console.log('Did not get the expected results', response);
-      }
+        return $q.resolve(response);
+      } 
+      console.log('Did not get the expected results', response);
+      return $q.reject(response);
     };
 
     var logError = function (response) {
-      return $q.reject(response).then(null, function (response) {
-        console.log('Failed to get data from jobs server', response);
-      });
+      console.log('Failed to get data from jobs server', response);
+      return $q.reject(response);
     };
 
     var geocodeMappableJobs = function () {
@@ -129,6 +135,8 @@
         if (matcher.test(job.location)) { return; }
 
         geocoderService.getLatLng(job.location + ', ' + job.state).then(function(results) {
+
+          console.log(results);
           
           job.latitude = results.lat;
           job.longitude = results.lng;
@@ -148,9 +156,28 @@
       });
 
     };
-    
-    getJobsFeed().then(readResponse, logError).then(geocodeMappableJobs);
 
+    var multiplyJobsMultipleLocations = function (responses) {
+      var locations = responses[1].data;
+      
+      angular.forEach(jobs.list, function (job) {
+        var jobDetails = locations[job.id]
+        if (jobDetails) {
+          
+          angular.forEach(jobDetails.locations, function (location) {
+            var clone = angular.copy(job);
+            clone.location = location + ', Raleigh';
+            jobs.list.push(clone);
+          });
+
+        };
+      });
+
+    };
+    
+    var promise = getJobsFeed().then(readResponse, logError);
+    var promise2 = getLocationsMultiple()
+    $q.all([promise, promise2]).then(multiplyJobsMultipleLocations).then(geocodeMappableJobs);
 
     return {
       jobs: jobs
