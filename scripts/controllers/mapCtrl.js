@@ -2,8 +2,8 @@
 
   'use strict';
 
-  angular.module('appControllers').controller('mapCtrl', ['$scope', 'mapService', 'parkService', 'uiGmapGoogleMapApi', 'uiGmapIsReady', '$q', '$mdDialog', 'jobsService', 'jobsMapConfig',
-  	function ($scope, mapService, parkService, gMapsAPI, uiGmapIsReady, $q, $mdDialog, jobsService, jobsMapConfig){
+  angular.module('appControllers').controller('mapCtrl', ['$scope', 'mapService', 'uiGmapGoogleMapApi', 'uiGmapIsReady', '$q', '$mdDialog', 'jobsService', 'jobsMapConfig',
+  	function ($scope, mapService, gMapsAPI, uiGmapIsReady, $q, $mdDialog, jobsService, jobsMapConfig){
 
   	// Map settings
     $scope.map = mapService.map;
@@ -12,29 +12,15 @@
       // console.log(newValue);
     // }, true);
     
-    // Park Markers
-    $scope.parks = parkService.markers;
-    $scope.currentPlace = parkService.currentPlace;
-    $scope.parkMarkersConfig = parkService.parkMarkersConfig;
-
     // Job Markers
     $scope.jobs = jobsService.jobs;
     $scope.jobMarkersConfig = jobsMapConfig.jobMarkersConfig;
             
-    // Park Info Window
-    $scope.parkWindow = parkService.parkWindow;
-
     // Job Info Window
     $scope.jobWindow = jobsMapConfig.jobWindow;
 
-    // Make a new query when the activities filter changes
-    // $scope.$watchCollection('selectedActivities.current', function (selected) {
-    //   parkService.updateParkMarkers(selected);
-    // });
 
     $scope.map.events.zoom_changed = function (map) {
-      $scope.parkWindow.show = false;
-      $scope.currentPlace.name = 'Raleigh, NC';
       $scope.jobWindow.show = false;
       $scope.jobMarkersConfig.type = (map.getZoom() >= 14) ?  'spider' : 'cluster'; 
     };

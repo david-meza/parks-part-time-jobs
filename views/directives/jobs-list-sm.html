@@ -47,7 +47,7 @@
       <p>Showing <b>{{ filteredJobs.length }}</b> jobs in <b>{{ currentPlace.name }}</b></p>
     </md-list-item>
 
-    <md-list-item ng-repeat = "job in jobs | calculateDistanceToUser | filterByPark | applySelectedFilters | orderBy: selectedSort as filteredJobs">
+    <md-list-item ng-repeat = "job in jobs | calculateDistanceToUser | applySelectedFilters | orderBy: selectedSort as filteredJobs">
       
       <md-card data-job-id = "{{ job.id }}" ng-class-odd="'odd-card'" flex>
         

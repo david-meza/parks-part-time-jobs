@@ -2,22 +2,14 @@
 
   'use strict';
 
-  angular.module('appControllers').controller('jobsListSmCtrl', ['$scope', '$mdDialog', '$mdSidenav', 'parkService', 'mapService', 'jobsService',
-    function ($scope, $mdDialog, $mdSidenav, parkService, mapService, jobsService) {
+  angular.module('appControllers').controller('jobsListSmCtrl', ['$scope', '$mdDialog', '$mdSidenav', 'mapService', 'jobsService',
+    function ($scope, $mdDialog, $mdSidenav, mapService, jobsService) {
 
       $scope.map = mapService.map;
 
-      $scope.currentPlace = parkService.currentPlace;
+      $scope.currentPlace = 'Raleigh, NC';
           
       $scope.jobs = jobsService.jobs.list;
-
-      $scope.parks = parkService.markers;
-
-      $scope.centerToPark = function (park) {
-        $scope.map.location.coords.latitude = park.latitude;
-        $scope.map.location.coords.longitude = park.longitude;
-        park.markerClick();
-      };
 
       $scope.sortOptions = [
         { view: 'nearest', model: 'distance' },
