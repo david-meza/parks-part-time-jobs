@@ -71,16 +71,6 @@
                 controller: 'jobsListSmCtrl'
               }
             }
-          })
-
-          .state('home.park', {
-            url: ':name',
-            views: {
-              'job-details': {
-                templateUrl: 'views/directives/jobs-list-sm.html',
-                controller: 'parkCtrl'
-              }
-            }
           });
 
     }]);

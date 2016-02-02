@@ -136,8 +136,6 @@
 
         geocoderService.getLatLng(job.location + ', ' + job.state).then(function(results) {
 
-          console.log(results);
-          
           job.latitude = results.lat;
           job.longitude = results.lng;
           job.formattedAddress = results.formattedAddress;

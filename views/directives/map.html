@@ -32,24 +32,7 @@
                     coords='map.myLocationMarker.coords'
                     options = "map.myLocationMarker.options">
     </ui-gmap-marker>
-
     
-    <!-- Park Markers -->
-    <ui-gmap-markers  models="parks.content"
-                      coords="'self'"
-                      icon="'icon'"
-                      click="markerClick"
-                      type = "parkMarkersConfig.type"
-                      typeOptions = "parkMarkersConfig.typeOptions"
-                      typeEvents = "parkMarkersConfig.typeEvents"
-                      modelsbyref="parks.shallowWatch"
-                      fit = "parks.fitToMap"
-                      options="'options'"
-                      events="parks.markerEvents"
-                      doRebuildAll = "parks.rebuild"
-                      control = "parks.control">
-    </ui-gmap-markers>
-
     
     <!-- Job Markers -->
     <ui-gmap-markers  models="jobs.mappable"
@@ -66,18 +49,6 @@
                       doRebuildAll = "jobMarkersConfig.rebuild"
                       control = "jobMarkersConfig.control">
     </ui-gmap-markers>
-
-    
-    <!-- Park Info Window -->
-    <ui-gmap-window show="parkWindow.show" 
-                    coords="parkWindow.coords"
-                    control = "parkWindow.control" 
-                    options="parkWindow.options" 
-                    closeclick="parkWindow.closeclick"
-                    templateurl = "parkWindow.templateUrl"
-                    templateparameter = "parkWindow.templateParameter"
-                    ng-cloak>
-    </ui-gmap-window>
 
     
     <!-- Job Info Window -->
