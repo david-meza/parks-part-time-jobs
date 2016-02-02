@@ -79,7 +79,7 @@
     };
 
     var isPRCRjob = function (job) {
-      var matcher = new RegExp(/prc|parks|recreation|rcc|temporary/i);
+      var matcher = new RegExp(/prc|parks|recreation/i);
       angular.forEach(job.categories, function (cat) {
         if (matcher.test(cat)) return true;
       });
@@ -141,7 +141,7 @@
           job.latitude = results.lat;
           job.longitude = results.lng;
           job.formattedAddress = results.formattedAddress;
-          job.icon = 'img/icons/job-marker.svg';
+          job.icon = '/img/icons/job-marker.svg';
           job.markerClick = jobsMapConfig.markerClick;
           job.options = {
             title: job.title,
@@ -165,7 +165,6 @@
         if (jobDetails) {
           
           angular.forEach(jobDetails.locations, function (location) {
-            console.log(location);
             var clone = angular.copy(job);
             clone.location = (location.replace(/^.+-\s*/i, '') + ', Raleigh');
             jobs.list.push(clone);
