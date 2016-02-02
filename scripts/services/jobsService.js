@@ -165,8 +165,9 @@
         if (jobDetails) {
           
           angular.forEach(jobDetails.locations, function (location) {
+            console.log(location);
             var clone = angular.copy(job);
-            clone.location = location + ', Raleigh';
+            clone.location = (location.replace(/^.+-\s*/i, '') + ', Raleigh');
             jobs.list.push(clone);
           });
 

@@ -38,12 +38,14 @@
 
       // If we already processed this address return the stored results and go on to the next item in the queue
       if (locations.hasOwnProperty(task.address)) {
+        console.log('location was stored', task.address, locations[task.address]);
         queue.shift();
         task.d.resolve(locations[task.address]);
         if (queue.length) { return geocodeNextAddress(); }
 
       // Otherwise get the results from the geocoder service
       } else {
+        console.log('hitting the API for', task.address);
         geocoder.geocode({ address : task.address }, function (result, status) {
 
           // Resolve the promise with the results and reset the pause to the default
