@@ -7,7 +7,7 @@
 
       $scope.map = mapService.map;
 
-      $scope.currentPlace = 'Raleigh, NC';
+      $scope.currentPlace = { name: 'Raleigh, NC' };
           
       $scope.jobs = jobsService.jobs.list;
 
