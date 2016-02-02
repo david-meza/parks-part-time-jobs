@@ -13,7 +13,7 @@ module.exports = function (grunt) {
   });
 
   // Configurable paths for the application
-  var appConfig = {
+  var config = {
     src: require('./bower.json').appPath || 'src',
     dist: 'dist'
   };
@@ -22,7 +22,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
 
     // Project settings
-    config: appConfig,
+    config: config,
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
@@ -82,7 +82,7 @@ module.exports = function (grunt) {
                 '/src/styles',
                 connect.static('./src/styles')
               ),
-              connect.static(appConfig.src)
+              connect.static(config.src)
             ];
           }
         }
@@ -98,7 +98,7 @@ module.exports = function (grunt) {
                 '/bower_components',
                 connect.static('./bower_components')
               ),
-              connect.static(appConfig.src)
+              connect.static(config.src)
             ];
           }
         }
@@ -300,27 +300,27 @@ module.exports = function (grunt) {
     // By default, your `index.html`'s <!-- Usemin block --> will take care of
     // minification. These next options are pre-configured if you do not wish
     // to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     files: {
-    //       '<%= config.dist %>/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css'
-    //       ]
-    //     }
-    //   }
-    // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= config.dist %>/scripts/scripts.js': [
-    //         '<%= config.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
+    cssmin: {
+      dist: {
+        files: {
+          '<%= config.dist %>/styles/park-jobs.css': [
+            '.tmp/styles/{,*/}*.css'
+          ]
+        }
+      }
+    },
+    uglify: {
+      dist: {
+        files: {
+          '<%= config.dist %>/scripts/scripts.js': [
+            '<%= config.dist %>/{,*/}*.js'
+          ]
+        }
+      }
+    },
+    concat: {
+      dist: {}
+    },
 
     imagemin: {
       dist: {
