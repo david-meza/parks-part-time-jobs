@@ -8,15 +8,11 @@
     var parser = new X2JS(),
         jobs = { list: [], mappable: [], categories: {} };
 
-    
-    var getJobsFeed = function () {
+    // https://giststapplv1:6443/arcgis/rest/services/Parks/ParkLocator/MapServer/5/query?where=1%3D1&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=4326&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&resultRecordCount=&f=pjson
+    var getJobsFeed = function (query) {
       return $http({
         method: 'GET',
-        url : 'https://agency.governmentjobs.com/jobfeed.cfm?agency=raleighnc',
-        headers: {
-          'Content-Type': 'xml',
-          // 'Access-Control-Allow-Origin': 'http://127.0.0.1:54593'
-        }
+        url : 'https://giststapplv1:6443/arcgis/rest/services/Parks/ParkLocator/MapServer/5/query?where=' + (query || '1%3D1') + '&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=4326&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&resultRecordCount=&f=pjson'
       });
     };
 
@@ -113,6 +109,7 @@
     };
 
     var readResponse = function(response) {
+      debugger;
       if (response.status === 200) {
         var jsonResponse = parser.xml_str2json(response.data);
         var rawJobs = jsonResponse.rss.channel.item;
