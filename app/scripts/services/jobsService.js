@@ -1,14 +1,12 @@
-(function(angular, X2JS) {
+(function(angular) {
 
   'use strict';
 
   angular.module('appServices').factory('jobsService', ['$http', '$q', 'geocoderService', '$timeout', 'jobsMapConfig',
     function ($http, $q, geocoderService, $timeout, jobsMapConfig) {
 
-    var parser = new X2JS(),
-        jobs = { list: [], mappable: [], categories: {} };
+    var jobs = { list: [], mappable: [], categories: {} };
 
-    // https://giststapplv1:6443/arcgis/rest/services/Parks/ParkLocator/MapServer/5/query?where=1%3D1&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=4326&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&resultRecordCount=&f=pjson
     var getJobsFeed = function (query) {
       return $http({
         method: 'GET',
@@ -24,7 +22,7 @@
     };
 
     var parseDescription = function (desc) {
-      if (!desc || desc === '<br />') return 'No description preview available';
+      if (!desc || desc === '<br />') { return 'No description preview available'; }
 
       var htmlParser = new DOMParser();
       var nodes = htmlParser.parseFromString(desc, 'text/html');
@@ -41,43 +39,59 @@
           this.push(cat.Category);
         }, arr);
       } else {
-        console.log(categories);
-        arr.push(categories);
+        arr = categories.split(',');
       }
       return arr;
     };
 
     var constructJob = function (job) {
-      var id = job.jobId.__text
-      var description = parseDescription(job.description);
-      var categories = parseCategories(job.categories.category);
-      var titleUrl = job.title.replace(/\W+/ig, '-').toLowerCase();
+      var id = job.JOBID;
+      var description = parseDescription(job.DESCRIPTION);
+      var categories = parseCategories(job.CATEGORIES);
+      var titleUrl = job.TITLE.replace(/\W+/ig, '-').toLowerCase();
+      var minSalary = Number(job.MINIMUMSALARY) || 7.25;
+      var maxSalary = Number(job.MAXIMUMSALARY) || undefined; // What should we do with null/0 values??
       titleUrl = titleUrl[titleUrl.length - 1] === '-' ? titleUrl.substring(0, titleUrl.length - 1) : titleUrl;
 
       return {
-        id: id,
-        title: job.title,
+        id: Number(id),
+        objectId: job.OBJECTID,
+        title: job.TITLE,
         titleUrl: titleUrl,
-        department: job.department.__text,
         categories: categories,
+        department: job.DEPARTMENT,
         description: description,
-        jobType: job.jobType.__text,
-        location: job.location.__text,
-        state: job.state.__text,
-        minSalary: Number(job.minimumSalary.__text) || 7.25,
-        maxSalary: Number(job.maximumSalary.__text),
-        interval: job.salaryInterval.__text,
-        createdDate: new Date(Date.parse(job.advertiseFromDate.__text)),
-        endDate: job.advertiseToDateTime.__text,
-        link: job.link,
-        detailsUrl: ('https://www.governmentjobs.com/careers/raleighnc/jobs/' + id + '/' + titleUrl)
+        jobType: job.JOBTYPE,
+        latitude: job.LAT,
+        longitude: job.LNG,
+        location: job.LOCATION,
+        state: 'North Carolina',
+        minSalary: minSalary,
+        maxSalary: maxSalary,
+        interval: job.SALARYINTERVAL,
+        // String specifies it is GMT which is automatically localized when it is parsed
+        pubDate: new Date(Date.parse(job.PUBDATE)),
+        // 5 hour offset from UTC to EST = 18,000s or 18,000,000ms
+        createdDate: new Date(Date.parse(job.ADVERTISEFROMDATEUTC) - 18000000),
+        // Handle 'Continous' cases with a valid date instead of NaN or Invalid Date obj
+        endDate: new Date((Date.parse(job.ADVERTISETODATEUTC) - 18000000) || 'Dec 31 2020 23:59:59'),
+        link: job.LINK,
+        detailsUrl: ('https://www.governmentjobs.com/careers/raleighnc/jobs/' + id + '/' + titleUrl),
+        
+        icon: jobsMapConfig.jobMarkersConfig.icon,
+        markerClick: jobsMapConfig.markerClick,
+        options: {
+          title: job.TITLE,
+          labelAnchor: '0 0',
+          animation: 2
+        }
       };
     };
 
     var isPRCRjob = function (job) {
       var matcher = new RegExp(/prc|parks|recreation/i);
       angular.forEach(job.categories, function (cat) {
-        if (matcher.test(cat)) return true;
+        if (matcher.test(cat)) { return true; }
       });
       return matcher.test(job.department);
     };
@@ -99,8 +113,8 @@
     var extractJobData = function (jsonjobs) {
       angular.forEach( jsonjobs, function (job) {
 
-        var processedJob = constructJob(job);
-        if (processedJob.jobType === 'Full-Time' || !isPRCRjob(processedJob) ) return;
+        var processedJob = constructJob(job.attributes);
+        if (processedJob.jobType === 'Full-Time' || !isPRCRjob(processedJob) ) { return; }
         jobs[processedJob.id] = processedJob;
         storeCategory(processedJob);
         this.push(processedJob);
@@ -109,10 +123,8 @@
     };
 
     var readResponse = function(response) {
-      debugger;
       if (response.status === 200) {
-        var jsonResponse = parser.xml_str2json(response.data);
-        var rawJobs = jsonResponse.rss.channel.item;
+        var rawJobs = response.data.features;
         extractJobData(rawJobs);
         return $q.resolve(response);
       } 
@@ -125,26 +137,26 @@
       return $q.reject(response);
     };
 
+    var findMappableJobs = function () {
+      angular.forEach(jobs.list, function (job) {
+        if (job.latitude === 0 || job.longitude === 0) { return; }
+        jobs.mappable.push(job);
+      }); 
+    };
+
     var geocodeMappableJobs = function () {
       var matcher = new RegExp(/varies|multiple/i);
         
       angular.forEach(jobs.list, function (job) {
-        if (matcher.test(job.location)) { return; }
+        if (matcher.test(job.location) || job.latitude || job.longitude) { return; }
 
         geocoderService.getLatLng(job.location + ', ' + job.state).then(function(results) {
 
           job.latitude = results.lat;
           job.longitude = results.lng;
           job.formattedAddress = results.formattedAddress;
-          job.icon = '/img/icons/job-marker.svg';
-          job.markerClick = jobsMapConfig.markerClick;
-          job.options = {
-            title: job.title,
-            labelAnchor: '0 0',
-            animation: 2
-          };
           
-          jobs.mappable.push(job);
+          jobs.list.push(job);
 
         }, logError);
 
@@ -156,7 +168,7 @@
       var locations = responses[1].data;
       
       angular.forEach(jobs.list, function (job) {
-        var jobDetails = locations[job.id]
+        var jobDetails = locations[job.id];
         if (jobDetails) {
           
           angular.forEach(jobDetails.locations, function (location) {
@@ -165,14 +177,14 @@
             jobs.list.push(clone);
           });
 
-        };
+        }
       });
 
     };
     
-    var promise = getJobsFeed().then(readResponse, logError);
-    var promise2 = getLocationsMultiple()
-    $q.all([promise, promise2]).then(multiplyJobsMultipleLocations).then(geocodeMappableJobs);
+    getJobsFeed().then(readResponse, logError).then(findMappableJobs);
+    // var promise2 = getLocationsMultiple()
+    // $q.all([promise, promise2]).then(multiplyJobsMultipleLocations).then(geocodeMappableJobs);
 
     return {
       jobs: jobs
@@ -180,4 +192,4 @@
 
   }]);
 
-})(window.angular, X2JS);
+})(window.angular);
