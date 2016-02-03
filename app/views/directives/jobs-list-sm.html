@@ -1,0 +1,141 @@
+<md-content id = "jobs-list" layout = "column" flex du-scroll-container>
+
+  <back-to-top>
+    <md-button  class="md-accent md-raised md-fab md-mini" 
+                aria-label="Back to Top"
+                ng-click="scrollToTop()">
+      <md-icon md-svg-icon="img/icons/arrow-up.svg"></md-icon>
+    </md-button>
+  </back-to-top>
+              
+  <md-subheader class="md-primary jobs-subheader" layout = "row">
+    
+    
+    <span flex layout = "row">
+      
+      <div flex = "45" layout = "row">
+        <md-icon md-svg-icon = "img/icons/sort.svg"></md-icon>
+        <span class = "text-before-dropdown">Sort by</span> 
+        
+        <md-select  ng-model = "selectedSort" 
+                    aria-label = "Select Sort" 
+                    class = "inline-dropdown" 
+                    md-container-class = "inline-dropdown" flex>
+          <md-option ng-value="option.model" ng-repeat="option in sortOptions">{{ option.view }}</md-option>
+        </md-select>
+
+      </div>
+      <span flex = "10"></span>
+      <div flex = "45" layout = "row">
+        <span flex></span>
+        <md-button  class = "capitalize md-primary md-raised filter-button"
+                    ng-click="openFilterSelection($event)">
+          <md-icon md-svg-icon = "img/icons/filter.svg"></md-icon>
+          Filter
+        </md-button>
+        
+      </div>
+
+ 
+    </span>
+    
+  </md-subheader>
+  
+  <md-list>
+
+    <md-list-item>
+      <p>Showing <b>{{ filteredJobs.length }}</b> jobs in <b>{{ currentPlace.name }}</b></p>
+    </md-list-item>
+
+    <md-list-item ng-repeat = "job in jobs | calculateDistanceToUser | applySelectedFilters | orderBy: selectedSort as filteredJobs">
+      
+      <md-card data-job-id = "{{ job.id }}" ng-class-odd="'odd-card'" flex>
+        
+        <md-card-header class = "job-card-header">
+          <md-card-header-text layout = "row">
+            <span flex></span>
+            <span class="md-subhead new-job" ng-if="today - job.createdDate <= 604800000"><b>NEW!</b> &nbsp;</span>
+            <span class="md-subhead expiring-job" ng-if="job.endDate - today <= 604800000"><b>Expiring Soon!</b> &nbsp;</span>
+            <span class="md-subhead">Posted {{ job.createdDate | date: 'mediumDate' || 'EEEE, MMM d, y - h:mm a' }}</span>
+          </md-card-header-text>
+
+
+        </md-card-header>
+
+        <md-card-title class = "job-card-title">
+          <md-card-title-text>
+            
+            <span class="md-headline job-title">{{ job.title }}</span>
+            
+            <span class="md-subhead job-salary">
+              <md-icon  aria-label="salary icon" 
+                        md-svg-icon="img/icons/salary.svg">
+              </md-icon>
+              {{ job.jobType }}: {{ job.minSalary | currency }}-{{ job.maxSalary | currency }} {{ job.interval }}
+            </span>
+            
+            <span class="md-subhead job-location" ng-show="job.distance">
+              <md-icon  aria-label="distance icon" 
+                        md-svg-icon="img/icons/location.svg">
+              </md-icon>
+              {{ job.distance | number: 2 }} Miles away
+            </span>
+
+            <span class="md-subhead job-category">
+              <md-icon  aria-label="department icon" 
+                        md-svg-icon="img/icons/work.svg">
+              </md-icon>
+              Department: {{ job.department }}
+            </span>
+
+            <span class="md-subhead job-category">
+              <md-icon  aria-label="categories icon" 
+                        md-svg-icon="img/icons/categories.svg">
+              </md-icon>
+              Categories: {{ job.categories.join(', ') }}
+            </span>
+
+          </md-card-title-text>
+        </md-card-title>
+        
+
+        <md-card-content>
+          <p ng-init="descriptionLimit = 135"> {{ job.description | limitTo: descriptionLimit }}<a ng-click="descriptionLimit = job.description.length" ng-show="descriptionLimit < job.description.length" class = "color-indigo">... More</a> </p>
+        </md-card-content>
+        
+
+        <md-card-actions layout="row" layout-align="end center" class = "card-actions">
+          <md-button  target = "_blank" 
+                      ng-href="https://www.governmentjobs.com/careers/raleighnc/jobs/{{ job.id }}/{{ job.titleUrl }}"
+                      class = "md-accent">
+            <md-icon  aria-label="See Job Details" 
+                      md-svg-icon="img/icons/document.svg">
+            </md-icon>
+            Job Details
+          </md-button>
+          <md-button  target = "_blank" 
+                      ng-href="https://www.governmentjobs.com/careers/raleighnc/jobs/{{ job.id }}/{{ job.titleUrl }}/apply"
+                      class = "md-accent apply-button">
+            <md-icon  aria-label="Apply now" 
+                      md-svg-icon="img/icons/briefcase.svg">
+            </md-icon>
+            Apply
+          </md-button>
+        </md-card-actions>
+
+
+        <md-card-footer ng-show="job.otherLocations.length > 0">
+          <span class = "footer-title"><b>Also available at:</b></span>
+          <div class = "md-chips chips-wrapper md-readonly">
+            <div class = "md-chip background-default" ng-repeat="park in job.otherLocations">
+              <a ng-click="centerToPark(park)">{{ park.name }}</a>
+            </div>
+          </div>
+        </md-card-footer>
+      </md-card>
+    </md-list-item>
+
+  </md-list>
+
+</md-content>
+

@@ -1,0 +1,72 @@
+<div id="map-canvas" layout = "column" flex>
+
+  <!-- Search Container and Input Field (ui-gmap-search-box) -->
+  <!-- <div id="searchbox-container">
+    <md-button class="search-icon-container">
+      <md-icon md-svg-icon="img/icons/search.svg" aria-label = "Position map"></md-icon>
+    </md-button>
+  </div> -->
+
+  <!-- Main Map Directive -->
+  <ui-gmap-google-map center='map.location.coords'
+                      zoom='map.zoom'
+                      options = 'map.options'
+                      dragging='map.dragging'
+                      refresh='map.refresh'
+                      pan='map.pan'
+                      events = 'map.events'
+                      control = 'map.control'
+                      layout = "column" flex>
+
+
+    <!-- Map Positioning Autocomplete Search Box -->
+    <ui-gmap-search-box template="map.searchbox.template"
+                        events="map.searchbox.events"
+                        options = "map.searchbox.options"
+                        parentdiv = "'searchbox-container'">
+    </ui-gmap-search-box>
+
+
+    <!-- User Marker -->
+    <ui-gmap-marker idKey='map.myLocationMarker.id'
+                    coords='map.myLocationMarker.coords'
+                    options = "map.myLocationMarker.options">
+    </ui-gmap-marker>
+    
+    
+    <!-- Job Markers -->
+    <ui-gmap-markers  models="jobs.mappable"
+                      idkey="'objectId'"
+                      coords="'self'"
+                      icon="'icon'"
+                      click="markerClick"
+                      type = "jobMarkersConfig.type"
+                      typeOptions = "jobMarkersConfig.typeOptions"
+                      typeEvents = "jobMarkersConfig.typeEvents"
+                      modelsbyref="jobMarkersConfig.shallowWatch"
+                      fit = "jobMarkersConfig.fitToMap"
+                      options="'options'"
+                      events="jobMarkersConfig.markerEvents"
+                      doRebuildAll = "jobMarkersConfig.rebuild"
+                      control = "jobMarkersConfig.control">
+    </ui-gmap-markers>
+
+    
+    <!-- Job Info Window -->
+    <ui-gmap-window show="jobWindow.show" 
+                    coords="jobWindow.coords"
+                    control = "jobWindow.control" 
+                    options="jobWindow.options" 
+                    closeclick="jobWindow.closeclick"
+                    templateurl = "jobWindow.templateUrl"
+                    templateparameter = "jobWindow.templateParameter"
+                    ng-cloak>
+    </ui-gmap-window>
+
+
+  </ui-gmap-google-map>
+
+
+  <map-actions></map-actions>
+    
+</div>

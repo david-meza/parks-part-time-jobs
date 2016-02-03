@@ -1,0 +1,25 @@
+<div class = "ng-cloak" id = "park-window" layout = "column">
+  
+  <div class = "title" layout = "row">
+    
+    <div class = "title-text" flex layout = "column">
+      <span flex class="md-headline">{{ parameter.title }}</span>
+      <span flex class="md-subhead job-location">
+        <md-icon md-svg-icon="/img/icons/location.svg"></md-icon>
+        {{ parameter.location || parameter.formattedAddress }}
+      </span>
+      <span flex class="md-subhead job-salary">
+        <md-icon md-svg-icon="/img/icons/salary.svg"></md-icon>
+        {{ parameter.jobType }}: {{ parameter.minSalary | currency }}-{{ parameter.maxSalary | currency }} {{ parameter.interval }}
+      </span>
+    </div>
+      
+  </div>
+
+  <div class = "card-actions" layout="row" layout-align="center center" md-theme = "altTheme">
+    <md-button class = "md-primary capitalize" ng-href = "{{ parameter.detailsUrl }}/apply" target = "_blank">
+      Apply
+    </md-button>
+  </div>
+
+</div>
