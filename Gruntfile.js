@@ -14,7 +14,7 @@ module.exports = function (grunt) {
 
   // Configurable paths for the application
   var config = {
-    src: require('./bower.json').appPath || 'src',
+    app: require('./bower.json').appPath || 'app',
     dist: 'dist'
   };
 
@@ -31,18 +31,18 @@ module.exports = function (grunt) {
         tasks: ['wiredep']
       },
       js: {
-        files: ['<%= config.src %>/scripts/{,*/}*.js'],
+        files: ['<%= config.app %>/scripts/**/*.js'],
         tasks: ['newer:jshint:all', 'newer:jscs:all'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
       },
       jsTest: {
-        files: ['test/spec/{,*/}*.js'],
+        files: ['test/spec/**/*.js'],
         tasks: ['newer:jshint:test', 'newer:jscs:test', 'karma']
       },
       compass: {
-        files: ['<%= config.src %>/styles/{,*/}*.{scss,sass}'],
+        files: ['<%= config.app %>/styles/**/*.{scss,sass}'],
         tasks: ['compass:server', 'postcss:server']
       },
       gruntfile: {
@@ -53,9 +53,9 @@ module.exports = function (grunt) {
           livereload: '<%= connect.options.livereload %>'
         },
         files: [
-          '<%= config.src %>/{,*/}*.html',
-          '.tmp/styles/{,*/}*.css',
-          '<%= config.src %>/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= config.app %>/**/*.html',
+          '.tmp/styles/**/*.css',
+          '<%= config.app %>/img/**/*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
@@ -79,10 +79,10 @@ module.exports = function (grunt) {
                 connect.static('./bower_components')
               ),
               connect().use(
-                '/src/styles',
-                connect.static('./src/styles')
+                '/app/styles',
+                connect.static('./app/styles')
               ),
-              connect.static(config.src)
+              connect.static(config.app)
             ];
           }
         }
@@ -98,7 +98,7 @@ module.exports = function (grunt) {
                 '/bower_components',
                 connect.static('./bower_components')
               ),
-              connect.static(config.src)
+              connect.static(config.app)
             ];
           }
         }
@@ -120,14 +120,14 @@ module.exports = function (grunt) {
       all: {
         src: [
           'Gruntfile.js',
-          '<%= config.src %>/scripts/{,*/}*.js'
+          '<%= config.app %>/scripts/**/*.js'
         ]
       },
       test: {
         options: {
           jshintrc: 'test/.jshintrc'
         },
-        src: ['test/spec/{,*/}*.js']
+        src: ['test/spec/**/*.js']
       }
     },
 
@@ -140,11 +140,11 @@ module.exports = function (grunt) {
       all: {
         src: [
           'Gruntfile.js',
-          '<%= config.src %>/scripts/{,*/}*.js'
+          '<%= config.app %>/scripts/**/*.js'
         ]
       },
       test: {
-        src: ['test/spec/{,*/}*.js']
+        src: ['test/spec/**/*.js']
       }
     },
 
@@ -155,7 +155,7 @@ module.exports = function (grunt) {
           dot: true,
           src: [
             '.tmp',
-            '<%= config.dist %>/{,*/}*',
+            '<%= config.dist %>/**/*',
             '!<%= config.dist %>/.git{,*/}*'
           ]
         }]
@@ -177,7 +177,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '.tmp/styles/',
-          src: '{,*/}*.css',
+          src: '**/*.css',
           dest: '.tmp/styles/'
         }]
       },
@@ -185,7 +185,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '.tmp/styles/',
-          src: '{,*/}*.css',
+          src: '**/*.css',
           dest: '.tmp/styles/'
         }]
       }
@@ -194,7 +194,7 @@ module.exports = function (grunt) {
     // Automatically inject Bower components into the app
     wiredep: {
       app: {
-        src: ['<%= config.src %>/index.html'],
+        src: ['<%= config.app %>/index.html'],
         ignorePath:  /\.\.\//
       },
       test: {
@@ -214,7 +214,7 @@ module.exports = function (grunt) {
           }
       },
       sass: {
-        src: ['<%= config.src %>/styles/{,*/}*.{scss,sass}'],
+        src: ['<%= config.app %>/styles/{,*/}*.{scss,sass}'],
         ignorePath: /(\.\.\/){1,2}bower_components\//
       }
     }, 
@@ -222,12 +222,12 @@ module.exports = function (grunt) {
     // Compiles Sass to CSS and generates necessary files if requested
     compass: {
       options: {
-        sassDir: '<%= config.src %>/styles',
+        sassDir: '<%= config.app %>/styles',
         cssDir: '.tmp/styles',
         generatedImagesDir: '.tmp/img/generated',
-        imagesDir: '<%= config.src %>/img',
-        javascriptsDir: '<%= config.src %>/scripts',
-        fontsDir: '<%= config.src %>/styles/fonts',
+        imagesDir: '<%= config.app %>/img',
+        javascriptsDir: '<%= config.app %>/scripts',
+        fontsDir: '<%= config.app %>/styles/fonts',
         importPath: './bower_components',
         httpImagesPath: '/img',
         httpGeneratedImagesPath: '/img/generated',
@@ -254,7 +254,7 @@ module.exports = function (grunt) {
         src: [
           '<%= config.dist %>/scripts/{,*/}*.js',
           '<%= config.dist %>/styles/{,*/}*.css',
-          '<%= config.dist %>/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+          '<%= config.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
           '<%= config.dist %>/styles/fonts/*'
         ]
       }
@@ -264,7 +264,7 @@ module.exports = function (grunt) {
     // concat, minify and revision files. Creates configurations in memory so
     // additional tasks can operate on them
     useminPrepare: {
-      html: '<%= config.src %>/index.html',
+      html: '<%= config.app %>/index.html',
       options: {
         dest: '<%= config.dist %>',
         flow: {
@@ -300,34 +300,34 @@ module.exports = function (grunt) {
     // By default, your `index.html`'s <!-- Usemin block --> will take care of
     // minification. These next options are pre-configured if you do not wish
     // to use the Usemin blocks.
-    cssmin: {
-      dist: {
-        files: {
-          '<%= config.dist %>/styles/park-jobs.css': [
-            '.tmp/styles/{,*/}*.css'
-          ]
-        }
-      }
-    },
-    uglify: {
-      dist: {
-        files: {
-          '<%= config.dist %>/scripts/scripts.js': [
-            '<%= config.dist %>/{,*/}*.js'
-          ]
-        }
-      }
-    },
-    concat: {
-      dist: {}
-    },
+    // cssmin: {
+    //   dist: {
+    //     files: {
+    //       '<%= config.dist %>/styles/park-jobs.css': [
+    //         '.tmp/styles/**/*.css'
+    //       ]
+    //     }
+    //   }
+    // },
+    // uglify: {
+    //   dist: {
+    //     files: {
+    //       '<%= config.dist %>/scripts/scripts.js': [
+    //         '<%= config.dist %>/**/*.js'
+    //       ]
+    //     }
+    //   }
+    // },
+    // concat: {
+    //   dist: {}
+    // },
 
     imagemin: {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= config.src %>/img',
-          src: '{,*/}*.{png,jpg,jpeg,gif}',
+          cwd: '<%= config.app %>/img',
+          src: '**/*.{png,jpg,jpeg,gif}',
           dest: '<%= config.dist %>/img'
         }]
       }
@@ -337,8 +337,8 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= config.src %>/img',
-          src: '{,*/}*.svg',
+          cwd: '<%= config.app %>/img',
+          src: '**/*.svg',
           dest: '<%= config.dist %>/img'
         }]
       }
@@ -364,12 +364,12 @@ module.exports = function (grunt) {
     ngtemplates: {
       dist: {
         options: {
-          module: 'testApp',
+          module: 'parkJobs',
           htmlmin: '<%= htmlmin.dist.options %>',
           usemin: 'scripts/scripts.js'
         },
-        cwd: '<%= config.src %>',
-        src: 'views/{,*/}*.html',
+        cwd: '<%= config.app %>',
+        src: 'views/**/*.html',
         dest: '.tmp/templateCache.js'
       }
     },
@@ -400,13 +400,13 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           dot: true,
-          cwd: '<%= config.src %>',
+          cwd: '<%= config.app %>',
           dest: '<%= config.dist %>',
           src: [
             '*.{ico,png,txt}',
             '*.html',
-            'images/{,*/}*.{webp}',
-            'styles/fonts/{,*/}*.*'
+            'images/**/*.{webp}',
+            'styles/fonts/**/*.*'
           ]
         }, {
           expand: true,
@@ -417,9 +417,9 @@ module.exports = function (grunt) {
       },
       styles: {
         expand: true,
-        cwd: '<%= config.src %>/styles',
+        cwd: '<%= config.app %>/styles',
         dest: '.tmp/styles/',
-        src: '{,*/}*.css'
+        src: '**/*.css'
       }
     },
 
