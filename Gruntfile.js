@@ -55,7 +55,7 @@ module.exports = function (grunt) {
         files: [
           '<%= config.app %>/**/*.html',
           '.tmp/styles/**/*.css',
-          '<%= config.app %>/img/**/*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= config.app %>/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
@@ -338,7 +338,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= config.app %>/img',
-          src: '**/*.svg',
+          src: '{,*/}*.svg',
           dest: '<%= config.dist %>/img'
         }]
       }
