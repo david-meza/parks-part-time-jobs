@@ -54,8 +54,12 @@
         <md-card-header class = "job-card-header">
           <md-card-header-text layout = "row">
             <span flex></span>
-            <span class="md-subhead">Posted {{ job.createdDate | date: 'short' || 'EEEE, MMM d, y - h:mm a' }}</span>
+            <span class="md-subhead new-job" ng-if="today - job.createdDate <= 604800000"><b>NEW!</b> &nbsp;</span>
+            <span class="md-subhead expiring-job" ng-if="job.endDate - today <= 604800000"><b>Expiring Soon!</b> &nbsp;</span>
+            <span class="md-subhead">Posted {{ job.createdDate | date: 'mediumDate' || 'EEEE, MMM d, y - h:mm a' }}</span>
           </md-card-header-text>
+
+
         </md-card-header>
 
         <md-card-title class = "job-card-title">

@@ -69,9 +69,12 @@
         minSalary: minSalary,
         maxSalary: maxSalary,
         interval: job.SALARYINTERVAL,
+        // String specifies it is GMT which is automatically localized when it is parsed
+        pubDate: new Date(Date.parse(job.PUBDATE)),
         // 5 hour offset from UTC to EST = 18,000s or 18,000,000ms
         createdDate: new Date(Date.parse(job.ADVERTISEFROMDATEUTC) - 18000000),
-        endDate: new Date(Date.parse(job.ADVERTISETODATEUTC) - 18000000),
+        // Handle 'Continous' cases with a valid date instead of NaN or Invalid Date obj
+        endDate: new Date((Date.parse(job.ADVERTISETODATEUTC) - 18000000) || 'Dec 31 2020 23:59:59'),
         link: job.LINK,
         detailsUrl: ('https://www.governmentjobs.com/careers/raleighnc/jobs/' + id + '/' + titleUrl),
         

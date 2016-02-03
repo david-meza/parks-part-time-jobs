@@ -8,7 +8,9 @@
       $scope.map = mapService.map;
 
       $scope.currentPlace = { name: 'Raleigh, NC' };
-          
+
+      $scope.today = new Date().valueOf();
+
       $scope.jobs = jobsService.jobs.list;
 
       $scope.sortOptions = [
