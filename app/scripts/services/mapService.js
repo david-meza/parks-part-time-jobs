@@ -45,7 +45,7 @@
         disableDefaultUI: true,
         draggable: true,
         scrollwheel: false,
-        minZoom: 10,
+        minZoom: 1,
         tilt: 45,
         zoomControl: true,
         zoomControlOptions: {

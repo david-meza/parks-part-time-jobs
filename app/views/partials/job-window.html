@@ -4,7 +4,7 @@
     
     <div class = "title-text" flex layout = "column">
       <span flex class="md-headline">{{ parameter.title }}</span>
-      <span flex class="md-subhead">{{ parameter.formattedAddress }}</span>
+      <span flex class="md-subhead">{{ parameter.location || parameter.formattedAddress }}</span>
       <span flex class="md-subhead">{{ parameter.jobType }}: {{ parameter.minSalary | currency }}-{{ parameter.maxSalary | currency }} {{ parameter.interval }}</span>
     </div>
       

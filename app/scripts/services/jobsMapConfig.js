@@ -28,11 +28,12 @@
       markerEvents: {},
       rebuild: false,
       control: {},
+      icon: '/img/icons/job-marker.svg',
       type: 'cluster',
       typeOptions: {
         title: 'Zoom in to find more jobs!',
         gridSize: 100,
-        minimumClusterSize: 5
+        minimumClusterSize: 4
       },
       typeEvents: {}
     };
@@ -49,6 +50,7 @@
       jobWindow.templateParameter.interval = jobModel.interval;
       jobWindow.templateParameter.detailsUrl = jobModel.detailsUrl;
       jobWindow.templateParameter.formattedAddress = jobModel.formattedAddress;
+      jobWindow.templateParameter.location = jobModel.location;
       jobWindow.show = true;
     };
     
