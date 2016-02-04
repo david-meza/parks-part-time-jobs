@@ -127,7 +127,7 @@
         <md-card-footer ng-show="jobs[job.id].length > 1">
           <span class = "footer-title"><b>Also available at:</b></span>
           <div class = "md-chips chips-wrapper md-readonly">
-            <div class = "md-chip background-default limit-text limit-width" ng-repeat="jobObj in jobs[job.id]">
+            <div class = "md-chip background-default limit-text limit-width" ng-repeat="jobObj in jobs[job.id] | filter: { objectId: ('!' + job.objectId) }">
               <a class="footer-chip" ng-click="centerToJob(jobObj)">{{ jobObj.location }}</a>
             </div>
           </div>

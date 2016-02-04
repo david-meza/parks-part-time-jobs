@@ -14,9 +14,9 @@
       $scope.jobs = jobsService.jobs;
 
       $scope.centerToJob = function (job) {
+        $scope.map.zoom = 13;
         $scope.map.location.coords.latitude = job.latitude;
         $scope.map.location.coords.longitude = job.longitude;
-        $scope.map.zoom = 13;
         $timeout( function () {
           job.markerClick(null, 'card click', job);
         }, 200);
