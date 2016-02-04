@@ -10,7 +10,7 @@
 
     var _closeClick = function (windowScope) { 
       windowScope.show = false; 
-      if (activeCard) { 
+      if (angular.isDefined(activeCard)) { 
         activeCard.removeClass('selected'); 
         activeCard = undefined;
       }

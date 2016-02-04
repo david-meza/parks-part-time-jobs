@@ -132,6 +132,10 @@ md-card {
     @include transform( translateY(-1px) );
   }
 
+  &.selected {
+    border: 2px solid rgba(103,58,183,0.4);
+  }
+
   .job-card-header {
     position: relative;
     

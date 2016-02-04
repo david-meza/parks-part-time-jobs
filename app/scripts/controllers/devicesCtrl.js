@@ -9,8 +9,8 @@
 
       $scope.activeTab = deviceService.activeTab;
 
-      $scope.showTab = function (tab) {
-        return $scope.isMobile() && $scope.activeTab.name !== tab;
+      $scope.showList = function () {
+        return $scope.isMobile() && $scope.activeTab.list;
       };
 
   }]);
