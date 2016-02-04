@@ -3,6 +3,8 @@
 $success: #3C763D;
 $success-alt: #669834;
 $alert: #E65100;
+$danger: #E63125;
+$briefcase: #E65000;
 
 html {
   font-family: Roboto, Helvetica, Verdana, sans-serif;
@@ -475,26 +477,6 @@ th {
   margin-bottom: 0;
 }
 
-.green {
-  color: #669834;
-}
-
-.red {
-  color: #E63125;
-}
-
-#activity-window, #park-window {
-  opacity: 0;
-
-  -moz-animation:     show-me 900ms cubic-bezier(0.65, 0.05, 0.36, 1) 0s 1 normal;
-  -webkit-animation:  show-me 900ms cubic-bezier(0.65, 0.05, 0.36, 1) 0s 1 normal;
-  -o-animation:       show-me 900ms cubic-bezier(0.65, 0.05, 0.36, 1) 0s 1 normal;
-  animation:          show-me 900ms cubic-bezier(0.65, 0.05, 0.36, 1) 0s 1 normal;
-  
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-}
-
 @keyframes show-me {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -504,7 +486,18 @@ th {
   to { opacity: 1; }
 }
 
-#park-window {
+#job-window {
+  opacity: 0;
+  max-width: 350px;
+
+  -moz-animation:     show-me 900ms cubic-bezier(0.65, 0.05, 0.36, 1) 0s 1 normal;
+  -webkit-animation:  show-me 900ms cubic-bezier(0.65, 0.05, 0.36, 1) 0s 1 normal;
+  -o-animation:       show-me 900ms cubic-bezier(0.65, 0.05, 0.36, 1) 0s 1 normal;
+  animation:          show-me 900ms cubic-bezier(0.65, 0.05, 0.36, 1) 0s 1 normal;
+  
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+
   .title {
     .md-headline {
       font-size: 16px;
@@ -513,12 +506,23 @@ th {
     .md-subhead {
       color: rgba(0,0,0,0.65);
       font-size: 13px;
+
+      .after-icon {
+        // Does nothing... Hah - Text is still not aligned. Alt: parent display inline-flex
+        margin-left: -26px;
+        padding-left: 26px;
+      }
     }
 
-    .title-media {
-      .park-image {
-        max-height: 100px;
-        max-width: 133px;
+    .job-location {
+      md-icon {
+        color: $briefcase;
+      }
+    }
+
+    .job-salary {
+      md-icon {
+        color: $success-alt;
       }
     }
   }
@@ -580,36 +584,15 @@ th {
 
 }
 
-@media screen and (max-width: 767px) {
-
-  #mobile-nav {
-    display: block;
-  }
+@media screen and (max-width: 959px) {
 
   .hide-on-mobile {
     display: none;
   }
 
-  .navbar {
-    min-height: 0px;
-  }
-
-  .layout-margin, .layout-margin-gt-sm, .layout-margin-md, .layout-margin > *, .layout-margin-gt-sm > *, .layout-margin-md > *, .layout-margin > .flex, .layout-margin > .flex-gt-sm, .layout-margin > .flex-md {
-    margin: 0;
-  }
-
   #searchbox-container input#search-box {
     &:focus {
       width: 190px;
-    }
-  }
-
-  .footer {
-    padding-top: 0;
-
-    p {
-      font-size: 0.8em;
-      padding: 3px;
     }
   }
 

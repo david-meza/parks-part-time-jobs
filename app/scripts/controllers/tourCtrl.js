@@ -2,11 +2,11 @@
 
   'use strict';
 
-  angular.module('appControllers').controller('tourCtrl', ['$scope', 'ipCookie', '$timeout',
-    function ($scope, ipCookie, $timeout) {
+  angular.module('appControllers').controller('tourCtrl', ['$scope', 'ipCookie', '$timeout', 'deviceService',
+    function ($scope, ipCookie, $timeout, deviceService) {
       
       $timeout(function(){
-        $scope.currentStep = ipCookie('guided-tour') || 0;
+        $scope.currentStep = deviceService.isMobile() ? 5 : ipCookie('guided-tour') || 0;
       }, 10000);
 
       $scope.stepComplete = function() {
