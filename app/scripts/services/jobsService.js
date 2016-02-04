@@ -2,8 +2,8 @@
 
   'use strict';
 
-  angular.module('appServices').factory('jobsService', ['$http', '$q', 'geocoderService', '$timeout', 'jobsMapConfig',
-    function ($http, $q, geocoderService, $timeout, jobsMapConfig) {
+  angular.module('appServices').factory('jobsService', ['$http', '$q', '$timeout', 'jobsMapConfig',
+    function ($http, $q, $timeout, jobsMapConfig) {
 
     var jobs = { list: [], mappable: [], categories: {} };
 
@@ -137,26 +137,6 @@
     var logError = function (response) {
       console.log('Failed to get data from jobs server', response);
       return $q.reject(response);
-    };
-
-    var geocodeMappableJobs = function () {
-      var matcher = new RegExp(/varies|multiple/i);
-        
-      angular.forEach(jobs.list, function (job) {
-        if (matcher.test(job.location) || job.latitude || job.longitude) { return; }
-
-        geocoderService.getLatLng(job.location + ', ' + job.state).then(function(results) {
-
-          job.latitude = results.lat;
-          job.longitude = results.lng;
-          job.formattedAddress = results.formattedAddress;
-          
-          jobs.mappable.push(job);
-
-        }, logError);
-
-      });
-
     };
     
     getJobsFeed().then(readResponse, logError);
