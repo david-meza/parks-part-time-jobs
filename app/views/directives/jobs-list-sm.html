@@ -47,9 +47,9 @@
       <p>Showing <b>{{ filteredJobs.length }}</b> jobs in <b>{{ currentPlace.name }}</b></p>
     </md-list-item>
 
-    <md-list-item ng-repeat = "job in jobs | calculateDistanceToUser | applySelectedFilters | orderBy: selectedSort as filteredJobs">
+    <md-list-item ng-repeat = "job in jobs.list | calculateDistanceToUser | applySelectedFilters | orderBy: selectedSort as filteredJobs">
       
-      <md-card data-job-id = "{{ job.id }}" ng-class-odd="'odd-card'" flex>
+      <md-card data-job-id = "{{ job.objectId }}" ng-class-odd="'odd-card'" flex>
         
         <md-card-header class = "job-card-header">
           <md-card-header-text layout = "row">
@@ -124,11 +124,11 @@
         </md-card-actions>
 
 
-        <md-card-footer ng-show="job.otherLocations.length > 0">
+        <md-card-footer ng-show="jobs[job.id].length > 1">
           <span class = "footer-title"><b>Also available at:</b></span>
           <div class = "md-chips chips-wrapper md-readonly">
-            <div class = "md-chip background-default" ng-repeat="park in job.otherLocations">
-              <a ng-click="centerToPark(park)">{{ park.name }}</a>
+            <div class = "md-chip background-default limit-text limit-width" ng-repeat="jobObj in jobs[job.id]">
+              <a class="footer-chip" ng-click="centerToJob(jobObj)">{{ jobObj.location }}</a>
             </div>
           </div>
         </md-card-footer>

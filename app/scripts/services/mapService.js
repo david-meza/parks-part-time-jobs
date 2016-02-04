@@ -23,7 +23,7 @@
 
     var map = {
     	// 1 to 20 - 20 being closely zoomed in
-      zoom: 12,
+      zoom: 13,
       // turns to true when the map is being dragged
       dragging: false,
       // set to true to trigger a map refresh when necessary
@@ -45,8 +45,8 @@
         disableDefaultUI: true,
         draggable: true,
         scrollwheel: false,
-        minZoom: 1,
-        tilt: 45,
+        minZoom: 9,
+        tilt: 0,
         zoomControl: true,
         zoomControlOptions: {
           position: mapsObj ? mapsObj.ControlPosition.LEFT_BOTTOM : 6,
@@ -54,18 +54,17 @@
         },
         mapTypeControl: false,
         scaleControl: false,
-        streetViewControl: false,
+        streetViewControl: true,
+        streetViewControlOptions: {
+          position: mapsObj ? mapsObj.ControlPosition.LEFT_BOTTOM : 6
+        },
         rotateControl: false,
         panControl: false
       },
     };
 
-    // Optional map themes
-    // Light browns and greens (nature)
-    map.options.styles = [{'featureType':'poi.park','elementType':'geometry.fill','stylers':[{'color':'#519c2f'},{'gamma':'1.27'}]},{'featureType':'poi.park','elementType':'labels.text.stroke','stylers':[{'visibility':'on'},{'color':'#e4bd2e'},{'weight':'3.14'},{'gamma':'1.58'}]},{'featureType':'poi.school','elementType':'labels','stylers':[{'visibility': 'off'}]},{'featureType':'poi.business','elementType':'labels','stylers':[{'visibility': 'off'}]},{'featureType':'poi.place_of_worship','elementType':'labels','stylers':[{'visibility': 'off'}]},{'featureType':'road.local','elementType':'labels','stylers':[{'visibility': 'off'}]},{'featureType':'landscape','stylers':[{'hue':'#FFBB00'},{'saturation':43.400000000000006},{'lightness':37.599999999999994},{'gamma':1}]},{'featureType':'road.highway','stylers':[{'hue':'#FFC200'},{'saturation':-61.8},{'lightness':45.599999999999994},{'gamma':1}]},{'featureType':'road.arterial','stylers':[{'hue':'#FF0300'},{'saturation':-100},{'lightness':51.19999999999999},{'gamma':1}]},{'featureType':'road.local','stylers':[{'hue':'#FF0300'},{'saturation':-100},{'lightness':52},{'gamma':1}]},{'featureType':'water','stylers':[{'hue':'#0078FF'},{'saturation':-13.200000000000003},{'lightness':2.4000000000000057},{'gamma':1}]}];
-
-    // Light blues and greys 
-    map.options.secondaryStyles = [{'featureType':'water','stylers':[{'visibility':'on'},{'color':'#b5cbe4'}]},{'featureType':'landscape','stylers':[{'color':'#efefef'}]},{'featureType':'road.highway','elementType':'geometry','stylers':[{'color':'#83a5b0'}]},{'featureType':'road.arterial','elementType':'geometry','stylers':[{'color':'#bdcdd3'}]},{'featureType':'road.local','elementType':'geometry','stylers':[{'color':'#ffffff'}]},{'featureType':'poi.park','elementType':'geometry','stylers':[{'color':'#e3eed3'}]},{'featureType':'administrative','stylers':[{'visibility':'on'},{'lightness':33}]},{'featureType':'road'},{'featureType':'poi.park','elementType':'labels','stylers':[{'visibility':'on'},{'lightness':20}]},{},{'featureType':'road','stylers':[{'lightness':20}]}];
+    // Map Theme: Pale Dawn
+    map.options.styles = [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2e5d4"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{"featureType":"road","elementType":"all","stylers":[{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"water","elementType":"all","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]}];
 
     // Marker for current location (Geolocation or default)
     map.myLocationMarker = {
@@ -99,10 +98,6 @@
   	  }
     };
 
-  	var _isInRaleigh = function (lat, lon) {
-      return lat < 36.113561 && lat > 35.437814 && lon < -78.336890 && lon > -78.984583;
-    };
-
     var updateUserCoords = function (lat, lon) {
       // Update the location obj with the accurate user coords
       map.location.coords.latitude = lat;
@@ -117,7 +112,6 @@
         .textContent(message)
         .action('ok')
         .highlightAction(false)
-        // .capsule(true)
         .position('top right');
       $mdToast.show(toast);
     };
@@ -130,6 +124,7 @@
           },
           function (error) {
             informUser('Could not locate you due to: ' + error.message);
+            console.log(error);
           }, {
             enableHighAccuracy: true,
             timeout: 10000,
@@ -137,6 +132,7 @@
           }
         );
       } else {
+        informUser('Your browser does not support geolocation. Please upgrade.');
         console.log('Geolocation not supported. Defaulting to backup location.');
       }
     };

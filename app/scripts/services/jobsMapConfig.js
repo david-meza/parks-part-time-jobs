@@ -20,7 +20,7 @@
       coords: {},
       control: {},
       options: {
-        pixelOffset: { width: 0, height: -48 }
+        pixelOffset: { width: 0, height: -60 }
       },
       closeclick: _closeClick,
       templateUrl: 'views/partials/job-window.html',
@@ -34,10 +34,10 @@
       rebuild: false,
       control: {},
       icon: '/img/icons/job-marker.svg',
-      type: 'cluster',
+      type: 'spider',
       typeOptions: {
         title: 'Zoom in to find more jobs!',
-        gridSize: 100,
+        gridSize: 60,
         minimumClusterSize: 4
       },
       typeEvents: {}
@@ -69,7 +69,7 @@
     
     var markerClick = function (gInstance, evnt, model) {
       _positionWindow(model);
-      _scrollToJobCard(model.id);
+      _scrollToJobCard(model.objectId);
     };
 
     return {

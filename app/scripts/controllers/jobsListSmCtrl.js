@@ -2,8 +2,8 @@
 
   'use strict';
 
-  angular.module('appControllers').controller('jobsListSmCtrl', ['$scope', '$mdDialog', '$mdSidenav', 'mapService', 'jobsService',
-    function ($scope, $mdDialog, $mdSidenav, mapService, jobsService) {
+  angular.module('appControllers').controller('jobsListSmCtrl', ['$scope', '$mdDialog', '$mdSidenav', 'mapService', 'jobsService', '$timeout',
+    function ($scope, $mdDialog, $mdSidenav, mapService, jobsService, $timeout) {
 
       $scope.map = mapService.map;
 
@@ -11,7 +11,16 @@
 
       $scope.today = new Date().valueOf();
 
-      $scope.jobs = jobsService.jobs.list;
+      $scope.jobs = jobsService.jobs;
+
+      $scope.centerToJob = function (job) {
+        $scope.map.location.coords.latitude = job.latitude;
+        $scope.map.location.coords.longitude = job.longitude;
+        $scope.map.zoom = 13;
+        $timeout( function () {
+          job.markerClick(null, 'card click', job);
+        }, 200);
+      };
 
       $scope.sortOptions = [
         { view: 'nearest', model: 'distance' },

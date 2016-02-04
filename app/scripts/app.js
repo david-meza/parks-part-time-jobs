@@ -16,9 +16,13 @@
       function(uiGmapGoogleMapApiProvider) {
         uiGmapGoogleMapApiProvider.configure({
             signed_in: true,
-            // v: '3.21',
+            v: '3.22',
             libraries: 'places'
         });
+    }])
+
+    .config(['tourConfig', function (tourConfig) {
+      tourConfig.backDrop = true;
     }])
 
     .config([ '$httpProvider', function ($httpProvider) {

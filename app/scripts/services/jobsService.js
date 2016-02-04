@@ -96,6 +96,10 @@
       return matcher.test(job.department);
     };
 
+    var groupById = function (job) {
+      angular.isDefined(jobs[job.id]) ? jobs[job.id].push(job) : jobs[job.id] = [job];
+    };
+
     var storeCategory = function (job) {
       angular.forEach(job.categories, function (cat) {
         if (jobs.categories[cat]) {
@@ -115,9 +119,14 @@
 
         var processedJob = constructJob(job.attributes);
         if (processedJob.jobType === 'Full-Time' || !isPRCRjob(processedJob) ) { return; }
-        jobs[processedJob.id] = processedJob;
+        
+        groupById(processedJob);
         storeCategory(processedJob);
+        
         this.push(processedJob);
+        if (processedJob.latitude !== 0 || processedJob.longitude !== 0) {
+          jobs.mappable.push(processedJob);
+        }
 
       }, jobs.list);
     };
@@ -135,13 +144,6 @@
     var logError = function (response) {
       console.log('Failed to get data from jobs server', response);
       return $q.reject(response);
-    };
-
-    var findMappableJobs = function () {
-      angular.forEach(jobs.list, function (job) {
-        if (job.latitude === 0 || job.longitude === 0) { return; }
-        jobs.mappable.push(job);
-      }); 
     };
 
     var geocodeMappableJobs = function () {
@@ -182,7 +184,7 @@
 
     };
     
-    getJobsFeed().then(readResponse, logError).then(findMappableJobs);
+    getJobsFeed().then(readResponse, logError);
     // var promise2 = getLocationsMultiple()
     // $q.all([promise, promise2]).then(multiplyJobsMultipleLocations).then(geocodeMappableJobs);
 

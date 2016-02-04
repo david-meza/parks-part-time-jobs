@@ -22,7 +22,7 @@
 
     $scope.map.events.zoom_changed = function (map) {
       $scope.jobWindow.show = false;
-      $scope.jobMarkersConfig.type = (map.getZoom() >= 14) ?  'spider' : 'cluster'; 
+      $scope.jobMarkersConfig.type = (map.getZoom() >= 13) ?  'spider' : 'cluster'; 
     };
 
     var mapInstance,
