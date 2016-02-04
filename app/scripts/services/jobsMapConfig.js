@@ -5,9 +5,14 @@
   angular.module('appServices').factory('jobsMapConfig',
     function () {
 
+    var activeCard;
 
     var _closeClick = function (windowScope) { 
       windowScope.show = false; 
+      if (activeCard) { 
+        activeCard.removeClass('selected'); 
+        activeCard = undefined;
+      }
     };
 
     var jobWindow = {
@@ -53,9 +58,18 @@
       jobWindow.templateParameter.location = jobModel.location;
       jobWindow.show = true;
     };
+
+    var _scrollToJobCard = function (id) {
+      if (activeCard) { activeCard.removeClass('selected'); }
+      var container = angular.element(document.getElementById('jobs-list'));
+      var target = activeCard = angular.element(document.querySelector('md-card[data-job-id=\'' + id + '\']'));
+      container.scrollToElementAnimated(target, 90);
+      activeCard.addClass('selected');
+    };
     
     var markerClick = function (gInstance, evnt, model) {
       _positionWindow(model);
+      _scrollToJobCard(model.id);
     };
 
     return {

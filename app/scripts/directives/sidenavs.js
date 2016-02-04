@@ -12,6 +12,8 @@
         function ($scope, $mdSidenav, jobsFilterService, deviceService, jobsService) {
 
 
+        var jobContainer = document.getElementById('jobs-list');
+
         $scope.showList = function () {
           deviceService.activeTab.list = true;
           deviceService.activeTab.map = false;
@@ -77,11 +79,15 @@
         };
 
         $scope.applyFilter = function(knd, newVal) {
+          jobContainer = jobContainer || document.getElementById('jobs-list');
           // Update the filter with the new value
           $scope.filters[knd] = newVal;
 
           // Update the icon that we show on the sidebar
           $scope.settings[idxLookup[knd]].filtersOn = (typeof newVal === 'object' ? (newVal.length > 10 ? 10 : newVal.length) : (newVal === 0 || newVal === 9999 ? 0 : 1) );
+
+          // Scroll to the top of the md-content job list container
+          jobContainer.scrollTop = 0;
         };
 
         $scope.categories = jobsService.jobs.categories;
