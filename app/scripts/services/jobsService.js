@@ -14,13 +14,6 @@
       });
     };
 
-    var getLocationsMultiple = function () {
-      return $http({
-        method: 'GET',
-        url: '/scripts/joblocations.json'
-      });
-    };
-
     var parseDescription = function (desc) {
       if (!desc || desc === '<br />') { return 'No description preview available'; }
 
@@ -158,35 +151,15 @@
           job.longitude = results.lng;
           job.formattedAddress = results.formattedAddress;
           
-          jobs.list.push(job);
+          jobs.mappable.push(job);
 
         }, logError);
 
       });
 
     };
-
-    var multiplyJobsMultipleLocations = function (responses) {
-      var locations = responses[1].data;
-      
-      angular.forEach(jobs.list, function (job) {
-        var jobDetails = locations[job.id];
-        if (jobDetails) {
-          
-          angular.forEach(jobDetails.locations, function (location) {
-            var clone = angular.copy(job);
-            clone.location = (location.replace(/^.+-\s*/i, '') + ', Raleigh');
-            jobs.list.push(clone);
-          });
-
-        }
-      });
-
-    };
     
     getJobsFeed().then(readResponse, logError);
-    // var promise2 = getLocationsMultiple()
-    // $q.all([promise, promise2]).then(multiplyJobsMultipleLocations).then(geocodeMappableJobs);
 
     return {
       jobs: jobs

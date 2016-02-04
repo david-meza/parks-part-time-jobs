@@ -3,7 +3,7 @@
   'use strict';
 
   function easeInOutCubic (t) { 
-    return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1 
+    return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
   }
 
   angular.module('parkJobs', ['appServices', 'appFilters', 'appControllers', 'appDirectives', 'ui.router', 'ngMaterial', 'uiGmapgoogle-maps', 'angular-tour', 'dcbImgFallback', 'ngAnimate', 'ipCookie', 'duScroll', 'ngStorage'])

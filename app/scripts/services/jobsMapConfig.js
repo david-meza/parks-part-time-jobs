@@ -5,7 +5,8 @@
   angular.module('appServices').factory('jobsMapConfig',
     function () {
 
-    var activeCard;
+    var activeCard,
+        container;
 
     var _closeClick = function (windowScope) { 
       windowScope.show = false; 
@@ -61,9 +62,9 @@
 
     var _scrollToJobCard = function (id) {
       if (activeCard) { activeCard.removeClass('selected'); }
-      var container = angular.element(document.getElementById('jobs-list'));
-      var target = activeCard = angular.element(document.querySelector('md-card[data-job-id=\'' + id + '\']'));
-      container.scrollToElementAnimated(target, 90);
+      container = container || angular.element(document.getElementById('jobs-list'));
+      activeCard = angular.element(document.querySelector('md-card[data-job-id=\'' + id + '\']'));
+      container.scrollToElementAnimated(activeCard, 90);
       activeCard.addClass('selected');
     };
     

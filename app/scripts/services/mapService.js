@@ -132,7 +132,7 @@
           }
         );
       } else {
-        informUser('Your browser does not support geolocation. Please upgrade.');
+        informUser('Your browser does not support geolocation. Please upgrade it.');
         console.log('Geolocation not supported. Defaulting to backup location.');
       }
     };

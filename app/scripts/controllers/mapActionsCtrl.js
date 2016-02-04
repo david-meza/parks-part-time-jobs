@@ -6,9 +6,7 @@
     function ($scope, mapService, $mdDialog) {
           
       // Reference to service geo-location
-      $scope.geoLocate = function (ev) {
-        mapService.geoLocate();
-      };
+      $scope.geoLocate = mapService.geoLocate;
 
       // Opens the dialog showing address edit input field
       $scope.editLocation = function (ev) {

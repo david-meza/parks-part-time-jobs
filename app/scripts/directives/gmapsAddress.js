@@ -15,7 +15,7 @@
       },
       controller: 'autocompleteCtrl',
       
-      link: function(scope, element, attrs) {
+      link: function(scope, element) {
 
         $timeout(function(){
           var dropdown = document.getElementsByClassName('pac-container');

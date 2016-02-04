@@ -13,10 +13,9 @@
 
         var container = element.parent();
         
-        container.on('scroll', function() {
-          (this.scrollTop >= 50) ? element.addClass('bring-to-screen') : element.removeClass('bring-to-screen');
+        container.on('scroll', function () {
+          this.scrollTop >= 50 ? element.addClass('bring-to-screen') : element.removeClass('bring-to-screen');
         });
-
 
         scope.scrollToTop = function () {
           container.scrollTopAnimated(0, 800);

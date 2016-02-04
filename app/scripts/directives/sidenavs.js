@@ -74,7 +74,7 @@
           if (filterName === 'categories') { uncheckCategories(); }
         };
 
-        $scope.navigateTo = function(to, event) {
+        $scope.navigateTo = function(to) {
           $mdSidenav(to).open();
         };
 

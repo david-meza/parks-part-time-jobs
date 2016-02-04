@@ -11,7 +11,7 @@
 
     var matchOneElement = function (arr1, arr2) {
       return arr2.some(function(arr2Val) {
-        return arr1.indexOf(arr2Val) >= 0
+        return arr1.indexOf(arr2Val) >= 0;
       });
     };
     

@@ -64,7 +64,7 @@
 
           // Increase the pause up to 1s intervals and keep trying...
           } else if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
-            QUERY_PAUSE < 1000 ? QUERY_PAUSE += 250 : QUERY_PAUSE = 1000;
+            QUERY_PAUSE = (QUERY_PAUSE < 1000) ? QUERY_PAUSE + 250 : 1000;
 
           // Reject any other result
           } else if (status === google.maps.GeocoderStatus.ZERO_RESULTS) {
