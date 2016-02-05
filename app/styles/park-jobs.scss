@@ -33,12 +33,20 @@ img, h1, h2, h3, h4, h5, h6 {
   @include user-select(none); 
 }
 
-.logo {
-  height: 85px;
-  align-self: baseline;
-  background: url("/img/icons/parks-logo.svg") no-repeat left center;
-  background-size: contain;
+#navbar {
+
+  .md-toolbar-tools {
+    min-height: 100%;
+  }
+
+  .logo {
+    height: 95%;
+    align-self: baseline;
+    background: url("/img/icons/parks-logo.svg") no-repeat left center;
+    background-size: contain;
+  }
 }
+
 
 
 .svg-fill {
@@ -275,22 +283,6 @@ md-card {
   }
 }
 
-// SVG Fills
-
-#marker-off {
-  fill: rgba(113, 176, 69, 1);
-}
-
-#my-location {
-  fill: rgba(103, 58, 183, 0.9);
-}
-
-#person-pin {
-  fill: rgba(0, 0, 0, 0.74);
-}
-
-// End SVG Fills
-
 #flash {
   position: absolute;
   z-index: 101;
@@ -463,6 +455,27 @@ th {
 #map-canvas {
   position: relative;
   @include box-shadow( 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) );
+
+  #map-actions {
+
+    .my-location {
+      color: rgba(103, 58, 183, 0.9);
+    }
+
+    .person-pin {
+      color: rgba(0, 0, 0, 0.74);
+    }
+
+    // Not all browsers seem to support svg fills
+    #my-location {
+      fill: rgba(103, 58, 183, 0.9);
+    }
+
+    #person-pin {
+      fill: rgba(0, 0, 0, 0.74);
+    }
+
+  }
 }
 
 .mb-20 {
@@ -575,12 +588,18 @@ th {
 }
 
 @media screen and (max-width: 599px) {
-  #navbar.md-medium-tall {
-    height: auto;
-    max-height: initial;
-    min-height: auto;
+  #navbar {
+    &.md-medium-tall {
+      height: 48px;
+      max-height: 48px;
+      min-height: 48px;
+    }
+    
+    .logo {
+      height: 100%;
+      background: url("/img/icons/parks-logo-sm.svg") no-repeat center center;
+    }
   }
-
 
 }
 
