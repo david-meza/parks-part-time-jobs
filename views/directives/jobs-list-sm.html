@@ -47,16 +47,24 @@
       <p>Showing <b>{{ filteredJobs.length }}</b> jobs in <b>{{ currentPlace.name }}</b></p>
     </md-list-item>
 
-    <md-list-item ng-repeat = "job in jobs | calculateDistanceToUser | applySelectedFilters | orderBy: selectedSort as filteredJobs">
+    <md-list-item ng-repeat = "job in jobs.list | applySelectedFilters | orderBy: selectedSort as filteredJobs">
       
-      <md-card data-job-id = "{{ job.id }}" ng-class-odd="'odd-card'" flex>
+      <md-card data-job-id = "{{ job.objectId }}" ng-class-odd="'odd-card'" flex>
         
         <md-card-header class = "job-card-header">
           <md-card-header-text layout = "row">
+            
+            <span class="md-subhead expiring-job" ng-if="job.endDate - today <= 604800000">
+              <md-icon md-svg-icon="/img/icons/expiring.svg"></md-icon>
+              <b>Expires {{ job.endDate | date: 'EEEE, MMM d' }}!</b> &nbsp;
+            </span>
+            
             <span flex></span>
+            
             <span class="md-subhead new-job" ng-if="today - job.createdDate <= 604800000"><b>NEW!</b> &nbsp;</span>
-            <span class="md-subhead expiring-job" ng-if="job.endDate - today <= 604800000"><b>Expiring Soon!</b> &nbsp;</span>
-            <span class="md-subhead">Posted {{ job.createdDate | date: 'mediumDate' || 'EEEE, MMM d, y - h:mm a' }}</span>
+            <span class="md-subhead">Posted {{ job.createdDate | date: 'mediumDate' }}</span>
+            <span class="md-subhead" ng-if="job.endDate - today > 604800000">&nbsp;|&nbsp;Expires {{ job.endDate | date: 'mediumDate' }}</span>
+            
           </md-card-header-text>
 
 
@@ -124,11 +132,11 @@
         </md-card-actions>
 
 
-        <md-card-footer ng-show="job.otherLocations.length > 0">
+        <md-card-footer ng-show="jobs[job.id].length > 1">
           <span class = "footer-title"><b>Also available at:</b></span>
           <div class = "md-chips chips-wrapper md-readonly">
-            <div class = "md-chip background-default" ng-repeat="park in job.otherLocations">
-              <a ng-click="centerToPark(park)">{{ park.name }}</a>
+            <div class = "md-chip background-default limit-text limit-width" ng-repeat="jobObj in jobs[job.id] | filter: { objectId: ('!' + job.objectId) }">
+              <a class="footer-chip" ng-click="centerToJob(jobObj)">{{ jobObj.location }}</a>
             </div>
           </div>
         </md-card-footer>

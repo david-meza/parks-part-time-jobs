@@ -1,16 +1,16 @@
-<div class = "ng-cloak" id = "park-window" layout = "column">
+<div id = "job-window" layout = "column">
   
   <div class = "title" layout = "row">
     
     <div class = "title-text" flex layout = "column">
       <span flex class="md-headline">{{ parameter.title }}</span>
       <span flex class="md-subhead job-location">
-        <md-icon md-svg-icon="/img/icons/location.svg"></md-icon>
-        {{ parameter.location || parameter.formattedAddress }}
+        <md-icon md-svg-icon="/img/icons/location.svg" aria-label="Location Icon"></md-icon>
+        <span class="after-icon">{{ parameter.location || parameter.formattedAddress }}</span>
       </span>
       <span flex class="md-subhead job-salary">
-        <md-icon md-svg-icon="/img/icons/salary.svg"></md-icon>
-        {{ parameter.jobType }}: {{ parameter.minSalary | currency }}-{{ parameter.maxSalary | currency }} {{ parameter.interval }}
+        <md-icon md-svg-icon="/img/icons/salary.svg" aria-label="Salary Icon"></md-icon>
+        <span class="after-icon">{{ parameter.jobType }}: {{ parameter.minSalary | currency }}-{{ parameter.maxSalary | currency }} {{ parameter.interval }}</span>
       </span>
     </div>
       

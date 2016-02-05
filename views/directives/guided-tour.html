@@ -1,19 +1,19 @@
 <tour step="currentStep" post-step="stepComplete()">
   <virtual-step tourtip="Jobs can be sorted by distance, salary, post date and title"
                 tourtip-next-label="Next"
-                tourtip-placement="bottom"
-                tourtip-element=".inline-dropdown"
+                tourtip-placement="left"
+                tourtip-element="#jobs-list"
                 use-source-scope = "true"
                 tourtip-step="0">
   </virtual-step>  
   <virtual-step tourtip="They can also be filtered for more relevant results"
                 tourtip-next-label="Next"
                 tourtip-placement="left"
-                tourtip-element=".filter-button"
+                tourtip-element="#jobs-list"
                 use-source-scope = "true"
                 tourtip-step="1">
   </virtual-step>
-  <virtual-step tourtip="Click on a park marker to see jobs only at that location"
+  <virtual-step tourtip="You can click on a job marker to find that job on the list"
                 tourtip-next-label="Next"
                 tourtip-placement="right"
                 tourtip-element=".angular-google-map-container"
@@ -23,7 +23,7 @@
   </virtual-step>    
   <virtual-step tourtip="You can manually modify your location to find jobs near you"
                 tourtip-next-label="Next"
-                tourtip-placement="top"
+                tourtip-placement="left"
                 tourtip-element="#map-actions"
                 tourtip-container-element="#map-canvas"
                 use-source-scope = "true"

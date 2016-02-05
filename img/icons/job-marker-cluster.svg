@@ -1,18 +1,1 @@
-<svg id="job-marker-cluster" height="48" width="48" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg">
-  <path fill="transparent" d=" M 0.00 0.00 L 500.00 0.00 L 500.00 500.00 L 0.00 500.00 L 0.00 0.00 Z" />
-  
-  <circle cx="250" cy="250" r="250" fill="#7B2800" />
-  <circle cx="250" cy="250" r="210" fill="#9B481A" fill-opacity='0.5' />
-  <circle cx="250" cy="250" r="225" fill="#9B481A" fill-opacity='0.3' />
-  <circle cx="250" cy="250" r="240" fill="#9B481A" fill-opacity='0.2' />
-  <circle cx="250" cy="250" r="200" fill="#9B481A" />
-
-  <circle cx="375" cy="120" r="125" fill="rgba(255, 243, 224, 1)" />
-  <g id="cluster-briefcase" enable-background="new 0 0 48 48" transform="scale(4.5,4.5) translate(59, 0)">
-    <path fill="#424242" d="M27,7h-6c-1.7,0-3,1.3-3,3v3h2v-3c0-0.6,0.4-1,1-1h6c0.6,0,1,0.4,1,1v3h2v-3C30,8.3,28.7,7,27,7z"/>
-    <path fill="#E65100" d="M40,43H8c-2.2,0-4-1.8-4-4V15c0-2.2,1.8-4,4-4h32c2.2,0,4,1.8,4,4v24C44,41.2,42.2,43,40,43z"/>
-    <path fill="#FF6E40" d="M40,28H8c-2.2,0-4-1.8-4-4v-9c0-2.2,1.8-4,4-4h32c2.2,0,4,1.8,4,4v9C44,26.2,42.2,28,40,28z"/>
-    <path fill="#FFF3E0" d="M26,26h-4c-0.6,0-1-0.4-1-1v-2c0-0.6,0.4-1,1-1h4c0.6,0,1,0.4,1,1v2C27,25.6,26.6,26,26,26z"/>
-  </g>
-
-</svg>
+<svg height="48" width="48" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><path fill="transparent" d="M0 0h500v500H0V0z"/><circle cx="250" cy="250" r="250" fill="#7B2800"/><circle cx="250" cy="250" r="210" fill="#9B481A" fill-opacity=".5"/><circle cx="250" cy="250" r="225" fill="#9B481A" fill-opacity=".3"/><circle cx="250" cy="250" r="240" fill="#9B481A" fill-opacity=".2"/><circle cx="250" cy="250" r="200" fill="#9B481A"/><circle cx="375" cy="120" r="125" fill="rgba(255, 243, 224, 1)"/><path fill="#424242" d="M387 31.5h-27c-7.65 0-13.5 5.85-13.5 13.5v13.5h9V45c0-2.7 1.8-4.5 4.5-4.5h27c2.7 0 4.5 1.8 4.5 4.5v13.5h9V45c0-7.65-5.85-13.5-13.5-13.5z"/><path fill="#E65100" d="M445.5 193.5h-144c-9.9 0-18-8.1-18-18v-108c0-9.9 8.1-18 18-18h144c9.9 0 18 8.1 18 18v108c0 9.9-8.1 18-18 18z"/><path fill="#FF6E40" d="M445.5 126h-144c-9.9 0-18-8.1-18-18V67.5c0-9.9 8.1-18 18-18h144c9.9 0 18 8.1 18 18V108c0 9.9-8.1 18-18 18z"/><path fill="#FFF3E0" d="M382.5 117h-18c-2.7 0-4.5-1.8-4.5-4.5v-9c0-2.7 1.8-4.5 4.5-4.5h18c2.7 0 4.5 1.8 4.5 4.5v9c0 2.7-1.8 4.5-4.5 4.5z"/></svg>
