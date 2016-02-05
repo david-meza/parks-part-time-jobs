@@ -17,7 +17,7 @@
     var meetFilterCriteria = function (job) {
       return job.minSalary >= Number(selectedFilters.salary) && 
              ( !job.distance || job.distance <= Number(selectedFilters.distance) ) && 
-             ( selectedFilters.categories.length === 0 || matchOneElement(job.categories, selectedFilters.categories) )
+             ( selectedFilters.categories.length === 0 || matchOneElement(job.categories, selectedFilters.categories) );
     };
 
     // Calculate distance from marker to user
@@ -38,6 +38,12 @@
         
         calculateDistance(job); 
         if ( meetFilterCriteria(job) ) { this.push(job); }
+        // if ( meetFilterCriteria(job) ) { 
+        //   this.push(job);
+        //   job.icon = '/img/icons/job-marker.svg';
+        // } else {
+        //   job.icon = '/img/icons/job-marker-filtered.svg';
+        // }
       
       }, filtered);
 
