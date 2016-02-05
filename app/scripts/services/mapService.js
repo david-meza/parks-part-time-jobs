@@ -71,7 +71,7 @@
       id: 0,
       coords: { latitude: location.coords.latitude, longitude: location.coords.longitude },
       options: {
-        draggable: false,
+        draggable: true,
         clickable: false,
         icon: 'https://s3.amazonaws.com/davidmeza/Park_Locator/user.png',
         animation: (mapsObj ? mapsObj.Animation.DROP : 2)

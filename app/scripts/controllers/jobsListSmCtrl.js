@@ -27,13 +27,14 @@
         { view: 'furthest', model: '-distance' },
         { view: 'oldest', model: 'createdDate' }, 
         { view: 'newest', model: '-createdDate' }, 
+        { view: 'expiring soon', model: 'endDate' }, 
         { view: 'salary ($ - $$$)', model: 'minSalary' }, 
         { view: 'salary ($$$ - $)', model: '-minSalary' }, 
         { view: 'job title (A-Z)', model: 'title' },
         { view: 'job title (Z-A)', model: '-title' }
       ];
 
-      $scope.selectedSort = 'distance';
+      $scope.selectedSort = '-minSalary';
 
       $scope.openFilterSelection = function () {
         $mdSidenav('filter').toggle();

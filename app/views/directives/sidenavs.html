@@ -24,7 +24,7 @@
 
       </md-list>
 
-      <md-button ng-click="leftClose()" class="md-primary">
+      <md-button ng-click="closeSidenav('left')" class="md-primary">
         Close
       </md-button>
     </md-content>
@@ -61,7 +61,7 @@
           Clear all filters
         </md-button>
         
-        <md-button ng-click="filterClose()" class="md-primary capitalize">
+        <md-button ng-click="closeSidenav('filter')" class="md-primary capitalize">
           Close
         </md-button> 
       </div>
@@ -106,7 +106,7 @@
           Clear Salary Filter
         </md-button>
         
-        <md-button ng-click="salaryClose()" class="md-primary capitalize">
+        <md-button ng-click="closeSidenav('salary')" class="md-primary capitalize">
           &lt;&lt; Back
         </md-button>
       </div>
@@ -149,7 +149,7 @@
           Clear Distance Filter
         </md-button>
         
-        <md-button ng-click="distanceClose()" class="md-primary capitalize">
+        <md-button ng-click="closeSidenav('distance')" class="md-primary capitalize">
           &lt;&lt; Back
         </md-button>
       </div>
@@ -160,7 +160,7 @@
 
   <!-- Category list item -> Right Sidenav -> Opened from sidenavs controller -->
   <md-sidenav class="md-sidenav-right md-whiteframe-z2" 
-              md-component-id="category"
+              md-component-id="categories"
               md-is-open="categorySidenavOpen">
     
     <md-toolbar class="md-theme-light">
@@ -188,7 +188,7 @@
           Clear Categories Filter
         </md-button>
         
-        <md-button ng-click="categoryClose()" class="md-primary capitalize">
+        <md-button ng-click="closeSidenav('categories')" class="md-primary capitalize">
           &lt;&lt; Back
         </md-button>
       </div>

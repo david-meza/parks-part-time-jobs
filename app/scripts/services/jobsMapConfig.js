@@ -2,8 +2,8 @@
 
   'use strict';
 
-  angular.module('appServices').factory('jobsMapConfig',
-    function () {
+  angular.module('appServices').factory('jobsMapConfig', ['mapService',
+    function (mapService) {
 
     var activeCard,
         container;
@@ -69,7 +69,14 @@
     };
     
     var markerClick = function (gInstance, evnt, model) {
+      // Center map to marker
+      mapService.map.location.coords.latitude = model.latitude;
+      mapService.map.location.coords.longitude = model.longitude;
+      
+      // Position Job Info Window above marker
       _positionWindow(model);
+
+      // Find the card on the job list and scroll to it
       _scrollToJobCard(model.objectId);
     };
 
@@ -79,6 +86,6 @@
       markerClick: markerClick
     };
 
-  });
+  }]);
 
 })(window.angular);

@@ -148,14 +148,18 @@ md-card {
 
   .job-card-header {
     position: relative;
+
+    .md-subhead {
+      font-size: 12px;
+    }
     
-    .new-job {
+    .md-subhead.new-job {
       color: $success;
     }
 
-    .expiring-job {
+    .md-subhead.expiring-job {
       color: $alert;
-      font-size: 15px;
+      font-size: 14px;
     }
   }
 

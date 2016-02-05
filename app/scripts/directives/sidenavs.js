@@ -14,50 +14,31 @@
 
         var jobContainer = document.getElementById('jobs-list');
 
+        // Left side nav - mobile devices
         $scope.showList = function () {
           deviceService.activeTab.list = true;
           deviceService.activeTab.map = false;
           deviceService.activeTab.name = 'list';
-          $scope.leftClose();
+          $scope.closeSidenav('left');
         };
 
         $scope.hideList = function () {
           deviceService.activeTab.list = false;
           deviceService.activeTab.map = true;
           deviceService.activeTab.name = 'map';
-          $scope.leftClose();
+          $scope.closeSidenav('left');
         };
 
-        $scope.filterClose = function () {
-          $mdSidenav('filter').close();
-        };
-        
-        $scope.leftClose = function () {
-          $mdSidenav('left').close();
-        };
-        
-        $scope.salaryClose = function () {
-          $mdSidenav('salary').close();
+        // Close any sidenav
+        $scope.closeSidenav = function (name) {
+          $mdSidenav(name).close();
         };
 
-        $scope.categoryClose = function () {
-          $mdSidenav('category').close();
-        };
 
-        $scope.distanceClose = function () {
-          $mdSidenav('distance').close();
-        };
-
-        $scope.settings = [
-          { name: 'Distance', extraScreen: 'distance',  icon: 'img/icons/location.svg', filtersOn: 0 },
-          { name: 'Category', extraScreen: 'category',  icon: 'img/icons/work.svg',     filtersOn: 0 },
-          { name: 'Salary',   extraScreen: 'salary',    icon: 'img/icons/salary.svg',   filtersOn: 0 },
-        ];
-
-        var idxLookup = {
-          distance: 0,
-          categories: 1,
-          salary: 2,
+        $scope.settings = {
+          distance:   { name: 'Distance', extraScreen: 'distance',  icon: 'img/icons/location.svg', filtersOn: 0 },
+          categories: { name: 'Category', extraScreen: 'categories',icon: 'img/icons/work.svg',     filtersOn: 0 },
+          salary:     { name: 'Salary',   extraScreen: 'salary',    icon: 'img/icons/salary.svg',   filtersOn: 0 },
         };
 
         // Initialize filters
@@ -68,6 +49,7 @@
             $scope.clearFilter('salary', 0);
             $scope.clearFilter('distance', 9999);
             $scope.clearFilter('categories', []);
+            return;
           }
           
           $scope.applyFilter(filterName, val);
@@ -84,9 +66,9 @@
           $scope.filters[knd] = newVal;
 
           // Update the icon that we show on the sidebar
-          $scope.settings[idxLookup[knd]].filtersOn = (typeof newVal === 'object' ? (newVal.length > 10 ? 10 : newVal.length) : (newVal === 0 || newVal === 9999 ? 0 : 1) );
+          $scope.settings[knd].filtersOn = (typeof newVal === 'object' ? (newVal.length > 10 ? 10 : newVal.length) : (newVal === 0 || newVal === 9999 ? 0 : 1) );
 
-          // Scroll to the top of the md-content job list container
+          // Scroll to the top of the md-content job list container to avoid a blank screen if user is scrolled down
           jobContainer.scrollTop = 0;
         };
 
@@ -98,7 +80,7 @@
           });
         };
 
-        $scope.salaryOptions = [8, 10, 12, 15, 20];
+        $scope.salaryOptions = [8, 10, 12, 15];
 
         $scope.distanceOptions = [5, 10, 15, 20, 25];
 
