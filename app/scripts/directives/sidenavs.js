@@ -36,9 +36,9 @@
 
 
         $scope.settings = {
-          distance:   { name: 'Distance', extraScreen: 'distance',  icon: 'img/icons/location.svg', filtersOn: 0 },
-          categories: { name: 'Category', extraScreen: 'categories',icon: 'img/icons/work.svg',     filtersOn: 0 },
-          salary:     { name: 'Salary',   extraScreen: 'salary',    icon: 'img/icons/salary.svg',   filtersOn: 0 },
+          distance:   { name: 'Distance', extraScreen: 'distance',  icon: 'core2:location', filtersOn: 'core2:filter-none' },
+          categories: { name: 'Category', extraScreen: 'categories',icon: 'core2:work',     filtersOn: 'core2:filter-none' },
+          salary:     { name: 'Salary',   extraScreen: 'salary',    icon: 'core2:salary',   filtersOn: 'core2:filter-none' },
         };
 
         // Initialize filters
@@ -66,7 +66,7 @@
           $scope.filters[knd] = newVal;
 
           // Update the icon that we show on the sidebar
-          $scope.settings[knd].filtersOn = (typeof newVal === 'object' ? (newVal.length > 10 ? 10 : newVal.length) : (newVal === 0 || newVal === 9999 ? 0 : 1) );
+          $scope.settings[knd].filtersOn = (typeof newVal === 'object' ? (newVal.length >= 10 ? 'core2:filter-9-plus' : 'core2:filter-' + newVal.length) : (newVal === 0 || newVal === 9999 ? 'core2:filter-none' : 'core2:filter-1') );
 
           // Scroll to the top of the md-content job list container to avoid a blank screen if user is scrolled down
           jobContainer.scrollTop = 0;

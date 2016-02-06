@@ -2,8 +2,8 @@
 
   'use strict';
 
-  angular.module('appControllers').controller('jobsListSmCtrl', ['$scope', '$mdDialog', '$mdSidenav', 'mapService', 'jobsService', '$timeout',
-    function ($scope, $mdDialog, $mdSidenav, mapService, jobsService, $timeout) {
+  angular.module('appControllers').controller('jobsListSmCtrl', ['$scope', '$mdDialog', '$mdSidenav', 'mapService', 'jobsService', '$timeout', 'jobsFilterService',
+    function ($scope, $mdDialog, $mdSidenav, mapService, jobsService, $timeout, jobsFilterService) {
 
       $scope.map = mapService.map;
 
@@ -12,6 +12,8 @@
       $scope.today = new Date().valueOf();
 
       $scope.jobs = jobsService.jobs;
+
+      $scope.selectedFilters = jobsFilterService.filters;
 
       $scope.centerToJob = function (job) {
         $scope.map.zoom = 13;

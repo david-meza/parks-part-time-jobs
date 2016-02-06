@@ -4,7 +4,7 @@
     <md-button  class="md-accent md-raised md-fab md-mini" 
                 aria-label="Back to Top"
                 ng-click="scrollToTop()">
-      <md-icon md-svg-icon="img/icons/arrow-up.svg"></md-icon>
+      <md-icon md-svg-icon="arrow-up"></md-icon>
     </md-button>
   </back-to-top>
               
@@ -14,7 +14,7 @@
     <span flex layout = "row">
       
       <div flex = "45" layout = "row">
-        <md-icon md-svg-icon = "img/icons/sort.svg"></md-icon>
+        <md-icon md-svg-icon = "core2:sort"></md-icon>
         <span class = "text-before-dropdown">Sort by</span> 
         
         <md-select  ng-model = "selectedSort" 
@@ -30,7 +30,7 @@
         <span flex></span>
         <md-button  class = "capitalize md-primary md-raised filter-button"
                     ng-click="openFilterSelection($event)">
-          <md-icon md-svg-icon = "img/icons/filter.svg"></md-icon>
+          <md-icon md-svg-icon = "core2:filter"></md-icon>
           Filter
         </md-button>
         
@@ -40,14 +40,15 @@
     </span>
     
   </md-subheader>
+
   
   <md-list>
 
     <md-list-item>
-      <p>Showing <b>{{ filteredJobs.length }}</b> jobs in <b>{{ currentPlace.name }}</b></p>
+      <p>Showing <b>{{ selectedFilters.totalJobs }}</b> jobs in <b>{{ currentPlace.name }}</b></p>
     </md-list-item>
 
-    <md-list-item ng-repeat = "job in jobs.list | applySelectedFilters | orderBy: selectedSort as filteredJobs">
+    <md-list-item ng-repeat = "job in jobs.list | applySelectedFilters | orderBy: selectedSort">
       
       <md-card data-job-id = "{{ job.objectId }}" ng-class-odd="'odd-card'" flex>
         
@@ -55,7 +56,7 @@
           <md-card-header-text layout = "row">
             
             <span class="md-subhead expiring-job" ng-if="job.endDate - today <= 604800000">
-              <md-icon md-svg-icon="/img/icons/expiring.svg"></md-icon>
+              <md-icon md-svg-icon="expiring"></md-icon>
               <b>Expires {{ job.endDate | date: 'EEEE, MMM d' }}!</b> &nbsp;
             </span>
             
@@ -64,7 +65,7 @@
             <span class="md-subhead new-job" ng-if="today - job.createdDate <= 604800000"><b>NEW!</b> &nbsp;</span>
             <span class="md-subhead">Posted {{ job.createdDate | date: 'mediumDate' }}</span>
             <span class="md-subhead" ng-if="job.endDate - today > 604800000">&nbsp;|&nbsp;Expires {{ job.endDate | date: 'mediumDate' }}</span>
-            
+
           </md-card-header-text>
 
 
@@ -77,28 +78,28 @@
             
             <span class="md-subhead job-salary">
               <md-icon  aria-label="salary icon" 
-                        md-svg-icon="img/icons/salary.svg">
+                        md-svg-icon="core2:salary">
               </md-icon>
               {{ job.jobType }}: {{ job.minSalary | currency }}-{{ job.maxSalary | currency }} {{ job.interval }}
             </span>
             
             <span class="md-subhead job-location" ng-show="job.distance">
               <md-icon  aria-label="distance icon" 
-                        md-svg-icon="img/icons/location.svg">
+                        md-svg-icon="core2:location">
               </md-icon>
               {{ job.distance | number: 2 }} Miles away
             </span>
 
             <span class="md-subhead job-category">
               <md-icon  aria-label="department icon" 
-                        md-svg-icon="img/icons/work.svg">
+                        md-svg-icon="core2:work">
               </md-icon>
               Department: {{ job.department }}
             </span>
 
             <span class="md-subhead job-category">
               <md-icon  aria-label="categories icon" 
-                        md-svg-icon="img/icons/categories.svg">
+                        md-svg-icon="categories">
               </md-icon>
               Categories: {{ job.categories.join(', ') }}
             </span>
@@ -117,7 +118,7 @@
                       ng-href="https://www.governmentjobs.com/careers/raleighnc/jobs/{{ job.id }}/{{ job.titleUrl }}"
                       class = "md-accent">
             <md-icon  aria-label="See Job Details" 
-                      md-svg-icon="img/icons/document.svg">
+                      md-svg-icon="document">
             </md-icon>
             Job Details
           </md-button>
@@ -125,7 +126,7 @@
                       ng-href="https://www.governmentjobs.com/careers/raleighnc/jobs/{{ job.id }}/{{ job.titleUrl }}/apply"
                       class = "md-accent apply-button">
             <md-icon  aria-label="Apply now" 
-                      md-svg-icon="img/icons/briefcase.svg">
+                      md-svg-icon="briefcase">
             </md-icon>
             Apply
           </md-button>
