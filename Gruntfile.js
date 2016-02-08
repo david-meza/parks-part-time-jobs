@@ -254,7 +254,7 @@ module.exports = function (grunt) {
         src: [
           '<%= config.dist %>/scripts/{,*/}*.js',
           '<%= config.dist %>/styles/{,*/}*.css',
-          '<%= config.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+          '<%= config.dist %>/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
           '<%= config.dist %>/styles/fonts/*'
         ]
       }
@@ -291,7 +291,7 @@ module.exports = function (grunt) {
           '<%= config.dist %>/styles'
         ],
         patterns: {
-          js: [[/(images\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, 'Replacing references to images']]
+          js: [[/(img\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, 'Replacing references to images']]
         }
       }
     },
@@ -327,7 +327,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= config.app %>/img',
-          src: '**/*.{png,jpg,jpeg,gif}',
+          src: '{,*/}*.{png,jpg,jpeg,gif}',
           dest: '<%= config.dist %>/img'
         }]
       }
@@ -404,8 +404,8 @@ module.exports = function (grunt) {
           dest: '<%= config.dist %>',
           src: [
             '*.{ico,png,txt}',
-            '*.html',
-            'images/**/*.{webp}',
+            '{index,404}.html',
+            'img/{,*/}*.{webp,svg}',
             'styles/fonts/**/*.*'
           ]
         }, {
@@ -433,8 +433,8 @@ module.exports = function (grunt) {
       ],
       dist: [
         'compass:dist',
-        'imagemin',
-        'svgmin'
+        // 'svgmin',
+        'imagemin'
       ]
     },
 
