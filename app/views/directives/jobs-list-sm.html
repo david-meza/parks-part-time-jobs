@@ -50,7 +50,7 @@
 
     <md-list-item ng-repeat = "job in jobs.list | applySelectedFilters | orderBy: selectedSort">
       
-      <md-card data-job-id = "{{ job.objectId }}" ng-class-odd="'odd-card'" flex>
+      <md-card data-job-id = "{{ ::job.objectId }}" ng-class-odd="'odd-card'" flex>
         
         <md-card-header class = "job-card-header">
           <md-card-header-text layout = "row">
@@ -74,13 +74,13 @@
         <md-card-title class = "job-card-title">
           <md-card-title-text>
             
-            <span class="md-headline job-title">{{ job.title }}</span>
+            <span class="md-headline job-title">{{ ::job.title }}</span>
             
             <span class="md-subhead job-salary">
               <md-icon  aria-label="salary icon" 
                         md-svg-icon="core2:salary">
               </md-icon>
-              {{ job.jobType }}: {{ job.minSalary | currency }}-{{ job.maxSalary | currency }} {{ job.interval }}
+              {{ ::job.jobType }}: {{ ::job.minSalary | currency }} - {{ ::job.maxSalary | currency }} {{ ::job.interval }}
             </span>
             
             <span class="md-subhead job-location" ng-show="job.distance">
@@ -101,7 +101,7 @@
               <md-icon  aria-label="categories icon" 
                         md-svg-icon="categories">
               </md-icon>
-              Categories: {{ job.categories.join(', ') }}
+              Categories: {{ ::job.categories.join(', ') }}
             </span>
 
           </md-card-title-text>
@@ -109,13 +109,13 @@
         
 
         <md-card-content>
-          <p ng-init="descriptionLimit = 135"> {{ job.description | limitTo: descriptionLimit }}<a ng-click="descriptionLimit = job.description.length" ng-show="descriptionLimit < job.description.length" class = "color-indigo">... More</a> </p>
+          <p ng-init="descriptionLimit = 135"> {{ ::job.description | limitTo: descriptionLimit }}<a ng-click="descriptionLimit = job.description.length" ng-show="descriptionLimit < job.description.length" class = "color-indigo">... More</a> </p>
         </md-card-content>
         
 
         <md-card-actions layout="row" layout-align="end center" class = "card-actions">
           <md-button  target = "_blank" 
-                      ng-href="https://www.governmentjobs.com/careers/raleighnc/jobs/{{ job.id }}/{{ job.titleUrl }}"
+                      ng-href="{{ ::job.detailsUrl }}"
                       class = "md-accent">
             <md-icon  aria-label="See Job Details" 
                       md-svg-icon="document">
@@ -123,7 +123,7 @@
             Job Details
           </md-button>
           <md-button  target = "_blank" 
-                      ng-href="https://www.governmentjobs.com/careers/raleighnc/jobs/{{ job.id }}/{{ job.titleUrl }}/apply"
+                      ng-href="{{ ::job.detailsUrl }}/apply"
                       class = "md-accent apply-button">
             <md-icon  aria-label="Apply now" 
                       md-svg-icon="briefcase">
@@ -133,14 +133,15 @@
         </md-card-actions>
 
 
-        <md-card-footer ng-show="jobs[job.id].length > 1">
+        <md-card-footer ng-if="jobs.otherLocations[job.objectId].length > 0">
           <span class = "footer-title"><b>Also available at:</b></span>
           <div class = "md-chips chips-wrapper md-readonly">
-            <div class = "md-chip background-default limit-text limit-width" ng-repeat="jobObj in jobs[job.id] | filter: { objectId: ('!' + job.objectId) }">
-              <a class="footer-chip" ng-click="centerToJob(jobObj)">{{ jobObj.location }}</a>
+            <div class = "md-chip background-default limit-text limit-width" ng-repeat="jobObj in jobs.otherLocations[job.objectId]">
+              <a class="footer-chip" ng-click="centerToJob(jobObj)">{{ ::jobObj.location }}</a>
             </div>
           </div>
         </md-card-footer>
+
       </md-card>
     </md-list-item>
 

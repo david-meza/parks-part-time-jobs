@@ -5,7 +5,7 @@
   angular.module('appServices').factory('jobsService', ['$http', '$q', '$timeout', 'jobsMapConfig',
     function ($http, $q, $timeout, jobsMapConfig) {
 
-    var jobs = { list: [], mappable: [], categories: {} };
+    var jobs = { list: [], mappable: [], categories: {}, otherLocations: {} };
 
     var today = new Date().valueOf();
 
@@ -97,7 +97,7 @@
     };
 
     var groupById = function (job) {
-      angular.isDefined(jobs[job.id]) ? jobs[job.id].push(job) : jobs[job.id] = [job];
+      return angular.isDefined(jobs[job.id]) ? jobs[job.id].push(job) : jobs[job.id] = [job];
     };
 
     var storeCategory = function (job) {
@@ -131,10 +131,24 @@
       }, jobs.list);
     };
 
+    // Pre-filter the other job locations to avoid making a call to | filter on the DOM
+    var calculateOtherLocations = function () {
+      angular.forEach( jobs.list, function (listedJob) {
+        jobs.otherLocations[listedJob.objectId] = [];
+        angular.forEach( jobs[listedJob.id], function (groupedJob) {
+          if (listedJob.objectId !== groupedJob.objectId) {
+            // We can't store this as a property of the job itself due to max stack reached error
+            jobs.otherLocations[listedJob.objectId].push(groupedJob);
+          }
+        });
+      });
+    };
+
     var readResponse = function(response) {
       if (response.status === 200) {
         var rawJobs = response.data.features;
         extractJobData(rawJobs);
+        calculateOtherLocations();
         return $q.resolve(response);
       } 
       console.log('Did not get the expected results', response);
