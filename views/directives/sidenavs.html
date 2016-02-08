@@ -13,12 +13,12 @@
 
       <md-list>
         <md-list-item ng-click = "hideList()">
-          <md-icon md-svg-icon="img/icons/map.svg" ng-cloak></md-icon>
+          <md-icon md-svg-icon="core2:map-view" ng-cloak></md-icon>
           <p> Map View </p>
         </md-list-item>
 
         <md-list-item ng-click = "showList()">
-          <md-icon md-svg-icon="img/icons/list-view.svg" ng-cloak></md-icon>
+          <md-icon md-svg-icon="core2:list-view" ng-cloak></md-icon>
           <p> List View </p>
         </md-list-item>
 
@@ -49,8 +49,8 @@
         </md-list-item>
       
         <md-list-item ng-click="navigateTo(setting.extraScreen, $event)" ng-repeat="setting in settings">
-          <md-icon md-svg-icon="{{setting.icon}}"></md-icon>
-          <p> {{ setting.name }} </p>
+          <md-icon md-svg-icon="{{ ::setting.icon}}"></md-icon>
+          <p> {{ ::setting.name }} </p>
           <md-icon md-svg-icon="{{setting.filtersOn}}"></md-icon>
         </md-list-item>
 
@@ -93,7 +93,7 @@
                         class = "list-item-with-radio" 
                         md-ink-ripple = "#FF0000"
                         ng-repeat="salary in salaryOptions">
-              <md-radio-button flex value = "{{salary}}"> {{ salary | currency }}+ hourly </md-radio-button>
+              <md-radio-button flex value="{{::salary}}"> {{ ::salary | currency }}+ hourly </md-radio-button>
           </md-list-item>
 
         </md-radio-group>
@@ -137,7 +137,7 @@
                         ng-click="applyFilter('distance', filters.distance)" 
                         class = "list-item-with-radio" 
                         md-ink-ripple = "#FF0000">
-              <md-radio-button flex value = "{{ distance }}"> Within {{ distance }} miles </md-radio-button>
+              <md-radio-button flex value="{{ ::distance }}"> Within {{ ::distance }} miles </md-radio-button>
           </md-list-item>
 
         </md-radio-group>
@@ -176,10 +176,10 @@
       <div ng-repeat="(catName, category) in categories">
         <md-checkbox  ng-checked="catExists(catName, filters.categories)" 
                       ng-click="catToggle(catName, filters.categories)" 
-                      aria-label = "{{ catName }}"
+                      aria-label = "{{ ::catName }}"
                       ng-model = "category.checked"
                       ng-change="applyFilter('categories', filters.categories)">
-          {{ catName }} ({{ category.jobCount }})
+          {{ ::catName }} ({{ category.jobCount }})
         </md-checkbox>
       </div>
 

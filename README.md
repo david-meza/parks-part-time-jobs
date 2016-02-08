@@ -1,6 +1,6 @@
 # Parks and Recreation Part Time Jobs
 
-Careers page for available part time opportunities in the parks and recreation department
+Careers page for available part time opportunities in the Raleigh Parks and Recreation department
 
 ## Live Demo
 
@@ -9,6 +9,8 @@ Careers page for available part time opportunities in the parks and recreation d
 
 ## Build & development
 
-To install bower dependencies run `bower install`. To compile and watch Sass files run `sass --watch styles:styles`
+The running of tasks for this application was automated using Grunt. 
 
-Optionally run `live-server` or `serve` (node modules) for preview.
+To produce a distributable/minified version of the app run `grunt build`. 
+
+To preview the application in development in a local live server run `grunt serve`
