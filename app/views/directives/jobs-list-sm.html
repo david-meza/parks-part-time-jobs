@@ -55,16 +55,16 @@
         <md-card-header class = "job-card-header">
           <md-card-header-text layout = "row">
             
-            <span class="md-subhead expiring-job" ng-if="job.endDate - today <= 604800000">
+            <span class="md-subhead expiring-job" ng-if="job.expiresSoon">
               <md-icon md-svg-icon="expiring"></md-icon>
-              <b>Expires {{ job.endDate | date: 'EEEE, MMM d' }}!</b> &nbsp;
+              <b>Expires {{ ::job.endDate | date: 'EEEE, MMM d' }}!</b> &nbsp;
             </span>
             
             <span flex></span>
             
-            <span class="md-subhead new-job" ng-if="today - job.createdDate <= 604800000"><b>NEW!</b> &nbsp;</span>
-            <span class="md-subhead">Posted {{ job.createdDate | date: 'mediumDate' }}</span>
-            <span class="md-subhead" ng-if="job.endDate - today > 604800000">&nbsp;|&nbsp;Expires {{ job.endDate | date: 'mediumDate' }}</span>
+            <span class="md-subhead new-job" ng-if="job.isNew"><b>NEW!</b> &nbsp;</span>
+            <span class="md-subhead">Posted {{ ::job.createdDate | date: 'mediumDate' }}</span>
+            <span class="md-subhead" ng-if="!job.expiresSoon">&nbsp;|&nbsp;Expires {{ ::job.endDate | date: 'mediumDate' }}</span>
 
           </md-card-header-text>
 
@@ -90,12 +90,12 @@
               {{ job.distance | number: 2 }} Miles away
             </span>
 
-            <span class="md-subhead job-category">
+            <!-- <span class="md-subhead job-category">
               <md-icon  aria-label="department icon" 
                         md-svg-icon="core2:work">
               </md-icon>
               Department: {{ job.department }}
-            </span>
+            </span> -->
 
             <span class="md-subhead job-category">
               <md-icon  aria-label="categories icon" 

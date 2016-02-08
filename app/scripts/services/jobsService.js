@@ -7,6 +7,8 @@
 
     var jobs = { list: [], mappable: [], categories: {} };
 
+    var today = new Date().valueOf();
+
     var getJobsFeed = function (query) {
       return $http({
         method: 'GET',
@@ -44,6 +46,12 @@
       var titleUrl = job.TITLE.replace(/\W+/ig, '-').toLowerCase();
       var minSalary = Number(job.MINIMUMSALARY) || 7.25;
       var maxSalary = Number(job.MAXIMUMSALARY) || undefined; // What should we do with null/0 values??
+      // String specifies it is GMT which is automatically localized when it is parsed
+      var pubDate = new Date(Date.parse(job.PUBDATE));
+      // 5 hour offset from UTC to EST = 18,000s or 18,000,000ms
+      var createdDate = new Date(Date.parse(job.ADVERTISEFROMDATEUTC) - 18000000);
+      // Handle 'Continous' cases with a valid date instead of NaN or Invalid Date obj
+      var endDate = new Date((Date.parse(job.ADVERTISETODATEUTC) - 18000000) || 'Dec 31 2020 23:59:59');
       titleUrl = titleUrl[titleUrl.length - 1] === '-' ? titleUrl.substring(0, titleUrl.length - 1) : titleUrl;
 
       return {
@@ -62,12 +70,11 @@
         minSalary: minSalary,
         maxSalary: maxSalary,
         interval: job.SALARYINTERVAL,
-        // String specifies it is GMT which is automatically localized when it is parsed
-        pubDate: new Date(Date.parse(job.PUBDATE)),
-        // 5 hour offset from UTC to EST = 18,000s or 18,000,000ms
-        createdDate: new Date(Date.parse(job.ADVERTISEFROMDATEUTC) - 18000000),
-        // Handle 'Continous' cases with a valid date instead of NaN or Invalid Date obj
-        endDate: new Date((Date.parse(job.ADVERTISETODATEUTC) - 18000000) || 'Dec 31 2020 23:59:59'),
+        pubDate: pubDate,
+        createdDate: createdDate,
+        endDate: endDate,
+        isNew: today - createdDate <= 604800000,
+        expiresSoon : endDate - today <= 604800000,
         link: job.LINK,
         detailsUrl: ('https://www.governmentjobs.com/careers/raleighnc/jobs/' + id + '/' + titleUrl),
         

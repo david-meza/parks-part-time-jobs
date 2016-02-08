@@ -9,8 +9,6 @@
 
       $scope.currentPlace = { name: 'Raleigh, NC' };
 
-      $scope.today = new Date().valueOf();
-
       $scope.jobs = jobsService.jobs;
 
       $scope.selectedFilters = jobsFilterService.filters;
