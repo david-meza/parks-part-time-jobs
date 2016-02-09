@@ -10,7 +10,9 @@
 
     gMapsApi.then( function (maps) {
       mapsObj = maps;
-      map.searchbox.options.bounds = new mapsObj.LatLngBounds(new mapsObj.LatLng(35.437814,-78.984583), new mapsObj.LatLng(36.113561,-78.336890));
+      map.options.zoomControlOptions.position = maps.ControlPosition.LEFT_BOTTOM;
+      map.options.zoomControlOptions.style = maps.ZoomControlStyle.SMALL;
+      map.options.streetViewControlOptions.position = maps.ControlPosition.LEFT_BOTTOM;
     });
 
     // Temporary coordinates while Geoloc gets us the user's coords
@@ -31,6 +33,7 @@
       pan: false,
       location: location,
       control: {},
+      events: {},
       bounds: {
         northeast: {
           longitude: -78.336890,
@@ -78,26 +81,6 @@
       },
     };
 
-    // Get our map instance when it loads
-    map.events = {
-      tilesloaded: function () {
-        map.mapInstance = map.control.getGMap();
-      }
-    };
-
-    // Search box
-    map.searchbox = {
-      template: 'views/partials/search-box.html',
-      position: 'TOP_RIGHT',
-      options: {},
-      events: {
-        places_changed: function (searchBox) {
-          var loc = searchBox.getPlaces()[0].geometry.location;
-          moveToPos(loc.lat(), loc.lng());
-  	    }
-  	  }
-    };
-
     var updateUserCoords = function (lat, lon) {
       // Update the location obj with the accurate user coords
       map.location.coords.latitude = lat;
@@ -112,6 +95,7 @@
         .textContent(message)
         .action('ok')
         .highlightAction(false)
+        .hideDelay(4000)
         .position('top right');
       $mdToast.show(toast);
     };
@@ -138,12 +122,6 @@
     };
 
     geoLocate();
-
-    var moveToPos = function (lat, lon) {
-      map.location.coords.latitude = lat;
-      map.location.coords.longitude = lon;
-      map.zoom = 16;
-    };
 
     return {
       map: map,

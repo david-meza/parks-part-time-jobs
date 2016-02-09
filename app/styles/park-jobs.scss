@@ -146,6 +146,10 @@ md-card {
     border: 2px solid rgba(103,58,183,0.4);
   }
 
+  &:focus {
+    outline: none;
+  }
+
   .job-card-header {
     position: relative;
 

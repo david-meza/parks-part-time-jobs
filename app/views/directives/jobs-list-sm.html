@@ -50,7 +50,7 @@
 
     <md-list-item ng-repeat = "job in jobs.list | applySelectedFilters | orderBy: selectedSort">
       
-      <md-card data-job-id = "{{ ::job.objectId }}" ng-class-odd="'odd-card'" flex>
+      <md-card data-job-id = "{{ ::job.objectId }}" ng-class-odd="'odd-card'" ng-click="centerToJob(job)" flex>
         
         <md-card-header class = "job-card-header">
           <md-card-header-text layout = "row">
@@ -67,8 +67,6 @@
             <span class="md-subhead" ng-if="!job.expiresSoon">&nbsp;|&nbsp;Expires {{ ::job.endDate | date: 'mediumDate' }}</span>
 
           </md-card-header-text>
-
-
         </md-card-header>
 
         <md-card-title class = "job-card-title">

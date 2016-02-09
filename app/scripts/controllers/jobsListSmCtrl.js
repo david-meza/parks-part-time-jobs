@@ -2,8 +2,8 @@
 
   'use strict';
 
-  angular.module('appControllers').controller('jobsListSmCtrl', ['$scope', '$mdDialog', '$mdSidenav', 'mapService', 'jobsService', '$timeout', 'jobsFilterService',
-    function ($scope, $mdDialog, $mdSidenav, mapService, jobsService, $timeout, jobsFilterService) {
+  angular.module('appControllers').controller('jobsListSmCtrl', ['$scope', '$mdDialog', '$mdSidenav', 'mapService', 'jobsService', '$timeout', 'jobsFilterService', '$mdToast',
+    function ($scope, $mdDialog, $mdSidenav, mapService, jobsService, $timeout, jobsFilterService, $mdToast) {
 
       $scope.map = mapService.map;
 
@@ -14,6 +14,13 @@
       $scope.selectedFilters = jobsFilterService.filters;
 
       $scope.centerToJob = function (job) {
+        if (!job.latitude) {
+          $mdToast.show( $mdToast.simple()
+            .textContent('Oops! This job does not have a set location.')
+            .position('top right')
+            .hideDelay(3000) );
+          return; 
+        }
         $scope.map.zoom = 13;
         $scope.map.location.coords.latitude = job.latitude;
         $scope.map.location.coords.longitude = job.longitude;
