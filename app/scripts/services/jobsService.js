@@ -81,8 +81,9 @@
         icon: jobsMapConfig.jobMarkersConfig.icon,
         markerClick: jobsMapConfig.markerClick,
         options: {
-          title: job.TITLE,
-          labelAnchor: '0 0',
+          labelContent: job.TITLE,
+          labelClass: 'marker-label',
+          labelVisible: false,
           animation: 2
         }
       };

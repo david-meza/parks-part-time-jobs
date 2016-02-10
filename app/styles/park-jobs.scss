@@ -133,6 +133,15 @@ img, h1, h2, h3, h4, h5, h6 {
   color: rgba(23, 116, 139, 0.9);
 }
 
+.marker-label {
+  background-color: #fff;
+  color: rgba(0,0,0,0.8);
+  font-size: 13px;
+  font-family: Roboto, Helvetica, Verdana, sans-serif;
+  padding: 5px;
+  @include box-shadow( 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12) );  
+}
+
 md-card {
 
   @include transition( all 0.4s cubic-bezier(0.345, 0, 0.25, 1) );
