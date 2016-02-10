@@ -21,7 +21,7 @@
       coords: {},
       control: {},
       options: {
-        pixelOffset: { width: 0, height: -60 }
+        pixelOffset: { width: 0, height: -75 }
       },
       closeclick: _closeClick,
       templateUrl: 'views/partials/job-window.html',
