@@ -4,8 +4,7 @@ Careers page for available part time opportunities in the Raleigh Parks and Recr
 
 ## Live Demo
 
-* Surge [Open](https://park-jobs.surge.sh)
-* Github Pages [Open](https://david-meza.github.io/parks-part-time-jobs)
+* Surge: [Open](https://park-jobs.surge.sh)
 
 ## Build & development
 
