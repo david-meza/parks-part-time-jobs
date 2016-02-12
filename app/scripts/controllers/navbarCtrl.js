@@ -2,13 +2,15 @@
 
   'use strict';
 
-  angular.module('appControllers').controller('navbarCtrl', ['$scope', '$rootScope', 'deviceService', '$mdSidenav', 'jobsFilterService', '$timeout',
-  	function ($scope, $rootScope, deviceService, $mdSidenav, jobsFilterService, $timeout) {
+  angular.module('appControllers').controller('navbarCtrl', ['$scope', '$rootScope', 'deviceService', '$mdSidenav', 'jobsFilterService', '$timeout', '$interval',
+  	function ($scope, $rootScope, deviceService, $mdSidenav, jobsFilterService, $timeout, $interval) {
       
       $scope.title = "Map My Park Job";
       
       // Start the circular progress icon
       $scope.progress = 'indeterminate';
+
+      $scope.searchProgress = 0;
 
       $scope.activeTab = deviceService.activeTab;
       $scope.isMobile = deviceService.isMobile;
@@ -19,12 +21,20 @@
 
       var searchPromise;
 
+      var progressInterval = $interval( function () {
+        $scope.searchProgress += 15;
+      }, 100, 0, true);
+
       $scope.$watch('filters.searchText', function (newVal) {
         // Debounce updating the searchText model in the service
         $timeout.cancel(searchPromise);
+        $scope.searchProgress = 0;
+
         searchPromise = $timeout( function () {
           jobsFilterService.filters.searchText = newVal; 
-        }, 500);
+          // $interval.cancel(progressInterval);
+          $scope.searchProgress = 100;
+        }, 1000);
       });
 
 
@@ -39,6 +49,14 @@
 
       $rootScope.$on('loading:finish', function(){
       	$scope.progress = undefined;
+      });
+
+      $scope.$on('$destroy', function() {
+        // Make sure that the interval is destroyed too
+        if (angular.isDefined(stop)) {
+          $interval.cancel(progressInterval);
+          progressInterval = undefined;
+        }
       });
 
   }]);

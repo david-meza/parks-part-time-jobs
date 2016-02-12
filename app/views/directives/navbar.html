@@ -15,6 +15,7 @@
         <md-icon md-svg-icon="search" aria-label = "Search Job"></md-icon>
       </md-button>
       <input id="search-box" ng-model="filters.searchText" />
+      <md-progress-linear md-mode="determinate" value="{{ searchProgress }}"></md-progress-linear>
     </div>
     <!-- <md-autocomplete  md-selected-item="selectedJob"
                       md-search-text="searchText"

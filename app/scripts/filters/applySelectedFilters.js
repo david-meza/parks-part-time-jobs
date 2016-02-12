@@ -42,8 +42,8 @@
     var filtered = [];
 
     var promise;
-    
-    return function (jobs) {
+
+    function actual(jobs) {
 
       if (promise) { return filtered; }
 
@@ -51,7 +51,7 @@
         // Empty filtered array
         filtered.splice(0, filtered.length);
         // Add jobs that meet the filtering criteria
-      	angular.forEach(jobs, function (job) {
+        angular.forEach(jobs, function (job) {
           calculateDistance(job); 
           if ( meetFilterCriteria(job) ) { this.push(job); }
         }, filtered);
@@ -67,6 +67,8 @@
       
       return filtered;
     };
+
+    return actual;
 
   }]);
 
