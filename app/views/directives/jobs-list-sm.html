@@ -48,7 +48,7 @@
       <p>Showing <b>{{ selectedFilters.totalJobs }} {{ selectedFilters.searchText }}</b> jobs in <b>{{ currentPlace.name }}</b></p>
     </md-list-item>
 
-    <md-list-item ng-repeat = "job in jobs.list | filter: selectedFilters.searchText | applySelectedFilters | orderBy: selectedSort">
+    <md-list-item ng-repeat = "job in jobs.list | applySelectedFilters | orderBy: selectedSort">
       
       <md-card  data-job-id = "{{ ::job.objectId }}" 
                 ng-class-odd="'odd-card'" 

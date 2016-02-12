@@ -14,10 +14,18 @@
       });
     };
 
+    var jobHas = function (job, searchText) {
+      var matcher = new RegExp(searchText, 'i');
+      return  matcher.test(job.title) || matcher.test(job.description) ||
+              matcher.test(job.categories.join(', ')) || matcher.test(job.jobType);
+    };
+
     var meetFilterCriteria = function (job) {
+      console.log(selectedFilters.searchText);
       return job.minSalary >= Number(selectedFilters.salary) && 
              ( !job.distance || job.distance <= Number(selectedFilters.distance) ) && 
-             ( selectedFilters.categories.length === 0 || matchOneElement(job.categories, selectedFilters.categories) );
+             ( selectedFilters.categories.length === 0 || matchOneElement(job.categories, selectedFilters.categories)) &&
+             ( angular.isUndefined(selectedFilters.searchText) || jobHas(job, selectedFilters.searchText) );
     };
 
     // Calculate distance from marker to user
@@ -55,9 +63,8 @@
 
       currentReq = promise;
       
-      promise.then( function(r) {
-        console.log('completed timeout', r);
-        $timeout.cancel(currentReq);
+      promise.then( function() {
+        // $timeout.cancel(currentReq);
         currentReq = undefined;
       });
       
