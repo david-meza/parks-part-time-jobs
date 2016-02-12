@@ -45,31 +45,33 @@
   <md-list>
 
     <md-list-item>
-      <p>Showing <b>{{ selectedFilters.totalJobs }}</b> jobs in <b>{{ currentPlace.name }}</b></p>
+      <p>Showing <b>{{ selectedFilters.totalJobs }} {{ selectedFilters.searchText }}</b> jobs in <b>{{ currentPlace.name }}</b></p>
     </md-list-item>
 
-    <md-list-item ng-repeat = "job in jobs.list | applySelectedFilters | orderBy: selectedSort">
+    <md-list-item ng-repeat = "job in jobs.list | filter: selectedFilters.searchText | applySelectedFilters | orderBy: selectedSort">
       
-      <md-card data-job-id = "{{ ::job.objectId }}" ng-class-odd="'odd-card'" ng-click="centerToJob(job)" flex>
+      <md-card  data-job-id = "{{ ::job.objectId }}" 
+                ng-class-odd="'odd-card'" 
+                flex >
         
         <md-card-header class = "job-card-header">
           <md-card-header-text layout = "row">
             
-            <span class="md-subhead expiring-job" ng-if="job.expiresSoon">
+            <span class="md-subhead expiring-job" ng-if="::job.expiresSoon">
               <md-icon md-svg-icon="expiring"></md-icon>
               <b>Expires {{ ::job.endDate | date: 'EEEE, MMM d' }}!</b> &nbsp;
             </span>
             
             <span flex></span>
             
-            <span class="md-subhead new-job" ng-if="job.isNew"><b>NEW!</b> &nbsp;</span>
+            <span class="md-subhead new-job" ng-if="::job.isNew"><b>NEW!</b> &nbsp;</span>
             <span class="md-subhead">Posted {{ ::job.createdDate | date: 'mediumDate' }}</span>
-            <span class="md-subhead" ng-if="!job.expiresSoon">&nbsp;|&nbsp;Expires {{ ::job.endDate | date: 'mediumDate' }}</span>
+            <span class="md-subhead" ng-if="::!job.expiresSoon">&nbsp;|&nbsp;Expires {{ ::job.endDate | date: 'mediumDate' }}</span>
 
           </md-card-header-text>
         </md-card-header>
 
-        <md-card-title class = "job-card-title">
+        <md-card-title ng-click="::centerToJob(job)" class = "job-card-title">
           <md-card-title-text>
             
             <span class="md-headline job-title">{{ ::job.title }}</span>
@@ -107,7 +109,7 @@
         
 
         <md-card-content>
-          <p ng-init="descriptionLimit = 135"> {{ ::job.description | limitTo: descriptionLimit }}<a ng-click="descriptionLimit = job.description.length" ng-show="descriptionLimit < job.description.length" class = "color-indigo">... More</a> </p>
+          <p ng-init="descriptionLimit = 135"> {{ job.description | limitTo: descriptionLimit }}<a ng-click="descriptionLimit = job.description.length" ng-show="descriptionLimit < job.description.length" class = "color-indigo">... More</a> </p>
         </md-card-content>
         
 
@@ -131,11 +133,11 @@
         </md-card-actions>
 
 
-        <md-card-footer ng-if="jobs.otherLocations[job.objectId].length > 0">
+        <md-card-footer ng-if="::jobs.otherLocations[job.objectId].length > 0">
           <span class = "footer-title"><b>Also available at:</b></span>
           <div class = "md-chips chips-wrapper md-readonly">
             <div class = "md-chip background-default limit-text limit-width" ng-repeat="jobObj in jobs.otherLocations[job.objectId]">
-              <a class="footer-chip" ng-click="centerToJob(jobObj)">{{ ::jobObj.location }}</a>
+              <a class="footer-chip" ng-click="::centerToJob(jobObj)">{{ ::jobObj.location }}</a>
             </div>
           </div>
         </md-card-footer>

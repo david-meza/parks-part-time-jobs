@@ -177,6 +177,12 @@ md-card {
   }
 
   .job-card-title {
+
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
     
     .job-title {
       font-size: 18px;
@@ -425,42 +431,44 @@ th {
 }
 
 #searchbox-container {
-  position: absolute;
+  position: relative;
   z-index: 11;
-  right: 8em;
-  top: 5px;
   @include box-shadow( 0 2px 5px 0 rgba(0, 0, 0, 0.26) );
+
+  .search-icon-container, input#search-box {
+    width: 40px;
+    height: 40px;
+  }
 
   .search-icon-container {
     position: absolute;
     min-width: 30px;
     min-height: 30px;
-    width: 40px;
-    height: 40px;
     padding: 0;
     margin: 0;
     z-index: 12;
-    background-color: #fff;
-    border: 2px solid #669834;
     border-radius: 0;
+    background-color: rgba(255,255,255,0.9);
   }
 
   input#search-box {
     position: relative;
-    width: 40px;
-    height: 40px;
     opacity: 0;
     z-index: 13;
     border: 0;
+    padding: 1px 5px;
+    font-size: 16px;
     cursor: pointer;
+    background-color: rgb(255,255,255);
     @include transition( all .25s cubic-bezier(0.345, 0, 0.25, 1) );
 
     &:focus {
       cursor: text;
-      width: 250px;
+      width: 200px;
       opacity: 1;
       outline: none;
-      border: 2px solid #669834;
+      border: 2px solid rgba(255,255,255,0.5);
+      @include box-shadow( 0 2px 8px 0 rgba(0, 0, 0, 0.3) );
     }
   }
 }

@@ -9,7 +9,8 @@
       salary: 0, // $0 or more
       distance: 9999, // 9999 miles
       categories: [],
-      totalJobs: undefined
+      totalJobs: undefined,
+      searchText: undefined
     };
 
     return {

@@ -2,8 +2,8 @@
 
   'use strict';
 
-  angular.module('appControllers').controller('navbarCtrl', ['$scope', '$rootScope', 'deviceService', '$mdSidenav',
-  	function ($scope, $rootScope, deviceService, $mdSidenav) {
+  angular.module('appControllers').controller('navbarCtrl', ['$scope', '$rootScope', 'deviceService', '$mdSidenav', 'jobsFilterService',
+  	function ($scope, $rootScope, deviceService, $mdSidenav, jobsFilterService) {
       
       $scope.title = "Map My Park Job";
       
@@ -12,6 +12,8 @@
 
       $scope.activeTab = deviceService.activeTab;
       $scope.isMobile = deviceService.isMobile;
+
+      $scope.filters = jobsFilterService.filters;
 
 
       $scope.toggleSidenav = function () {
