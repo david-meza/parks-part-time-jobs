@@ -15,13 +15,14 @@
     };
 
     var jobHas = function (job, searchText) {
-      var matcher = new RegExp(searchText, 'i');
+      // Clean up the string by removing special chars (handles invalid regex syntax errors).
+      var desired = searchText.replace(/[^\w\s]/gi, '');
+      var matcher = new RegExp(desired, 'i');
       return  matcher.test(job.title) || matcher.test(job.description) ||
               matcher.test(job.categories.join(', ')) || matcher.test(job.jobType);
     };
 
     var meetFilterCriteria = function (job) {
-      console.log(selectedFilters.searchText);
       return job.minSalary >= Number(selectedFilters.salary) && 
              ( !job.distance || job.distance <= Number(selectedFilters.distance) ) && 
              ( selectedFilters.categories.length === 0 || matchOneElement(job.categories, selectedFilters.categories)) &&
@@ -40,13 +41,11 @@
 
     var filtered = [];
 
-    var currentReq;
+    var promise;
     
     return function (jobs) {
 
-      console.log('running the filter...');
-
-      if (currentReq) { return filtered; }
+      if (promise) { return filtered; }
 
       var promise = $timeout( function () {
         // Empty filtered array
@@ -60,12 +59,10 @@
         selectedFilters.totalJobs = filtered.length;
         return filtered;
       }, 2000);
-
-      currentReq = promise;
       
       promise.then( function() {
-        // $timeout.cancel(currentReq);
-        currentReq = undefined;
+        // $timeout.cancel(promise);
+        promise = undefined;
       });
       
       return filtered;
