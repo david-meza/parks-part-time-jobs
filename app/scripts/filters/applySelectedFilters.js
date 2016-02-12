@@ -2,8 +2,8 @@
 
   'use strict';
 
-  angular.module('appFilters').filter('applySelectedFilters', ['jobsFilterService', 'mapService', 
-    function(jobsFilterService, mapService) {
+  angular.module('appFilters').filter('applySelectedFilters', ['jobsFilterService', 'mapService', '$timeout',
+    function(jobsFilterService, mapService, $timeout) {
     
     var selectedFilters = jobsFilterService.filters;
 
@@ -29,25 +29,38 @@
       var ydist = Math.abs(userLoc.latitude - job.latitude);
       job.distance = Math.sqrt( Math.pow(xdist, 2) + Math.pow(ydist, 2) ) * 80;
     };
+
+    var filtered = [];
+
+    var currentReq;
     
-    return function(jobs) {
+    return function (jobs) {
 
-      var filtered = [];
-      // Add jobs that meet the filtering criteria
-    	angular.forEach(jobs, function (job) {
-        
-        calculateDistance(job); 
-        if ( meetFilterCriteria(job) ) { this.push(job); }
-        // if ( meetFilterCriteria(job) ) { 
-        //   this.push(job);
-        //   job.icon = '/img/icons/job-marker.svg';
-        // } else {
-        //   job.icon = '/img/icons/job-marker-filtered.svg';
-        // }
+      console.log('running the filter...');
+
+      if (currentReq) { return filtered; }
+
+      var promise = $timeout( function () {
+        // Empty filtered array
+        filtered.splice(0, filtered.length);
+        // Add jobs that meet the filtering criteria
+      	angular.forEach(jobs, function (job) {
+          calculateDistance(job); 
+          if ( meetFilterCriteria(job) ) { this.push(job); }
+        }, filtered);
+        // Keep track of the total amount of jobs
+        selectedFilters.totalJobs = filtered.length;
+        return filtered;
+      }, 2000);
+
+      currentReq = promise;
       
-      }, filtered);
-
-      selectedFilters.totalJobs = filtered.length;
+      promise.then( function(r) {
+        console.log('completed timeout', r);
+        $timeout.cancel(currentReq);
+        currentReq = undefined;
+      });
+      
       return filtered;
     };
 
