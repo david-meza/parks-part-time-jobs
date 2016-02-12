@@ -20,19 +20,32 @@
       };
 
       var searchPromise;
+      var progressInterval;
 
-      var progressInterval = $interval( function () {
-        $scope.searchProgress += 15;
-      }, 100, 0, true);
+      var startSearch = function () {
+        if (!angular.isDefined(progressInterval)) {
+          progressInterval = $interval( function () {
+            $scope.searchProgress += 15;
+          }, 100, 0, true);
+        }
+      };
+
+      var stopSearch = function () {
+        if (angular.isDefined(progressInterval)) {
+          $interval.cancel(progressInterval);
+          progressInterval = undefined;
+        }
+      };
 
       $scope.$watch('filters.searchText', function (newVal) {
         // Debounce updating the searchText model in the service
         $timeout.cancel(searchPromise);
         $scope.searchProgress = 0;
+        startSearch();
 
         searchPromise = $timeout( function () {
           jobsFilterService.filters.searchText = newVal; 
-          // $interval.cancel(progressInterval);
+          stopSearch;
           $scope.searchProgress = 100;
         }, 1000);
       });
@@ -53,10 +66,7 @@
 
       $scope.$on('$destroy', function() {
         // Make sure that the interval is destroyed too
-        if (angular.isDefined(stop)) {
-          $interval.cancel(progressInterval);
-          progressInterval = undefined;
-        }
+        stopSearch
       });
 
   }]);
