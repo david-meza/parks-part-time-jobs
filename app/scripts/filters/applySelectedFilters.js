@@ -14,10 +14,19 @@
       });
     };
 
+    var jobHas = function (job, searchText) {
+      // Clean up the string by removing special chars (handles invalid regex syntax errors).
+      var desired = searchText.replace(/[^\w\s]/gi, '');
+      var matcher = new RegExp(desired, 'i');
+      return  matcher.test(job.title) || matcher.test(job.description) ||
+              matcher.test(job.categories.join(', ')) || matcher.test(job.jobType);
+    };
+
     var meetFilterCriteria = function (job) {
       return job.minSalary >= Number(selectedFilters.salary) && 
              ( !job.distance || job.distance <= Number(selectedFilters.distance) ) && 
-             ( selectedFilters.categories.length === 0 || matchOneElement(job.categories, selectedFilters.categories) );
+             ( selectedFilters.categories.length === 0 || matchOneElement(job.categories, selectedFilters.categories)) &&
+             ( angular.isUndefined(selectedFilters.searchText) || jobHas(job, selectedFilters.searchText) );
     };
 
     // Calculate distance from marker to user
@@ -32,19 +41,17 @@
 
     var filtered = [];
 
-    var currentReq;
-    
-    return function (jobs) {
+    var promise;
 
-      console.log('running the filter...');
+    function actual(jobs) {
 
-      if (currentReq) { return filtered; }
+      if (promise) { return filtered; }
 
       var promise = $timeout( function () {
         // Empty filtered array
         filtered.splice(0, filtered.length);
         // Add jobs that meet the filtering criteria
-      	angular.forEach(jobs, function (job) {
+        angular.forEach(jobs, function (job) {
           calculateDistance(job); 
           if ( meetFilterCriteria(job) ) { this.push(job); }
         }, filtered);
@@ -52,17 +59,16 @@
         selectedFilters.totalJobs = filtered.length;
         return filtered;
       }, 2000);
-
-      currentReq = promise;
       
-      promise.then( function(r) {
-        console.log('completed timeout', r);
-        $timeout.cancel(currentReq);
-        currentReq = undefined;
+      promise.then( function() {
+        // $timeout.cancel(promise);
+        promise = undefined;
       });
       
       return filtered;
     };
+
+    return actual;
 
   }]);
 

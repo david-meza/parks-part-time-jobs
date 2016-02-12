@@ -7,7 +7,7 @@
     
     <a flex alt="Parks and Recreation Logo" class = "logo" href = "https://parks.raleighnc.gov" target="_blank"></a>
     
-    <h1 flex>{{ ::title }}</h1>
+    <h1 flex class="limit-text toolbar-title">{{ ::title }}</h1>
 
     <!-- Job Search filter input -->
     <div id="searchbox-container">
@@ -15,6 +15,7 @@
         <md-icon md-svg-icon="search" aria-label = "Search Job"></md-icon>
       </md-button>
       <input id="search-box" ng-model="filters.searchText" />
+      <md-progress-linear md-mode="determinate" value="{{ searchProgress }}"></md-progress-linear>
     </div>
     <!-- <md-autocomplete  md-selected-item="selectedJob"
                       md-search-text="searchText"
