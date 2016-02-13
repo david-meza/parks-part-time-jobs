@@ -45,7 +45,7 @@
 
         searchPromise = $timeout( function () {
           jobsFilterService.filters.searchText = newVal; 
-          stopSearch;
+          stopSearch();
           $scope.searchProgress = 100;
         }, 1000);
       });
@@ -66,7 +66,7 @@
 
       $scope.$on('$destroy', function() {
         // Make sure that the interval is destroyed too
-        stopSearch
+        stopSearch();
       });
 
   }]);
