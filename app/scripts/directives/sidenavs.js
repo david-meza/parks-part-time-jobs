@@ -94,7 +94,11 @@
 
         $scope.catToggle = function (name, list) {
           var idx = list.indexOf(name);
-          idx > -1 ? list.splice(idx, 1) : list.push(name);
+          if (idx > -1) {
+            list.splice(idx, 1);
+          } else {
+            list.push(name);
+          }
         };
 
 

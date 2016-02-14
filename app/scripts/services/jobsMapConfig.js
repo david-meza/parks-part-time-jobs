@@ -32,12 +32,12 @@
       shallowWatch: false,
       fitToMap: false,
       markerEvents: {
-        mouseover: function (gMarker, eventName, model, args) {
+        mouseover: function (gMarker) {
           gMarker.setIcon('/img/icons/job-marker-hovered.svg');
           gMarker.labelVisible = true;
           gMarker.label.setVisible();
         },
-        mouseout: function (gMarker, eventName, model, args) {
+        mouseout: function (gMarker) {
           gMarker.setIcon('/img/icons/job-marker.svg');
           gMarker.labelVisible = false;
           gMarker.label.setVisible();

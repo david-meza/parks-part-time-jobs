@@ -5,7 +5,7 @@
   angular.module('appControllers').controller('navbarCtrl', ['$scope', '$rootScope', 'deviceService', '$mdSidenav', 'jobsFilterService', '$timeout', '$interval',
   	function ($scope, $rootScope, deviceService, $mdSidenav, jobsFilterService, $timeout, $interval) {
       
-      $scope.title = "Map My Park Job";
+      $scope.title = 'Map My Park Job';
       
       // Start the circular progress icon
       $scope.progress = 'indeterminate';

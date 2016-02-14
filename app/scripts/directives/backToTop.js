@@ -14,7 +14,11 @@
         var container = element.parent();
         
         container.on('scroll', function () {
-          this.scrollTop >= 50 ? element.addClass('bring-to-screen') : element.removeClass('bring-to-screen');
+          if (this.scrollTop >= 50) {
+            element.addClass('bring-to-screen');
+          } else {
+            element.removeClass('bring-to-screen');
+          }
         });
 
         scope.scrollToTop = function () {
