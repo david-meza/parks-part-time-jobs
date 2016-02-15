@@ -142,10 +142,16 @@ img, h1, h2, h3, h4, h5, h6 {
   @include box-shadow( 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12) );  
 }
 
-md-card {
+.md-card {
 
+  box-sizing: border-box;
+  margin: 8px;
+  @include display-flex;
+  @include flex-direction( column );
+  @include box-shadow( 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12) );
   @include transition( all 0.4s cubic-bezier(0.345, 0, 0.25, 1) );
 
+  
   &:hover, &.selected {
     @include box-shadow( 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12) );
     @include transform( translateY(-1px) );
@@ -159,25 +165,44 @@ md-card {
     outline: none;
   }
 
+  .md-card-header {
+    @include display-flex;
+    @include flex-direction( row );
+    color: rgba(0,0,0,0.87);
+
+    .md-card-header-text {
+      @include display-flex;
+      flex: 1;
+
+      .md-subhead {
+        font-size: 14px;
+        color: rgba(0,0,0,0.54);
+      }
+    }
+  }
+
   .job-card-header {
     position: relative;
+    padding: 0 4px;
 
-    .md-subhead {
-      font-size: 12px;
-    }
-    
-    .md-subhead.new-job {
-      color: $success;
-    }
+    .md-card-header-text {
+      .md-subhead {
+        font-size: 12px;
+      }
+      
+      .md-subhead.new-job {
+        color: $success;
+      }
 
-    .md-subhead.expiring-job {
-      color: $alert;
-      font-size: 14px;
+      .md-subhead.expiring-job {
+        color: $alert;
+        font-size: 14px;
+      }
     }
   }
 
   .job-card-title {
-
+    padding: 8px 16px 16px;
     cursor: pointer;
 
     &:focus {
@@ -186,9 +211,6 @@ md-card {
     
     .job-title {
       font-size: 18px;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
       font-weight: 300;
       line-height: 1.4em;
     }
@@ -226,7 +248,20 @@ md-card {
     }
   }
 
-  md-card-footer {
+  .md-card-content {
+    padding: 0 16px 10px;
+    display: block;
+
+    p:first-child {
+      margin-top: 0;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .md-card-footer {
     .footer-title {
       display: block;
       font-size: 15px;
@@ -280,14 +315,6 @@ md-card {
   }
 }
 
-.job-card-header {
-  padding: 0 4px;
-}
-
-.job-card-title {
-  padding: 8px 16px 16px;
-}
-
 .list-item-with-radio {
   button.md-no-style {
     padding: 0 0;
@@ -317,14 +344,14 @@ md-card {
   bottom: 10px;
   z-index: 21;
 
-  @include transform( translateY(100px) );
-  @include transition( all 0.4s cubic-bezier(0.345, 0, 0.25, 1) );
+  @include transform( translateY(100px) scale(0,0) );
+  @include transition( all 0.5s cubic-bezier(0.345, 0, 0.25, 1) );
 
   opacity: 0;
   
   &.bring-to-screen{
     opacity: 1;
-    @include transform(translateY(0));
+    @include transform( translateY(0) scale(1,1) );
   }
 }
 

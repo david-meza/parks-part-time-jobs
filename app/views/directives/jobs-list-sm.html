@@ -50,15 +50,16 @@
 
     <md-list-item ng-repeat = "job in jobs.list | applySelectedFilters | orderBy: selectedSort">
       
-      <md-card  data-job-id = "{{ ::job.objectId }}" 
-                ng-class-odd="'odd-card'" 
-                flex >
+      <div  data-job-id = "{{ ::job.objectId }}" 
+            class="md-card" 
+            ng-class-odd="'odd-card'" 
+            flex >
         
-        <md-card-header class = "job-card-header">
-          <md-card-header-text layout = "row">
+        <div class = "job-card-header md-card-header">
+          <div class="md-card-header-text layout-row">
             
             <span class="md-subhead expiring-job" ng-if="::job.expiresSoon">
-              <md-icon md-svg-icon="expiring"></md-icon>
+              <md-icon md-svg-icon="expiring" aria-label="expiration alert icon"></md-icon>
               <b>Expires {{ ::job.endDate | date: 'EEEE, MMM d' }}!</b> &nbsp;
             </span>
             
@@ -68,13 +69,13 @@
             <span class="md-subhead">Posted {{ ::job.createdDate | date: 'mediumDate' }}</span>
             <span class="md-subhead" ng-if="::!job.expiresSoon">&nbsp;|&nbsp;Expires {{ ::job.endDate | date: 'mediumDate' }}</span>
 
-          </md-card-header-text>
-        </md-card-header>
+          </div>
+        </div>
 
-        <md-card-title ng-click="::centerToJob(job)" class = "job-card-title">
-          <md-card-title-text>
+        <div ng-click="::centerToJob(job)" class="job-card-title md-card-title">
+          <div class="md-card-title-text layout-column">
             
-            <span class="md-headline job-title">{{ ::job.title }}</span>
+            <span class="md-headline job-title limit-text">{{ ::job.title }}</span>
             
             <span class="md-subhead job-salary">
               <md-icon  aria-label="salary icon" 
@@ -90,13 +91,6 @@
               {{ job.distance | number: 2 }} Miles away
             </span>
 
-            <!-- <span class="md-subhead job-category">
-              <md-icon  aria-label="department icon" 
-                        md-svg-icon="core2:work">
-              </md-icon>
-              Department: {{ job.department }}
-            </span> -->
-
             <span class="md-subhead job-category">
               <md-icon  aria-label="categories icon" 
                         md-svg-icon="categories">
@@ -104,16 +98,16 @@
               Categories: {{ ::job.categories.join(', ') }}
             </span>
 
-          </md-card-title-text>
-        </md-card-title>
+          </div>
+        </div>
         
 
-        <md-card-content>
+        <div class="md-card-content">
           <p ng-init="descriptionLimit = 135"> {{ job.description | limitTo: descriptionLimit }}<a ng-click="descriptionLimit = job.description.length" ng-show="descriptionLimit < job.description.length" class = "color-indigo">... More</a> </p>
-        </md-card-content>
+        </div>
         
 
-        <md-card-actions layout="row" layout-align="end center" class = "card-actions">
+        <div layout="row" layout-align="end center" class = "card-actions md-card-actions">
           <md-button  target = "_blank" 
                       ng-href="{{ ::job.detailsUrl }}"
                       class = "md-accent">
@@ -130,19 +124,20 @@
             </md-icon>
             Apply
           </md-button>
-        </md-card-actions>
+        </div>
 
 
-        <md-card-footer ng-if="::jobs.otherLocations[job.objectId].length > 0">
+        <div class="md-card-footer" ng-if="::jobs.otherLocations[job.objectId].length > 0">
           <span class = "footer-title"><b>Also available at:</b></span>
           <div class = "md-chips chips-wrapper md-readonly">
             <div class = "md-chip background-default limit-text limit-width" ng-repeat="jobObj in jobs.otherLocations[job.objectId]">
               <a class="footer-chip" ng-click="::centerToJob(jobObj)">{{ ::jobObj.location }}</a>
             </div>
           </div>
-        </md-card-footer>
+        </div>
 
-      </md-card>
+
+      </div>
     </md-list-item>
 
   </md-list>

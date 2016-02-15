@@ -40,14 +40,17 @@
     };
 
     var filtered = [];
-
     var promise;
 
-    function actual(jobs) {
+    return function (jobs) {
 
+      console.log('run filter');
+      // Return the old results if there's a promise in progress
       if (promise) { return filtered; }
 
-      var promise = $timeout( function () {
+      console.log('set timeout');
+
+      promise = $timeout( function () {
         // Empty filtered array
         filtered.splice(0, filtered.length);
         // Add jobs that meet the filtering criteria
@@ -57,18 +60,12 @@
         }, filtered);
         // Keep track of the total amount of jobs
         selectedFilters.totalJobs = filtered.length;
-        return filtered;
-      }, 2000);
-      
-      promise.then( function() {
-        // $timeout.cancel(promise);
+      }, 2000).then( function() {
         promise = undefined;
       });
       
       return filtered;
     };
-
-    return actual;
 
   }]);
 

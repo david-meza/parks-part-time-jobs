@@ -74,7 +74,7 @@
     var _scrollToJobCard = function (id) {
       if (activeCard) { activeCard.removeClass('selected'); }
       container = container || angular.element(document.getElementById('jobs-list'));
-      activeCard = angular.element(document.querySelector('md-card[data-job-id=\'' + id + '\']'));
+      activeCard = angular.element(document.querySelector('.md-card[data-job-id=\'' + id + '\']'));
       container.scrollToElementAnimated(activeCard, 90);
       activeCard.addClass('selected');
     };
