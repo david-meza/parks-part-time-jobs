@@ -44,12 +44,9 @@
 
     return function (jobs) {
 
-      console.log('run filter');
       // Return the old results if there's a promise in progress
       if (promise) { return filtered; }
-
-      console.log('set timeout');
-
+      
       promise = $timeout( function () {
         // Empty filtered array
         filtered.splice(0, filtered.length);
@@ -64,6 +61,7 @@
         promise = undefined;
       });
       
+      // Still return something even if the promise isn't fulfilled yet. DOM will be updated one digest loop after it is.
       return filtered;
     };
 

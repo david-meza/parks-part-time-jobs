@@ -268,9 +268,14 @@ img, h1, h2, h3, h4, h5, h6 {
       font-weight: 400;
       line-height: 1.4em;
       padding: 2px 8px;
+      margin-left: 4px;
     }
 
     .md-chips {
+      .md-chip {
+        margin: 4px;
+      }
+
       .footer-chip {
         font-size: 13px;
         line-height: 1.2em;
@@ -295,7 +300,6 @@ img, h1, h2, h3, h4, h5, h6 {
   
 }
 
-
 .limit-text {
   overflow: hidden;
   white-space: nowrap;
@@ -309,6 +313,7 @@ img, h1, h2, h3, h4, h5, h6 {
 
 .inline-dropdown {
   margin: 0 0 3px 2px;
+  align-self: center;
 
   .md-select-value {
     border-bottom: transparent;
