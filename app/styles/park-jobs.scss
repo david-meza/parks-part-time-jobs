@@ -660,6 +660,14 @@ th {
     }
   }
 
+  .md-card .job-card-header .md-card-header-text .md-subhead {
+    font-size: 11px;
+
+    &.expiring-job {
+      font-size: 12px;
+    }
+  }
+
 }
 
 @media screen and (max-width: 959px) {

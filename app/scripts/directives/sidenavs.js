@@ -15,14 +15,14 @@
         var jobContainer = document.getElementById('jobs-list');
 
         // Left side nav - mobile devices
-        $scope.showList = function () {
+        $scope.showJobsList = function () {
           deviceService.activeTab.list = true;
           deviceService.activeTab.map = false;
           deviceService.activeTab.name = 'list';
           $scope.closeSidenav('left');
         };
 
-        $scope.hideList = function () {
+        $scope.hideJobsList = function () {
           deviceService.activeTab.list = false;
           deviceService.activeTab.map = true;
           deviceService.activeTab.name = 'map';
