@@ -6,12 +6,12 @@
     function($window){
 
       var _width = $window.innerWidth;
-      var activeTab = { name: 'map', list: false, map: true };
 
       var isMobile = function () {
-        return _width < 768;
+        return _width < 960;
       };
     
+      var activeTab = { name: 'map', list: !isMobile(), map: true };
 
   	return {
       isMobile: isMobile,

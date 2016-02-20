@@ -8,13 +8,6 @@
 
     var mapsObj;
 
-    gMapsApi.then( function (maps) {
-      mapsObj = maps;
-      map.options.zoomControlOptions.position = maps.ControlPosition.LEFT_BOTTOM;
-      map.options.zoomControlOptions.style = maps.ZoomControlStyle.SMALL;
-      map.options.streetViewControlOptions.position = maps.ControlPosition.LEFT_BOTTOM;
-    });
-
     // Temporary coordinates while Geoloc gets us the user's coords
     var location = {
     	coords: {
@@ -122,6 +115,13 @@
     };
 
     geoLocate();
+
+    gMapsApi.then( function (maps) {
+      mapsObj = maps;
+      map.options.zoomControlOptions.position = maps.ControlPosition.LEFT_BOTTOM;
+      map.options.zoomControlOptions.style = maps.ZoomControlStyle.SMALL;
+      map.options.streetViewControlOptions.position = maps.ControlPosition.LEFT_BOTTOM;
+    });
 
     return {
       map: map,
