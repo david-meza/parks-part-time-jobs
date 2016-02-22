@@ -1,6 +1,6 @@
 {
   "name": "MapMyParkJob",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "author": "David Meza",
   "appPath": "app",
   "dependencies": {
