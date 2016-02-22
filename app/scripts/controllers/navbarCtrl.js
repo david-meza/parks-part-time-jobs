@@ -21,6 +21,7 @@
 
       var searchPromise;
       var progressInterval;
+      var jobContainer;
 
       var startSearch = function () {
         if (!angular.isDefined(progressInterval)) {
@@ -44,7 +45,12 @@
         startSearch();
 
         searchPromise = $timeout( function () {
+          // Scroll to the top of the container so we don't get white screens after filtering if the user was at the bottom of the list
+          jobContainer = jobContainer || document.getElementById('jobs-list');
+          jobContainer.scrollTop = 0;
+          // Update the search text model that triggers a filter update.
           jobsFilterService.filters.searchText = newVal; 
+          // Cancel the progress bar interval and fill the bar.
           stopSearch();
           $scope.searchProgress = 100;
         }, 1000);
