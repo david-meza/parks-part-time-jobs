@@ -10,7 +10,7 @@
       // Start the circular progress icon
       $scope.progress = 'indeterminate';
 
-      $scope.searchProgress = 0;
+      $scope.searchProgress = 100;
 
       $scope.activeTab = deviceService.activeTab;
       $scope.isMobile = deviceService.isMobile;
@@ -24,7 +24,7 @@
       var jobContainer;
 
       var startSearch = function () {
-        if (!angular.isDefined(progressInterval)) {
+        if (angular.isUndefined(progressInterval)) {
           progressInterval = $interval( function () {
             $scope.searchProgress += 15;
           }, 100, 0, true);
@@ -39,6 +39,7 @@
       };
 
       $scope.$watch('filters.searchText', function (newVal) {
+        if (angular.isUndefined(newVal)) { return; }
         // Debounce updating the searchText model in the service
         $timeout.cancel(searchPromise);
         $scope.searchProgress = 0;

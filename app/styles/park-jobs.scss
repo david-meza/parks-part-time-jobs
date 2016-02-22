@@ -5,6 +5,7 @@ $success-alt: #669834;
 $alert: #E65100;
 $danger: #E63125;
 $briefcase: #E65000;
+$indigo: #3F51B5;
 
 html {
   font-family: Roboto, Helvetica, Verdana, sans-serif;
@@ -58,7 +59,11 @@ img, h1, h2, h3, h4, h5, h6 {
 }
 
 .color-indigo {
-  color: rgb(63,81,181);
+  color: $indigo;
+}
+
+.md-primary {
+  color: $indigo; 
 }
 
 .pac-container {
@@ -140,6 +145,22 @@ img, h1, h2, h3, h4, h5, h6 {
   font-family: Roboto, Helvetica, Verdana, sans-serif;
   padding: 5px;
   @include box-shadow( 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12) );  
+}
+
+#jobs-list {
+  .jobs-subheader {
+    background-color: #fff;
+    // @include transition ( box-shadow 0.4s cubic-bezier(0.345, 0, 0.25, 1) );
+
+    &.md-sticky-clone {
+      @include box-shadow( 0px 2px 4px 0 rgba(0, 0, 0, 0.16) );
+    }
+
+    .text-before-dropdown, .inline-dropdown {
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
 }
 
 .md-card {
@@ -679,6 +700,13 @@ th {
   #searchbox-container input#search-box {
     &:focus {
       width: 190px;
+    }
+  }
+
+  #jobs-list {
+    .fix-mobile-sticky {
+      margin-bottom: 74px !important;
+      height: 1px !important;
     }
   }
 

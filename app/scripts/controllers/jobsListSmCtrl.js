@@ -12,15 +12,17 @@
       $scope.jobs = jobsService.jobs;
 
       $scope.selectedFilters = jobsFilterService.filters;
+      $scope.sortOptions = jobsFilterService.sortOptions;
+
+      var showNoLocation = function() {
+        $mdToast.show( $mdToast.simple()
+          .textContent('Oops! This job does not have a set location.')
+          .position('top right')
+          .hideDelay(3000) );
+      };
 
       $scope.centerToJob = function (job) {
-        if (!job.latitude) {
-          $mdToast.show( $mdToast.simple()
-            .textContent('Oops! This job does not have a set location.')
-            .position('top right')
-            .hideDelay(3000) );
-          return; 
-        }
+        if (!job.latitude) { return showNoLocation(); }
         $scope.map.zoom = 13;
         $scope.map.location.coords.latitude = job.latitude;
         $scope.map.location.coords.longitude = job.longitude;
@@ -28,20 +30,6 @@
           job.markerClick(null, 'card click', job);
         }, 200);
       };
-
-      $scope.sortOptions = [
-        { view: 'nearest', model: 'distance' },
-        { view: 'furthest', model: '-distance' },
-        { view: 'oldest', model: 'createdDate' }, 
-        { view: 'newest', model: '-createdDate' }, 
-        { view: 'expiring soon', model: 'endDate' }, 
-        { view: 'salary ($ - $$$)', model: 'minSalary' }, 
-        { view: 'salary ($$$ - $)', model: '-minSalary' }, 
-        { view: 'job title (A-Z)', model: 'title' },
-        { view: 'job title (Z-A)', model: '-title' }
-      ];
-
-      $scope.selectedSort = '-minSalary';
 
       $scope.openFilterSelection = function () {
         $mdSidenav('filter').toggle();

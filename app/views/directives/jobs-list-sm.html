@@ -8,20 +8,18 @@
     </md-button>
   </back-to-top>
               
-  <md-subheader class="md-primary jobs-subheader" layout = "row">
-    
-    
+  <sticky-element>
     <span flex layout = "row">
       
       <div flex = "45" layout = "row">
         <md-icon md-svg-icon = "core2:sort"></md-icon>
-        <span class = "text-before-dropdown">Sort by</span> 
+        <span class = "text-before-dropdown md-primary">Sort by</span> 
         
-        <md-select  ng-model = "selectedSort" 
+        <md-select  ng-model = "selectedFilters.selectedSort" 
                     aria-label = "Select Sort" 
-                    class = "inline-dropdown" 
+                    class = "inline-dropdown md-primary" 
                     md-container-class = "inline-dropdown" flex>
-          <md-option ng-value="option.model" ng-repeat="option in sortOptions">{{ option.view }}</md-option>
+          <md-option ng-value="::option.model" ng-repeat="option in sortOptions">{{ ::option.view }}</md-option>
         </md-select>
 
       </div>
@@ -35,11 +33,8 @@
         </md-button>
         
       </div>
-
- 
     </span>
-    
-  </md-subheader>
+  </sticky-element>
 
   
   <md-list>
@@ -48,7 +43,7 @@
       <p>Showing <b>{{ selectedFilters.totalJobs }} {{ selectedFilters.searchText }}</b> jobs in <b>{{ currentPlace.name }}</b></p>
     </md-list-item>
 
-    <md-list-item ng-repeat = "job in jobs.list | applySelectedFilters | orderBy: selectedSort">
+    <md-list-item ng-repeat = "job in jobs.list | applySelectedFilters | orderBy: selectedFilters.selectedSort">
       
       <div  data-job-id = "{{ ::job.objectId }}" 
             class="md-card" 
