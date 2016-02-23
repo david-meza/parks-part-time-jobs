@@ -15,13 +15,20 @@
       },
       controller: 'autocompleteCtrl',
       
-      link: function(scope, element) {
+      link: function postLink(scope, element) {
 
-        $timeout(function(){
-          var dropdown = document.getElementsByClassName('pac-container');
+        var moveAddressResults = function () {
+          var dropdown = angular.element( document.getElementsByClassName('pac-container') );
+          if (dropdown.length === 0) { 
+            return $timeout(function(){
+              moveAddressResults();
+            }, 200); 
+          }
+          dropdown.detach();
           element.append(dropdown);
-        }, 0);
+        };
 
+        moveAddressResults();
 
       }
     };

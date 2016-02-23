@@ -83,17 +83,18 @@
       map.zoom = 14;
     };
 
-    var informUser = function (message) {
+    var informUser = function (message, hide) {
       var toast = $mdToast.simple()
         .textContent(message)
         .action('ok')
         .highlightAction(false)
-        .hideDelay(4000)
-        .position('top right');
+        .hideDelay(hide || 4000)
+        .position('bottom left');
       $mdToast.show(toast);
     };
 
     var geoLocate = function() {
+      informUser('Attempting to find you.', 1500);
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition( 
           function (position) {
