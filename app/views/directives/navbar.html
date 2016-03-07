@@ -1,7 +1,7 @@
 <md-toolbar layout = "row" id = "navbar" md-scroll-shrink class = "md-medium-tall">
   <div class="md-toolbar-tools" layout = "row" layout-align = "space-between stretch">
     
-    <md-button class="md-icon-button" aria-label="Settings" hide-gt-sm ng-click="toggleSidenav()">
+    <md-button class="md-icon-button" aria-label="open menu side nav" hide-gt-sm ng-click="toggleSidenav()">
       <md-icon md-svg-icon="core2:menu" ng-cloak></md-icon>
     </md-button>
     
@@ -17,15 +17,6 @@
       <input id="search-box" ng-model="filters.searchText" />
       <md-progress-linear md-mode="determinate" value="{{ searchProgress }}"></md-progress-linear>
     </div>
-    <!-- <md-autocomplete  md-selected-item="selectedJob"
-                      md-search-text="searchText"
-                      md-items="job in jobs.list"
-                      md-item-text="job.title"
-                      md-selected-item-change="selectedJobChange(job)"
-                      placeholder="Search">
-        
-      <span md-highlight-text="searchText" md-highlight-flags="^i">{{job.title}}</span>
-    </md-autocomplete> -->
 
     <md-progress-circular class="md-accent md-hue-2 progress-spinner" md-mode="{{ progress }}" md-diameter="50"></md-progress-circular>
   </div>

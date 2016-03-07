@@ -2,9 +2,13 @@
 
 Careers page for available part time opportunities in the Raleigh Parks and Recreation department
 
-## Live Demo
+## Live Demo (Up to Date)
 
 * Surge: [Open](https://park-jobs.surge.sh)
+
+## Deployed Version
+
+Raleighnc.gov Open Maps: [Open](http://openmaps.raleighnc.gov/park-jobs/)
 
 ## Build & development
 

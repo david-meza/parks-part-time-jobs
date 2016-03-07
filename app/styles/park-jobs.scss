@@ -106,9 +106,9 @@ img, h1, h2, h3, h4, h5, h6 {
     }
   }
 
-}
-.pac-container:empty{
-  display: none !important;
+  &:empty{
+    display: none !important;
+  }
 }
 
 .tour-tip p {
@@ -160,6 +160,22 @@ img, h1, h2, h3, h4, h5, h6 {
       font-size: 14px;
       font-weight: 500;
     }
+
+    .text-before-dropdown {
+      margin: auto;
+      padding-top: 3px;
+    }
+
+    .inline-dropdown {
+      margin: 0 0 3px 2px;
+      align-self: center;
+
+      .md-select-value {
+        border-bottom: transparent;
+        align-self: flex-end;
+      }
+    }
+
   }
 }
 
@@ -325,21 +341,6 @@ img, h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-}
-
-.text-before-dropdown {
-  margin: auto;
-  padding-top: 3px;
-}
-
-.inline-dropdown {
-  margin: 0 0 3px 2px;
-  align-self: center;
-
-  .md-select-value {
-    border-bottom: transparent;
-    align-self: flex-end;
-  }
 }
 
 .list-item-with-radio {
