@@ -3,5 +3,6 @@
 
 /bower_components
 /node_modules
+/report
 
 styles/styles.css.map

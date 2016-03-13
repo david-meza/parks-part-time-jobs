@@ -12,8 +12,8 @@ Raleighnc.gov Open Maps: [Open](http://openmaps.raleighnc.gov/park-jobs/)
 
 ## Build & development
 
-The running of tasks for this application was automated using Grunt. 
+The running of tasks for this application was automated using Grunt.
 
-To produce a distributable/minified version of the app run `grunt build`. 
+To produce a distributable/minified version of the app run `grunt build`.
 
 To preview the application in development in a local live server run `grunt serve`
