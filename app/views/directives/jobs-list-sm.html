@@ -1,23 +1,23 @@
 <md-content id = "jobs-list" layout = "column" flex du-scroll-container>
 
   <back-to-top>
-    <md-button  class="md-accent md-raised md-fab md-mini" 
+    <md-button  class="md-accent md-raised md-fab md-mini"
                 aria-label="Back to Top"
                 ng-click="scrollToTop()">
       <md-icon md-svg-icon="arrow-up"></md-icon>
     </md-button>
   </back-to-top>
-              
+
   <sticky-element>
     <span flex layout = "row">
-      
+
       <div flex = "45" layout = "row">
         <md-icon md-svg-icon = "core2:sort"></md-icon>
-        <span class = "text-before-dropdown md-primary">Sort by</span> 
-        
-        <md-select  ng-model = "selectedFilters.selectedSort" 
-                    aria-label = "Select Sort" 
-                    class = "inline-dropdown md-primary" 
+        <span class = "text-before-dropdown md-primary">Sort by</span>
+
+        <md-select  ng-model = "selectedFilters.selectedSort"
+                    aria-label = "Select Sort"
+                    class = "inline-dropdown md-primary"
                     md-container-class = "inline-dropdown" flex>
           <md-option ng-value="::option.model" ng-repeat="option in sortOptions">{{ ::option.view }}</md-option>
         </md-select>
@@ -31,35 +31,35 @@
           <md-icon md-svg-icon = "core2:filter"></md-icon>
           Filter
         </md-button>
-        
+
       </div>
     </span>
   </sticky-element>
 
-  
+
   <md-list>
 
     <md-list-item>
       <p>Showing <b>{{ selectedFilters.totalJobs }} {{ selectedFilters.searchText }}</b> jobs in <b>{{ currentPlace.name }}</b></p>
     </md-list-item>
 
-    <md-list-item ng-repeat = "job in jobs.list | applySelectedFilters | orderBy: selectedFilters.selectedSort">
-      
-      <div  data-job-id = "{{ ::job.objectId }}" 
-            class="md-card" 
-            ng-class-odd="'odd-card'" 
+    <md-list-item ng-repeat = "job in jobs.list | applySelectedFilters | orderBy: selectedFilters.selectedSort" class="layout-row">
+
+      <div  data-job-id = "{{ ::job.objectId }}"
+            class="md-card"
+            ng-class-odd="'odd-card'"
             flex >
-        
+
         <div class = "job-card-header md-card-header">
           <div class="md-card-header-text layout-row">
-            
+
             <span class="md-subhead expiring-job" ng-if="::job.expiresSoon">
               <md-icon md-svg-icon="expiring" aria-label="expiration alert icon"></md-icon>
               <b>Expires {{ ::job.endDate | date: 'EEEE, MMM d' }}!</b> &nbsp;
             </span>
-            
+
             <span flex></span>
-            
+
             <span class="md-subhead new-job" ng-if="::job.isNew"><b>NEW!</b> &nbsp;</span>
             <span class="md-subhead">Posted {{ ::job.createdDate | date: 'mediumDate' }}</span>
             <span class="md-subhead" ng-if="::!job.expiresSoon">&nbsp;|&nbsp;Expires {{ ::job.endDate | date: 'mediumDate' }}</span>
@@ -69,25 +69,25 @@
 
         <div ng-click="::centerToJob(job)" class="job-card-title md-card-title">
           <div class="md-card-title-text layout-column">
-            
+
             <span class="md-headline job-title limit-text">{{ ::job.title }}</span>
-            
+
             <span class="md-subhead job-salary">
-              <md-icon  aria-label="salary icon" 
+              <md-icon  aria-label="salary icon"
                         md-svg-icon="core2:salary">
               </md-icon>
               {{ ::job.jobType }}: {{ ::job.minSalary | currency }} - {{ ::job.maxSalary | currency }} {{ ::job.interval }}
             </span>
-            
+
             <span class="md-subhead job-location" ng-show="job.distance">
-              <md-icon  aria-label="distance icon" 
+              <md-icon  aria-label="distance icon"
                         md-svg-icon="core2:location">
               </md-icon>
               {{ job.distance | number: 2 }} Miles away
             </span>
 
             <span class="md-subhead job-category">
-              <md-icon  aria-label="categories icon" 
+              <md-icon  aria-label="categories icon"
                         md-svg-icon="categories">
               </md-icon>
               Categories: {{ ::job.categories.join(', ') }}
@@ -95,26 +95,26 @@
 
           </div>
         </div>
-        
+
 
         <div class="md-card-content">
           <p ng-init="descriptionLimit = 135"> {{ job.description | limitTo: descriptionLimit }}<a ng-click="descriptionLimit = job.description.length" ng-show="descriptionLimit < job.description.length" class = "color-indigo">... More</a> </p>
         </div>
-        
+
 
         <div layout="row" layout-align="end center" class = "card-actions md-card-actions">
-          <md-button  target = "_blank" 
+          <md-button  target = "_blank"
                       ng-href="{{ ::job.detailsUrl }}"
                       class = "md-accent">
-            <md-icon  aria-label="See Job Details" 
+            <md-icon  aria-label="See Job Details"
                       md-svg-icon="document">
             </md-icon>
             Job Details
           </md-button>
-          <md-button  target = "_blank" 
+          <md-button  target = "_blank"
                       ng-href="{{ ::job.detailsUrl }}/apply"
                       class = "md-accent apply-button">
-            <md-icon  aria-label="Apply now" 
+            <md-icon  aria-label="Apply now"
                       md-svg-icon="briefcase">
             </md-icon>
             Apply
